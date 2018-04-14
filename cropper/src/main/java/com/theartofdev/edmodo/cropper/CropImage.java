@@ -475,11 +475,11 @@ public final class CropImage {
         /**
          * Options for image crop UX
          */
-        private final CropImageOptions mOptions;
+        private final CropOptions mOptions;
 
         private ActivityBuilder(@Nullable Uri source) {
             mSource = source;
-            mOptions = new CropImageOptions();
+            mOptions = new CropOptions();
         }
 
         /**

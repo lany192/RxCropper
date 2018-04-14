@@ -170,7 +170,7 @@ final class CropWindowHandler {
     /**
      * Set the variables to be used during crop window handling.
      */
-    public void setInitialAttributeValues(CropImageOptions options) {
+    public void setInitialAttributeValues(CropOptions options) {
         mMinCropWindowWidth = options.minCropWindowWidth;
         mMinCropWindowHeight = options.minCropWindowHeight;
         mMinCropResultWidth = options.minCropResultWidth;

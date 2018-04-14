@@ -23,7 +23,7 @@ import java.lang.ref.WeakReference;
 /**
  * Task to load bitmap asynchronously from the UI thread.
  */
-final class BitmapLoadingWorkerTask extends AsyncTask<Void, Void, BitmapLoadingWorkerTask.Result> {
+final class LoadingTask extends AsyncTask<Void, Void, LoadingTask.Result> {
 
     // region: Fields and Consts
 
@@ -53,7 +53,7 @@ final class BitmapLoadingWorkerTask extends AsyncTask<Void, Void, BitmapLoadingW
     private final int mHeight;
     // endregion
 
-    public BitmapLoadingWorkerTask(CropImageView cropImageView, Uri uri) {
+    public LoadingTask(CropImageView cropImageView, Uri uri) {
         mUri = uri;
         mCropImageViewReference = new WeakReference<>(cropImageView);
 
@@ -127,7 +127,7 @@ final class BitmapLoadingWorkerTask extends AsyncTask<Void, Void, BitmapLoadingW
     // region: Inner class: Result
 
     /**
-     * The result of BitmapLoadingWorkerTask async loading.
+     * The result of LoadingTask async loading.
      */
     public static final class Result {
 

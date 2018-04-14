@@ -213,12 +213,12 @@ public class CropImageView extends FrameLayout {
     /**
      * Task used to load bitmap async from UI thread
      */
-    private WeakReference<BitmapLoadingWorkerTask> mBitmapLoadingWorkerTask;
+    private WeakReference<LoadingTask> mLoadingTask;
 
     /**
      * Task used to crop bitmap async from UI thread
      */
-    private WeakReference<BitmapCroppingWorkerTask> mBitmapCroppingWorkerTask;
+    private WeakReference<CropTask> mCropTask;
     // endregion
 
     public CropImageView(Context context) {
@@ -228,7 +228,7 @@ public class CropImageView extends FrameLayout {
     public CropImageView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        CropImageOptions options = null;
+        CropOptions options = null;
         Intent intent = context instanceof Activity ? ((Activity) context).getIntent() : null;
         if (intent != null) {
             Bundle bundle = intent.getBundleExtra(CropImage.CROP_IMAGE_EXTRA_BUNDLE);
@@ -239,7 +239,7 @@ public class CropImageView extends FrameLayout {
 
         if (options == null) {
 
-            options = new CropImageOptions();
+            options = new CropOptions();
 
             if (attrs != null) {
                 TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CropImageView, 0, 0);
@@ -1098,8 +1098,8 @@ public class CropImageView extends FrameLayout {
      */
     public void setImageUriAsync(Uri uri) {
         if (uri != null) {
-            BitmapLoadingWorkerTask currentTask =
-                    mBitmapLoadingWorkerTask != null ? mBitmapLoadingWorkerTask.get() : null;
+            LoadingTask currentTask =
+                    mLoadingTask != null ? mLoadingTask.get() : null;
             if (currentTask != null) {
                 // cancel previous loading (no check if the same URI because camera URI can be the same for
                 // different images)
@@ -1111,8 +1111,8 @@ public class CropImageView extends FrameLayout {
             mRestoreCropWindowRect = null;
             mRestoreDegreesRotated = 0;
             mOverlayView.setInitialCropWindowRect(null);
-            mBitmapLoadingWorkerTask = new WeakReference<>(new BitmapLoadingWorkerTask(this, uri));
-            mBitmapLoadingWorkerTask.get().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            mLoadingTask = new WeakReference<>(new LoadingTask(this, uri));
+            mLoadingTask.get().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             setProgressBarVisibility();
         }
     }
@@ -1230,9 +1230,9 @@ public class CropImageView extends FrameLayout {
      *
      * @param result the result of bitmap loading
      */
-    void onSetImageUriAsyncComplete(BitmapLoadingWorkerTask.Result result) {
+    void onSetImageUriAsyncComplete(LoadingTask.Result result) {
 
-        mBitmapLoadingWorkerTask = null;
+        mLoadingTask = null;
         setProgressBarVisibility();
 
         if (result.error == null) {
@@ -1252,9 +1252,9 @@ public class CropImageView extends FrameLayout {
      *
      * @param result the result of bitmap cropping
      */
-    void onImageCroppingAsyncComplete(BitmapCroppingWorkerTask.Result result) {
+    void onImageCroppingAsyncComplete(CropTask.Result result) {
 
-        mBitmapCroppingWorkerTask = null;
+        mCropTask = null;
         setProgressBarVisibility();
 
         OnCropImageCompleteListener listener = mOnCropImageCompleteListener;
@@ -1362,8 +1362,8 @@ public class CropImageView extends FrameLayout {
         if (bitmap != null) {
             mImageView.clearAnimation();
 
-            BitmapCroppingWorkerTask currentTask =
-                    mBitmapCroppingWorkerTask != null ? mBitmapCroppingWorkerTask.get() : null;
+            CropTask currentTask =
+                    mCropTask != null ? mCropTask.get() : null;
             if (currentTask != null) {
                 // cancel previous cropping
                 currentTask.cancel(true);
@@ -1376,9 +1376,9 @@ public class CropImageView extends FrameLayout {
             int orgHeight = bitmap.getHeight() * mLoadedSampleSize;
             if (mLoadedImageUri != null
                     && (mLoadedSampleSize > 1 || options == RequestSizeOptions.SAMPLING)) {
-                mBitmapCroppingWorkerTask =
+                mCropTask =
                         new WeakReference<>(
-                                new BitmapCroppingWorkerTask(
+                                new CropTask(
                                         this,
                                         mLoadedImageUri,
                                         getCropPoints(),
@@ -1397,9 +1397,9 @@ public class CropImageView extends FrameLayout {
                                         saveCompressFormat,
                                         saveCompressQuality));
             } else {
-                mBitmapCroppingWorkerTask =
+                mCropTask =
                         new WeakReference<>(
-                                new BitmapCroppingWorkerTask(
+                                new CropTask(
                                         this,
                                         bitmap,
                                         getCropPoints(),
@@ -1416,7 +1416,7 @@ public class CropImageView extends FrameLayout {
                                         saveCompressFormat,
                                         saveCompressQuality));
             }
-            mBitmapCroppingWorkerTask.get().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            mCropTask.get().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             setProgressBarVisibility();
         }
     }
@@ -1440,8 +1440,8 @@ public class CropImageView extends FrameLayout {
             BitmapUtils.mStateBitmap = new Pair<>(key, new WeakReference<>(mBitmap));
             bundle.putString("LOADED_IMAGE_STATE_BITMAP_KEY", key);
         }
-        if (mBitmapLoadingWorkerTask != null) {
-            BitmapLoadingWorkerTask task = mBitmapLoadingWorkerTask.get();
+        if (mLoadingTask != null) {
+            LoadingTask task = mLoadingTask.get();
             if (task != null) {
                 bundle.putParcelable("LOADING_IMAGE_URI", task.getUri());
             }
@@ -1475,7 +1475,7 @@ public class CropImageView extends FrameLayout {
             Bundle bundle = (Bundle) state;
 
             // prevent restoring state if already set by outside code
-            if (mBitmapLoadingWorkerTask == null
+            if (mLoadingTask == null
                     && mLoadedImageUri == null
                     && mBitmap == null
                     && mImageResource == 0) {
@@ -1889,8 +1889,8 @@ public class CropImageView extends FrameLayout {
     private void setProgressBarVisibility() {
         boolean visible =
                 mShowProgressBar
-                        && (mBitmap == null && mBitmapLoadingWorkerTask != null
-                        || mBitmapCroppingWorkerTask != null);
+                        && (mBitmap == null && mLoadingTask != null
+                        || mCropTask != null);
         mProgressBar.setVisibility(visible ? VISIBLE : INVISIBLE);
     }
 

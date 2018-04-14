@@ -22,8 +22,8 @@ import java.lang.ref.WeakReference;
 /**
  * Task to crop bitmap asynchronously from the UI thread.
  */
-final class BitmapCroppingWorkerTask
-        extends AsyncTask<Void, Void, BitmapCroppingWorkerTask.Result> {
+final class CropTask
+        extends AsyncTask<Void, Void, CropTask.Result> {
 
     // region: Fields and Consts
 
@@ -123,7 +123,7 @@ final class BitmapCroppingWorkerTask
     private final int mSaveCompressQuality;
     // endregion
 
-    BitmapCroppingWorkerTask(
+    CropTask(
             CropImageView cropImageView,
             Bitmap bitmap,
             float[] cropPoints,
@@ -161,7 +161,7 @@ final class BitmapCroppingWorkerTask
         mOrgHeight = 0;
     }
 
-    BitmapCroppingWorkerTask(
+    CropTask(
             CropImageView cropImageView,
             Uri uri,
             float[] cropPoints,
@@ -215,7 +215,7 @@ final class BitmapCroppingWorkerTask
      * @return the decoded bitmap data
      */
     @Override
-    protected BitmapCroppingWorkerTask.Result doInBackground(Void... params) {
+    protected CropTask.Result doInBackground(Void... params) {
         try {
             if (!isCancelled()) {
 
@@ -297,7 +297,7 @@ final class BitmapCroppingWorkerTask
     // region: Inner class: Result
 
     /**
-     * The result of BitmapCroppingWorkerTask async loading.
+     * The result of CropTask async loading.
      */
     static final class Result {
 

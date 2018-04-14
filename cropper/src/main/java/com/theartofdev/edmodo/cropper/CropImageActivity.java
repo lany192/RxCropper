@@ -51,7 +51,7 @@ public class CropImageActivity extends AppCompatActivity
     /**
      * the options that were set for the crop image
      */
-    private CropImageOptions mOptions;
+    private CropOptions mOptions;
 
     @Override
     @SuppressLint("NewApi")

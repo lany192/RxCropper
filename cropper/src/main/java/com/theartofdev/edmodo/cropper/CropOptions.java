@@ -27,18 +27,18 @@ import android.util.TypedValue;
  * All the possible options that can be set to customize crop image.<br>
  * Initialized with default values.
  */
-public class CropImageOptions implements Parcelable {
+public class CropOptions implements Parcelable {
 
-    public static final Creator<CropImageOptions> CREATOR =
-            new Creator<CropImageOptions>() {
+    public static final Creator<CropOptions> CREATOR =
+            new Creator<CropOptions>() {
                 @Override
-                public CropImageOptions createFromParcel(Parcel in) {
-                    return new CropImageOptions(in);
+                public CropOptions createFromParcel(Parcel in) {
+                    return new CropOptions(in);
                 }
 
                 @Override
-                public CropImageOptions[] newArray(int size) {
-                    return new CropImageOptions[size];
+                public CropOptions[] newArray(int size) {
+                    return new CropOptions[size];
                 }
             };
 
@@ -299,7 +299,7 @@ public class CropImageOptions implements Parcelable {
     /**
      * Init options with defaults.
      */
-    public CropImageOptions() {
+    public CropOptions() {
 
         DisplayMetrics dm = Resources.getSystem().getDisplayMetrics();
 
@@ -364,7 +364,7 @@ public class CropImageOptions implements Parcelable {
     /**
      * Create object from parcel.
      */
-    protected CropImageOptions(Parcel in) {
+    protected CropOptions(Parcel in) {
         cropShape = CropImageView.CropShape.values()[in.readInt()];
         snapRadius = in.readFloat();
         touchRadius = in.readFloat();
