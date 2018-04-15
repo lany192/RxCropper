@@ -803,7 +803,7 @@ public class OverlayView extends View {
             float cornerOffset = (cornerWidth - lineWidth) / 2;
             float cornerExtension = cornerWidth / 2 + cornerOffset;
 
-            // Top left
+            //左上
             canvas.drawLine(
                     rect.left - cornerOffset,
                     rect.top - cornerExtension,
@@ -817,7 +817,15 @@ public class OverlayView extends View {
                     rect.top - cornerOffset,
                     mBorderCornerPaint);
 
-            // Top right
+//            //上边中间
+//            canvas.drawLine(
+//                    rect.right / 2 - mBorderCornerLength,
+//                    rect.top - cornerOffset,
+//                    rect.right / 2 + mBorderCornerLength,
+//                    rect.top - cornerOffset,
+//                    mBorderCornerPaint);
+
+            //右上
             canvas.drawLine(
                     rect.right + cornerOffset,
                     rect.top - cornerExtension,
@@ -830,6 +838,9 @@ public class OverlayView extends View {
                     rect.right - mBorderCornerLength,
                     rect.top - cornerOffset,
                     mBorderCornerPaint);
+
+
+
 
             // Bottom left
             canvas.drawLine(
@@ -844,6 +855,14 @@ public class OverlayView extends View {
                     rect.left + mBorderCornerLength,
                     rect.bottom + cornerOffset,
                     mBorderCornerPaint);
+
+//            // Bottom center
+//            canvas.drawLine(
+//                    rect.right / 2 + cornerExtension - mBorderCornerLength,
+//                    rect.bottom + cornerOffset,
+//                    rect.right / 2 + mBorderCornerLength,
+//                    rect.bottom + cornerOffset,
+//                    mBorderCornerPaint);
 
             // Bottom left
             canvas.drawLine(
