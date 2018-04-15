@@ -15,14 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.croppersample.R;
 import com.lany.cropper.CropImage;
 import com.lany.cropper.CropImageView;
 
 /**
  * The fragment that will show the Image Cropping UI by requested preset.
  */
-public final class MainFragment extends Fragment
+public class MainFragment extends Fragment
         implements CropImageView.OnSetImageUriCompleteListener,
         CropImageView.OnCropImageCompleteListener {
 
@@ -56,7 +55,7 @@ public final class MainFragment extends Fragment
     /**
      * Set the options of the crop image view to the given values.
      */
-    public void setCropImageViewOptions(CropImageViewOptions options) {
+    public void setCropImageViewOptions(ConfigOptions options) {
         mCropImageView.setScaleType(options.scaleType);
         mCropImageView.setCropShape(options.cropShape);
         mCropImageView.setGuidelines(options.guidelines);
@@ -86,7 +85,7 @@ public final class MainFragment extends Fragment
     }
 
     public void updateCurrentCropViewOptions() {
-        CropImageViewOptions options = new CropImageViewOptions();
+        ConfigOptions options = new ConfigOptions();
         options.scaleType = mCropImageView.getScaleType();
         options.cropShape = mCropImageView.getCropShape();
         options.guidelines = mCropImageView.getGuidelines();

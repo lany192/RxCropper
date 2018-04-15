@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference;
 /**
  * Task to load bitmap asynchronously from the UI thread.
  */
-final class LoadingTask extends AsyncTask<Void, Void, LoadingTask.Result> {
+public final class LoadingTask extends AsyncTask<Void, Void, LoadingTask.Result> {
 
     // region: Fields and Consts
 
@@ -72,17 +72,10 @@ final class LoadingTask extends AsyncTask<Void, Void, LoadingTask.Result> {
     protected Result doInBackground(Void... params) {
         try {
             if (!isCancelled()) {
-
-                BitmapUtils.BitmapSampled decodeResult =
-                        BitmapUtils.decodeSampledBitmap(mContext, mUri, mWidth, mHeight);
-
+                BitmapUtils.BitmapSampled decodeResult = BitmapUtils.decodeSampledBitmap(mContext, mUri, mWidth, mHeight);
                 if (!isCancelled()) {
-
-                    BitmapUtils.RotateBitmapResult rotateResult =
-                            BitmapUtils.rotateBitmapByExif(decodeResult.bitmap, mContext, mUri);
-
-                    return new Result(
-                            mUri, rotateResult.bitmap, decodeResult.sampleSize, rotateResult.degrees);
+                    BitmapUtils.RotateBitmapResult rotateResult = BitmapUtils.rotateBitmapByExif(decodeResult.bitmap, mContext, mUri);
+                    return new Result(mUri, rotateResult.bitmap, decodeResult.sampleSize, rotateResult.degrees);
                 }
             }
             return null;

@@ -11,8 +11,7 @@ import java.lang.ref.WeakReference;
 /**
  * Task to crop bitmap asynchronously from the UI thread.
  */
-final class CropTask
-        extends AsyncTask<Void, Void, CropTask.Result> {
+final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
 
     // region: Fields and Consts
 

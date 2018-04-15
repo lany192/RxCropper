@@ -18,27 +18,22 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.croppersample.R;
 import com.lany.cropper.CropImage;
 import com.lany.cropper.CropImageView;
 
 public class MainActivity extends AppCompatActivity {
-    DrawerLayout mDrawerLayout;
+    private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-
     private MainFragment mCurrentFragment;
-
     private Uri mCropImageUri;
-
-    private CropImageViewOptions mCropImageViewOptions = new CropImageViewOptions();
-    // endregion
+    private ConfigOptions mOptions = new ConfigOptions();
 
     public void setCurrentFragment(MainFragment fragment) {
         mCurrentFragment = fragment;
     }
 
-    public void setCurrentOptions(CropImageViewOptions options) {
-        mCropImageViewOptions = options;
+    public void setCurrentOptions(ConfigOptions options) {
+        mOptions = options;
         updateDrawerTogglesByOptions(options);
     }
 
@@ -97,15 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 && resultCode == AppCompatActivity.RESULT_OK) {
             Uri imageUri = CropImage.getPickImageResultUri(this, data);
 
-            // For API >= 23 we need to check specifically that we have permissions to read external
-            // storage,
-            // but we don't know if we need to for the URI so the simplest is to try open the stream and
-            // see if we get error.
-            boolean requirePermissions = false;
             if (CropImage.isReadExternalStoragePermissionsRequired(this, imageUri)) {
-
-                // request permissions and handle the result in onRequestPermissionsResult()
-                requirePermissions = true;
                 mCropImageUri = imageUri;
                 requestPermissions(
                         new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
@@ -174,68 +161,68 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.drawer_option_toggle_scale:
-                mCropImageViewOptions.scaleType =
-                        mCropImageViewOptions.scaleType == CropImageView.ScaleType.FIT_CENTER
+                mOptions.scaleType =
+                        mOptions.scaleType == CropImageView.ScaleType.FIT_CENTER
                                 ? CropImageView.ScaleType.CENTER_INSIDE
-                                : mCropImageViewOptions.scaleType == CropImageView.ScaleType.CENTER_INSIDE
+                                : mOptions.scaleType == CropImageView.ScaleType.CENTER_INSIDE
                                 ? CropImageView.ScaleType.CENTER
-                                : mCropImageViewOptions.scaleType == CropImageView.ScaleType.CENTER
+                                : mOptions.scaleType == CropImageView.ScaleType.CENTER
                                 ? CropImageView.ScaleType.CENTER_CROP
                                 : CropImageView.ScaleType.FIT_CENTER;
-                mCurrentFragment.setCropImageViewOptions(mCropImageViewOptions);
-                updateDrawerTogglesByOptions(mCropImageViewOptions);
+                mCurrentFragment.setCropImageViewOptions(mOptions);
+                updateDrawerTogglesByOptions(mOptions);
                 break;
             case R.id.drawer_option_toggle_shape:
-                mCropImageViewOptions.cropShape =
-                        mCropImageViewOptions.cropShape == CropImageView.CropShape.RECTANGLE
+                mOptions.cropShape =
+                        mOptions.cropShape == CropImageView.CropShape.RECTANGLE
                                 ? CropImageView.CropShape.OVAL
                                 : CropImageView.CropShape.RECTANGLE;
-                mCurrentFragment.setCropImageViewOptions(mCropImageViewOptions);
-                updateDrawerTogglesByOptions(mCropImageViewOptions);
+                mCurrentFragment.setCropImageViewOptions(mOptions);
+                updateDrawerTogglesByOptions(mOptions);
                 break;
             case R.id.drawer_option_toggle_guidelines:
-                mCropImageViewOptions.guidelines =
-                        mCropImageViewOptions.guidelines == CropImageView.Guidelines.OFF
+                mOptions.guidelines =
+                        mOptions.guidelines == CropImageView.Guidelines.OFF
                                 ? CropImageView.Guidelines.ON
-                                : mCropImageViewOptions.guidelines == CropImageView.Guidelines.ON
+                                : mOptions.guidelines == CropImageView.Guidelines.ON
                                 ? CropImageView.Guidelines.ON_TOUCH
                                 : CropImageView.Guidelines.OFF;
-                mCurrentFragment.setCropImageViewOptions(mCropImageViewOptions);
-                updateDrawerTogglesByOptions(mCropImageViewOptions);
+                mCurrentFragment.setCropImageViewOptions(mOptions);
+                updateDrawerTogglesByOptions(mOptions);
                 break;
             case R.id.drawer_option_toggle_aspect_ratio:
-                if (!mCropImageViewOptions.fixAspectRatio) {
-                    mCropImageViewOptions.fixAspectRatio = true;
-                    mCropImageViewOptions.aspectRatio = new Pair<>(1, 1);
+                if (!mOptions.fixAspectRatio) {
+                    mOptions.fixAspectRatio = true;
+                    mOptions.aspectRatio = new Pair<>(1, 1);
                 } else {
-                    if (mCropImageViewOptions.aspectRatio.first == 1
-                            && mCropImageViewOptions.aspectRatio.second == 1) {
-                        mCropImageViewOptions.aspectRatio = new Pair<>(4, 3);
-                    } else if (mCropImageViewOptions.aspectRatio.first == 4
-                            && mCropImageViewOptions.aspectRatio.second == 3) {
-                        mCropImageViewOptions.aspectRatio = new Pair<>(16, 9);
-                    } else if (mCropImageViewOptions.aspectRatio.first == 16
-                            && mCropImageViewOptions.aspectRatio.second == 9) {
-                        mCropImageViewOptions.aspectRatio = new Pair<>(9, 16);
+                    if (mOptions.aspectRatio.first == 1
+                            && mOptions.aspectRatio.second == 1) {
+                        mOptions.aspectRatio = new Pair<>(4, 3);
+                    } else if (mOptions.aspectRatio.first == 4
+                            && mOptions.aspectRatio.second == 3) {
+                        mOptions.aspectRatio = new Pair<>(16, 9);
+                    } else if (mOptions.aspectRatio.first == 16
+                            && mOptions.aspectRatio.second == 9) {
+                        mOptions.aspectRatio = new Pair<>(9, 16);
                     } else {
-                        mCropImageViewOptions.fixAspectRatio = false;
+                        mOptions.fixAspectRatio = false;
                     }
                 }
-                mCurrentFragment.setCropImageViewOptions(mCropImageViewOptions);
-                updateDrawerTogglesByOptions(mCropImageViewOptions);
+                mCurrentFragment.setCropImageViewOptions(mOptions);
+                updateDrawerTogglesByOptions(mOptions);
                 break;
             case R.id.drawer_option_toggle_auto_zoom:
-                mCropImageViewOptions.autoZoomEnabled = !mCropImageViewOptions.autoZoomEnabled;
-                mCurrentFragment.setCropImageViewOptions(mCropImageViewOptions);
-                updateDrawerTogglesByOptions(mCropImageViewOptions);
+                mOptions.autoZoomEnabled = !mOptions.autoZoomEnabled;
+                mCurrentFragment.setCropImageViewOptions(mOptions);
+                updateDrawerTogglesByOptions(mOptions);
                 break;
             case R.id.drawer_option_toggle_max_zoom:
-                mCropImageViewOptions.maxZoomLevel =
-                        mCropImageViewOptions.maxZoomLevel == 4
+                mOptions.maxZoomLevel =
+                        mOptions.maxZoomLevel == 4
                                 ? 8
-                                : mCropImageViewOptions.maxZoomLevel == 8 ? 2 : 4;
-                mCurrentFragment.setCropImageViewOptions(mCropImageViewOptions);
-                updateDrawerTogglesByOptions(mCropImageViewOptions);
+                                : mOptions.maxZoomLevel == 8 ? 2 : 4;
+                mCurrentFragment.setCropImageViewOptions(mOptions);
+                updateDrawerTogglesByOptions(mOptions);
                 break;
             case R.id.drawer_option_set_initial_crop_rect:
                 mCurrentFragment.setInitialCropRect();
@@ -246,19 +233,19 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.drawer_option_toggle_multitouch:
-                mCropImageViewOptions.multitouch = !mCropImageViewOptions.multitouch;
-                mCurrentFragment.setCropImageViewOptions(mCropImageViewOptions);
-                updateDrawerTogglesByOptions(mCropImageViewOptions);
+                mOptions.multitouch = !mOptions.multitouch;
+                mCurrentFragment.setCropImageViewOptions(mOptions);
+                updateDrawerTogglesByOptions(mOptions);
                 break;
             case R.id.drawer_option_toggle_show_overlay:
-                mCropImageViewOptions.showCropOverlay = !mCropImageViewOptions.showCropOverlay;
-                mCurrentFragment.setCropImageViewOptions(mCropImageViewOptions);
-                updateDrawerTogglesByOptions(mCropImageViewOptions);
+                mOptions.showCropOverlay = !mOptions.showCropOverlay;
+                mCurrentFragment.setCropImageViewOptions(mOptions);
+                updateDrawerTogglesByOptions(mOptions);
                 break;
             case R.id.drawer_option_toggle_show_progress_bar:
-                mCropImageViewOptions.showProgressBar = !mCropImageViewOptions.showProgressBar;
-                mCurrentFragment.setCropImageViewOptions(mCropImageViewOptions);
-                updateDrawerTogglesByOptions(mCropImageViewOptions);
+                mOptions.showProgressBar = !mOptions.showProgressBar;
+                mCurrentFragment.setCropImageViewOptions(mOptions);
+                updateDrawerTogglesByOptions(mOptions);
                 break;
             default:
                 Toast.makeText(this, "Unknown drawer option clicked", Toast.LENGTH_LONG).show();
@@ -273,7 +260,7 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private void updateDrawerTogglesByOptions(CropImageViewOptions options) {
+    private void updateDrawerTogglesByOptions(ConfigOptions options) {
         ((TextView) findViewById(R.id.drawer_option_toggle_scale))
                 .setText(
                         getResources()

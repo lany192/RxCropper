@@ -8,7 +8,7 @@ import com.lany.cropper.CropImageView;
 /**
  * The crop image view options that can be changed live.
  */
-final class CropImageViewOptions {
+final class ConfigOptions {
 
     public CropImageView.ScaleType scaleType = CropImageView.ScaleType.CENTER_INSIDE;
 

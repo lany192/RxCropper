@@ -6,6 +6,7 @@ android {
 
     defaultConfig {
         minSdkVersion 14
+        applicationId "com.lany.cropper.sample"
         targetSdkVersion rootProject.compileSdkVersion
         versionCode 1
         versionName '1.0'
