@@ -4,10 +4,10 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion rootProject.buildToolsVersion
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 15
         targetSdkVersion rootProject.compileSdkVersion
         versionCode 1
-        versionName PUBLISH_VERSION
+        versionName '1.0.0'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7

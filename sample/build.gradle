@@ -5,7 +5,7 @@ android {
     buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 15
         applicationId "com.lany.cropper.sample"
         targetSdkVersion rootProject.compileSdkVersion
         versionCode 1
@@ -19,4 +19,12 @@ android {
 dependencies {
     api project(':library')
     api "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.github.lany168:RxPicker:1.0.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    compileOnly 'org.projectlombok:lombok:1.16.20'
+    annotationProcessor 'org.projectlombok:lombok:1.16.20'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 }
