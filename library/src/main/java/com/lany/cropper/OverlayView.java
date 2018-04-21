@@ -462,36 +462,21 @@ public class OverlayView extends View {
      * Used once at the very start to initialize the attributes.
      */
     public void setInitialAttributeValues(CropOptions options) {
-
         mCropWindowHandler.setInitialAttributeValues(options);
-
-        setCropShape(options.cropShape);
-
-        setSnapRadius(options.snapRadius);
-
+        setCropShape(options.getCropShape());
+        setSnapRadius(options.getSnapRadius());
         setGuidelines(options.guidelines);
-
         setFixedAspectRatio(options.fixAspectRatio);
-
         setAspectRatioX(options.aspectRatioX);
-
         setAspectRatioY(options.aspectRatioY);
-
         setMultiTouchEnabled(options.multiTouchEnabled);
-
         mTouchRadius = options.touchRadius;
-
         mInitialCropWindowPaddingRatio = options.initialCropWindowPaddingRatio;
-
         mBorderPaint = getNewPaintOrNull(options.borderLineThickness, options.borderLineColor);
-
         mBorderCornerOffset = options.borderCornerOffset;
         mBorderCornerLength = options.borderCornerLength;
-        mBorderCornerPaint =
-                getNewPaintOrNull(options.borderCornerThickness, options.borderCornerColor);
-
+        mBorderCornerPaint = getNewPaintOrNull(options.borderCornerThickness, options.borderCornerColor);
         mGuidelinePaint = getNewPaintOrNull(options.guidelinesThickness, options.guidelinesColor);
-
         mBackgroundPaint = getNewPaint(options.backgroundColor);
     }
 
@@ -502,18 +487,14 @@ public class OverlayView extends View {
      * the image being cropped.
      */
     private void initCropWindow() {
-
         float leftLimit = Math.max(BitmapUtils.getRectLeft(mBoundsPoints), 0);
         float topLimit = Math.max(BitmapUtils.getRectTop(mBoundsPoints), 0);
         float rightLimit = Math.min(BitmapUtils.getRectRight(mBoundsPoints), getWidth());
         float bottomLimit = Math.min(BitmapUtils.getRectBottom(mBoundsPoints), getHeight());
-
         if (rightLimit <= leftLimit || bottomLimit <= topLimit) {
             return;
         }
-
         RectF rect = new RectF();
-
         // Tells the attribute functions the crop window has already been initialized
         initializedCropWindow = true;
 
@@ -522,13 +503,10 @@ public class OverlayView extends View {
 
         if (mInitialCropWindowRect.width() > 0 && mInitialCropWindowRect.height() > 0) {
             // Get crop window position relative to the displayed image.
-            rect.left =
-                    leftLimit + mInitialCropWindowRect.left / mCropWindowHandler.getScaleFactorWidth();
+            rect.left = leftLimit + mInitialCropWindowRect.left / mCropWindowHandler.getScaleFactorWidth();
             rect.top = topLimit + mInitialCropWindowRect.top / mCropWindowHandler.getScaleFactorHeight();
-            rect.right =
-                    rect.left + mInitialCropWindowRect.width() / mCropWindowHandler.getScaleFactorWidth();
-            rect.bottom =
-                    rect.top + mInitialCropWindowRect.height() / mCropWindowHandler.getScaleFactorHeight();
+            rect.right = rect.left + mInitialCropWindowRect.width() / mCropWindowHandler.getScaleFactorWidth();
+            rect.bottom = rect.top + mInitialCropWindowRect.height() / mCropWindowHandler.getScaleFactorHeight();
 
             // Correct for floating point errors. Crop rect boundaries should not exceed the source Bitmap
             // bounds.

@@ -1,6 +1,7 @@
 package com.lany.cropper.sample;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -21,6 +22,7 @@ import com.lany.picker.utils.ImageLoader;
 import java.io.File;
 import java.util.List;
 
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class SampleActivity extends AppCompatActivity {
@@ -38,7 +40,7 @@ public class SampleActivity extends AppCompatActivity {
         findViewById(R.id.my_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RxPicker.of()
+                Disposable disposable = RxPicker.of()
                         .single(true)
                         .start(SampleActivity.this)
                         .subscribe(new Consumer<List<ImageItem>>() {
@@ -53,20 +55,16 @@ public class SampleActivity extends AppCompatActivity {
     }
 
     private void startCropActivity(String path) {
-        CropOptions options=new CropOptions();
-
-
-        RxCropper
-                .of()
-                .setUri(Uri.fromFile(new File(path)))
-                .setOptions(options)
+        Disposable disposable = RxCropper.of()
+                .setSourceUri(Uri.fromFile(new File(path)))
+                .setBackgroundColor(Color.parseColor("#90000000"))
                 .start(this)
                 .subscribe(new Consumer<CropResult>() {
-            @Override
-            public void accept(CropResult result) {
-                handleCropResult(result);
-            }
-        });
+                    @Override
+                    public void accept(CropResult result) {
+                        handleCropResult(result);
+                    }
+                });
     }
 
     private void handleCropResult(CropResult result) {

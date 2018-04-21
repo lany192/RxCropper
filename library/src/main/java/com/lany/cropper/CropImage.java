@@ -566,7 +566,7 @@ public final class CropImage {
          * <i>Default: RECTANGLE</i>
          */
         public ActivityBuilder setCropShape(@NonNull CropShape cropShape) {
-            mOptions.cropShape = cropShape;
+            mOptions.setCropShape(cropShape);
             return this;
         }
 
@@ -577,7 +577,7 @@ public final class CropImage {
          * <i>Default: 3dp</i>
          */
         public ActivityBuilder setSnapRadius(float snapRadius) {
-            mOptions.snapRadius = snapRadius;
+            mOptions.setSnapRadius(snapRadius);
             return this;
         }
 

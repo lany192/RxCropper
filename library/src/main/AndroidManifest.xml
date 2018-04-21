@@ -3,7 +3,9 @@
 
     <application>
 
-        <activity android:name="com.lany.cropper.ui.CropImageActivity" />
+        <activity
+            android:name="com.lany.cropper.ui.CropImageActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
 
     </application>
 </manifest>

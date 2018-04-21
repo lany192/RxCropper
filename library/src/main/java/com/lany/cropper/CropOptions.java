@@ -19,10 +19,11 @@ import com.lany.cropper.enums.RequestSizeOptions;
 import com.lany.cropper.enums.ScaleType;
 import com.lany.cropper.ui.CropImageActivity;
 
-/**
- * All the possible options that can be set to customize crop image.<br>
- * Initialized with default values.
- */
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class CropOptions implements Parcelable {
 
     public static final Creator<CropOptions> CREATOR =
@@ -41,14 +42,14 @@ public class CropOptions implements Parcelable {
     /**
      * The shape of the cropping window.
      */
-    public CropShape cropShape;
+    private CropShape cropShape;
 
     /**
      * An edge of the crop window will snap to the corresponding edge of a specified bounding box when
      * the crop window edge is less than or equal to this distance (in pixels) away from the bounding
      * box edge. (in pixels)
      */
-    public float snapRadius;
+    private float snapRadius;
 
     /**
      * The radius of the touchable area around the handle. (in pixels)<br>
