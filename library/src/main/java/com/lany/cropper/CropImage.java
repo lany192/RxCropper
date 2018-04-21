@@ -30,6 +30,8 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 
+import com.lany.cropper.ui.CropImageActivity;
+
 import java.io.File;
 import java.io.InputStream;
 import java.util.ArrayList;

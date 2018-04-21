@@ -3,7 +3,7 @@
 
     <application>
 
-        <activity android:name="com.lany.cropper.CropImageActivity" />
+        <activity android:name="com.lany.cropper.ui.CropImageActivity" />
 
     </application>
 </manifest>

@@ -13,6 +13,8 @@ import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
+import com.lany.cropper.ui.CropImageActivity;
+
 /**
  * All the possible options that can be set to customize crop image.<br>
  * Initialized with default values.

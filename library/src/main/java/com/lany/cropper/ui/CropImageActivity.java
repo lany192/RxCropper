@@ -1,6 +1,6 @@
 
 
-package com.lany.cropper;
+package com.lany.cropper.ui;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -20,6 +20,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.lany.cropper.CropImage;
+import com.lany.cropper.CropImageView;
+import com.lany.cropper.CropOptions;
+import com.lany.cropper.CropResult;
+import com.lany.cropper.R;
 
 import java.io.File;
 import java.io.IOException;

@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
+import com.lany.cropper.ui.CropImageActivity;
 import com.lany.cropper.ui.ResultHandlerFragment;
 
 import io.reactivex.Observable;
