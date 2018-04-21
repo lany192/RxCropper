@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 
+import com.lany.cropper.enums.RequestSizeOptions;
+
 import java.lang.ref.WeakReference;
 
 /**
@@ -93,7 +95,7 @@ final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
     /**
      * The option to handle requested width/height
      */
-    private final CropImageView.RequestSizeOptions mReqSizeOptions;
+    private final RequestSizeOptions mReqSizeOptions;
 
     /**
      * the Android Uri to save the cropped image to
@@ -123,7 +125,7 @@ final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
             int reqHeight,
             boolean flipHorizontally,
             boolean flipVertically,
-            CropImageView.RequestSizeOptions options,
+            RequestSizeOptions options,
             Uri saveUri,
             Bitmap.CompressFormat saveCompressFormat,
             int saveCompressQuality) {
@@ -163,7 +165,7 @@ final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
             int reqHeight,
             boolean flipHorizontally,
             boolean flipVertically,
-            CropImageView.RequestSizeOptions options,
+            RequestSizeOptions options,
             Uri saveUri,
             Bitmap.CompressFormat saveCompressFormat,
             int saveCompressQuality) {

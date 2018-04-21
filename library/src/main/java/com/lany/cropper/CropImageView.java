@@ -23,6 +23,16 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.lany.cropper.enums.CropShape;
+import com.lany.cropper.enums.Guidelines;
+import com.lany.cropper.enums.RequestSizeOptions;
+import com.lany.cropper.enums.ScaleType;
+import com.lany.cropper.listeners.OnCropImageCompleteListener;
+import com.lany.cropper.listeners.OnSetCropOverlayMovedListener;
+import com.lany.cropper.listeners.OnSetCropOverlayReleasedListener;
+import com.lany.cropper.listeners.OnSetCropWindowChangeListener;
+import com.lany.cropper.listeners.OnSetImageUriCompleteListener;
+
 import java.lang.ref.WeakReference;
 import java.util.UUID;
 
@@ -1912,205 +1922,6 @@ public class CropImageView extends FrameLayout {
 
         // set the bitmap rectangle and update the crop window after scale factor is set
         mOverlayView.setBounds(clear ? null : mImagePoints, getWidth(), getHeight());
-    }
-    // endregion
-
-    // region: Inner class: CropShape
-
-    /**
-     * The possible cropping area shape.<br>
-     * To set square/circle crop shape set aspect ratio to 1:1.
-     */
-    public enum CropShape {
-        RECTANGLE,
-        OVAL
-    }
-    // endregion
-
-    // region: Inner class: ScaleType
-
-    /**
-     * Options for scaling the bounds of cropping image to the bounds of Crop Image View.<br>
-     * Note: Some options are affected by auto-zoom, if enabled.
-     */
-    public enum ScaleType {
-
-        /**
-         * Scale the image uniformly (maintain the image's aspect ratio) to fit in crop image view.<br>
-         * The largest dimension will be equals to crop image view and the second dimension will be
-         * smaller.
-         */
-        FIT_CENTER,
-
-        /**
-         * Center the image in the view, but perform no scaling.<br>
-         * Note: If auto-zoom is enabled and the source image is smaller than crop image view then it
-         * will be scaled uniformly to fit the crop image view.
-         */
-        CENTER,
-
-        /**
-         * Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width
-         * and height) of the image will be equal to or <b>larger</b> than the corresponding dimension
-         * of the view (minus padding).<br>
-         * The image is then centered in the view.
-         */
-        CENTER_CROP,
-
-        /**
-         * Scale the image uniformly (maintain the image's aspect ratio) so that both dimensions (width
-         * and height) of the image will be equal to or <b>less</b> than the corresponding dimension of
-         * the view (minus padding).<br>
-         * The image is then centered in the view.<br>
-         * Note: If auto-zoom is enabled and the source image is smaller than crop image view then it
-         * will be scaled uniformly to fit the crop image view.
-         */
-        CENTER_INSIDE
-    }
-    // endregion
-
-    // region: Inner class: Guidelines
-
-    /**
-     * The possible guidelines showing types.
-     */
-    public enum Guidelines {
-        /**
-         * Never show
-         */
-        OFF,
-
-        /**
-         * Show when crop move action is live
-         */
-        ON_TOUCH,
-
-        /**
-         * Always show
-         */
-        ON
-    }
-    // endregion
-
-    // region: Inner class: RequestSizeOptions
-
-    /**
-     * Possible options for handling requested width/height for cropping.
-     */
-    public enum RequestSizeOptions {
-
-        /**
-         * No resize/sampling is done unless required for memory management (OOM).
-         */
-        NONE,
-
-        /**
-         * Only sample the image during loading (if image set using URI) so the smallest of the image
-         * dimensions will be between the requested size and x2 requested size.<br>
-         * NOTE: resulting image will not be exactly requested width/height see: <a
-         * href="http://developer.android.com/training/displaying-bitmaps/load-bitmap.html">Loading
-         * Large Bitmaps Efficiently</a>.
-         */
-        SAMPLING,
-
-        /**
-         * Resize the image uniformly (maintain the image's aspect ratio) so that both dimensions (width
-         * and height) of the image will be equal to or <b>less</b> than the corresponding requested
-         * dimension.<br>
-         * If the image is smaller than the requested size it will NOT change.
-         */
-        RESIZE_INSIDE,
-
-        /**
-         * Resize the image uniformly (maintain the image's aspect ratio) to fit in the given
-         * width/height.<br>
-         * The largest dimension will be equals to the requested and the second dimension will be
-         * smaller.<br>
-         * If the image is smaller than the requested size it will enlarge it.
-         */
-        RESIZE_FIT,
-
-        /**
-         * Resize the image to fit exactly in the given width/height.<br>
-         * This resize method does NOT preserve aspect ratio.<br>
-         * If the image is smaller than the requested size it will enlarge it.
-         */
-        RESIZE_EXACT
-    }
-    // endregion
-
-    // region: Inner class: OnSetImageUriCompleteListener
-
-    /**
-     * Interface definition for a callback to be invoked when the crop overlay is released.
-     */
-    public interface OnSetCropOverlayReleasedListener {
-
-        /**
-         * Called when the crop overlay changed listener is called and inProgress is false.
-         *
-         * @param rect The rect coordinates of the cropped overlay
-         */
-        void onCropOverlayReleased(Rect rect);
-    }
-
-    /**
-     * Interface definition for a callback to be invoked when the crop overlay is released.
-     */
-    public interface OnSetCropOverlayMovedListener {
-
-        /**
-         * Called when the crop overlay is moved
-         *
-         * @param rect The rect coordinates of the cropped overlay
-         */
-        void onCropOverlayMoved(Rect rect);
-    }
-
-    /**
-     * Interface definition for a callback to be invoked when the crop overlay is released.
-     */
-    public interface OnSetCropWindowChangeListener {
-
-        /**
-         * Called when the crop window is changed
-         */
-        void onCropWindowChanged();
-    }
-
-    /**
-     * Interface definition for a callback to be invoked when image async loading is complete.
-     */
-    public interface OnSetImageUriCompleteListener {
-
-        /**
-         * Called when a crop image view has completed loading image for cropping.<br>
-         * If loading failed error parameter will contain the error.
-         *
-         * @param view  The crop image view that loading of image was complete.
-         * @param uri   the URI of the image that was loading
-         * @param error if error occurred during loading will contain the error, otherwise null.
-         */
-        void onSetImageUriComplete(CropImageView view, Uri uri, Exception error);
-    }
-    // endregion
-
-    // region: Inner class: OnGetCroppedImageCompleteListener
-
-    /**
-     * Interface definition for a callback to be invoked when image async crop is complete.
-     */
-    public interface OnCropImageCompleteListener {
-
-        /**
-         * Called when a crop image view has completed cropping image.<br>
-         * Result object contains the cropped bitmap, saved cropped image uri, crop points data or the
-         * error occured during cropping.
-         *
-         * @param view   The crop image view that cropping of image was complete.
-         * @param result the crop image result data (with cropped image or error)
-         */
-        void onCropImageComplete(CropImageView view, CropResult result);
     }
     // endregion
 }

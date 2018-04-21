@@ -19,7 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.lany.cropper.CropImage;
-import com.lany.cropper.CropImageView;
+import com.lany.cropper.enums.CropShape;
+import com.lany.cropper.enums.Guidelines;
+import com.lany.cropper.enums.ScaleType;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
@@ -162,31 +164,31 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.drawer_option_toggle_scale:
                 mOptions.scaleType =
-                        mOptions.scaleType == CropImageView.ScaleType.FIT_CENTER
-                                ? CropImageView.ScaleType.CENTER_INSIDE
-                                : mOptions.scaleType == CropImageView.ScaleType.CENTER_INSIDE
-                                ? CropImageView.ScaleType.CENTER
-                                : mOptions.scaleType == CropImageView.ScaleType.CENTER
-                                ? CropImageView.ScaleType.CENTER_CROP
-                                : CropImageView.ScaleType.FIT_CENTER;
+                        mOptions.scaleType == ScaleType.FIT_CENTER
+                                ? ScaleType.CENTER_INSIDE
+                                : mOptions.scaleType == ScaleType.CENTER_INSIDE
+                                ? ScaleType.CENTER
+                                : mOptions.scaleType == ScaleType.CENTER
+                                ? ScaleType.CENTER_CROP
+                                : ScaleType.FIT_CENTER;
                 mCurrentFragment.setCropImageViewOptions(mOptions);
                 updateDrawerTogglesByOptions(mOptions);
                 break;
             case R.id.drawer_option_toggle_shape:
                 mOptions.cropShape =
-                        mOptions.cropShape == CropImageView.CropShape.RECTANGLE
-                                ? CropImageView.CropShape.OVAL
-                                : CropImageView.CropShape.RECTANGLE;
+                        mOptions.cropShape == CropShape.RECTANGLE
+                                ? CropShape.OVAL
+                                : CropShape.RECTANGLE;
                 mCurrentFragment.setCropImageViewOptions(mOptions);
                 updateDrawerTogglesByOptions(mOptions);
                 break;
             case R.id.drawer_option_toggle_guidelines:
                 mOptions.guidelines =
-                        mOptions.guidelines == CropImageView.Guidelines.OFF
-                                ? CropImageView.Guidelines.ON
-                                : mOptions.guidelines == CropImageView.Guidelines.ON
-                                ? CropImageView.Guidelines.ON_TOUCH
-                                : CropImageView.Guidelines.OFF;
+                        mOptions.guidelines == Guidelines.OFF
+                                ? Guidelines.ON
+                                : mOptions.guidelines == Guidelines.ON
+                                ? Guidelines.ON_TOUCH
+                                : Guidelines.OFF;
                 mCurrentFragment.setCropImageViewOptions(mOptions);
                 updateDrawerTogglesByOptions(mOptions);
                 break;

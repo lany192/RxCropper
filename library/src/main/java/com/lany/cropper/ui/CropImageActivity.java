@@ -26,13 +26,13 @@ import com.lany.cropper.CropImageView;
 import com.lany.cropper.CropOptions;
 import com.lany.cropper.CropResult;
 import com.lany.cropper.R;
+import com.lany.cropper.listeners.OnCropImageCompleteListener;
+import com.lany.cropper.listeners.OnSetImageUriCompleteListener;
 
 import java.io.File;
 import java.io.IOException;
 
-public class CropImageActivity extends AppCompatActivity
-        implements CropImageView.OnSetImageUriCompleteListener,
-        CropImageView.OnCropImageCompleteListener {
+public class CropImageActivity extends AppCompatActivity implements OnSetImageUriCompleteListener, OnCropImageCompleteListener {
 
     /**
      * The crop image view library widget used in the activity

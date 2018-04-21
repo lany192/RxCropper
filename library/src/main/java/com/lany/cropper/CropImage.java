@@ -30,6 +30,10 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 
+import com.lany.cropper.enums.CropShape;
+import com.lany.cropper.enums.Guidelines;
+import com.lany.cropper.enums.RequestSizeOptions;
+import com.lany.cropper.enums.ScaleType;
 import com.lany.cropper.ui.CropImageActivity;
 
 import java.io.File;
@@ -561,7 +565,7 @@ public final class CropImage {
          * To set square/circle crop shape set aspect ratio to 1:1.<br>
          * <i>Default: RECTANGLE</i>
          */
-        public ActivityBuilder setCropShape(@NonNull CropImageView.CropShape cropShape) {
+        public ActivityBuilder setCropShape(@NonNull CropShape cropShape) {
             mOptions.cropShape = cropShape;
             return this;
         }
@@ -592,7 +596,7 @@ public final class CropImage {
          * whether the guidelines should be on, off, or only showing when resizing.<br>
          * <i>Default: ON_TOUCH</i>
          */
-        public ActivityBuilder setGuidelines(@NonNull CropImageView.Guidelines guidelines) {
+        public ActivityBuilder setGuidelines(@NonNull Guidelines guidelines) {
             mOptions.guidelines = guidelines;
             return this;
         }
@@ -601,7 +605,7 @@ public final class CropImage {
          * The initial scale type of the image in the crop image view<br>
          * <i>Default: FIT_CENTER</i>
          */
-        public ActivityBuilder setScaleType(@NonNull CropImageView.ScaleType scaleType) {
+        public ActivityBuilder setScaleType(@NonNull ScaleType scaleType) {
             mOptions.scaleType = scaleType;
             return this;
         }
@@ -838,11 +842,11 @@ public final class CropImage {
 
         /**
          * the size to resize the cropped image to.<br>
-         * Uses {@link CropImageView.RequestSizeOptions#RESIZE_INSIDE} option.<br>
+         * Uses {@link RequestSizeOptions#RESIZE_INSIDE} option.<br>
          * <i>Default: 0, 0 - not set, will not resize</i>
          */
         public ActivityBuilder setRequestedSize(int reqWidth, int reqHeight) {
-            return setRequestedSize(reqWidth, reqHeight, CropImageView.RequestSizeOptions.RESIZE_INSIDE);
+            return setRequestedSize(reqWidth, reqHeight, RequestSizeOptions.RESIZE_INSIDE);
         }
 
         /**
@@ -850,7 +854,7 @@ public final class CropImage {
          * <i>Default: 0, 0 - not set, will not resize</i>
          */
         public ActivityBuilder setRequestedSize(
-                int reqWidth, int reqHeight, CropImageView.RequestSizeOptions options) {
+                int reqWidth, int reqHeight, RequestSizeOptions options) {
             mOptions.outputRequestWidth = reqWidth;
             mOptions.outputRequestHeight = reqHeight;
             mOptions.outputRequestSizeOptions = options;

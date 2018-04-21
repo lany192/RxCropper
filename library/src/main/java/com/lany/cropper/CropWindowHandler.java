@@ -4,6 +4,8 @@ package com.lany.cropper;
 
 import android.graphics.RectF;
 
+import com.lany.cropper.enums.CropShape;
+
 /**
  * Handler from crop window stuff, moving and knowing possition.
  */
@@ -196,9 +198,9 @@ final class CropWindowHandler {
      * @return the Handle that was pressed; null if no Handle was pressed
      */
     public CropWindowMoveHandler getMoveHandler(
-            float x, float y, float targetRadius, CropImageView.CropShape cropShape) {
+            float x, float y, float targetRadius, CropShape cropShape) {
         CropWindowMoveHandler.Type type =
-                cropShape == CropImageView.CropShape.OVAL
+                cropShape == CropShape.OVAL
                         ? getOvalPressedMoveType(x, y)
                         : getRectanglePressedMoveType(x, y, targetRadius);
         return type != null ? new CropWindowMoveHandler(type, this, x, y) : null;

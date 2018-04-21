@@ -18,13 +18,14 @@ import android.widget.Toast;
 import com.lany.cropper.CropImage;
 import com.lany.cropper.CropImageView;
 import com.lany.cropper.CropResult;
+import com.lany.cropper.enums.CropShape;
+import com.lany.cropper.listeners.OnCropImageCompleteListener;
+import com.lany.cropper.listeners.OnSetImageUriCompleteListener;
 
 /**
  * The fragment that will show the Image Cropping UI by requested preset.
  */
-public class MainFragment extends Fragment
-        implements CropImageView.OnSetImageUriCompleteListener,
-        CropImageView.OnCropImageCompleteListener {
+public class MainFragment extends Fragment implements OnSetImageUriCompleteListener, OnCropImageCompleteListener {
 
     // region: Fields and Consts
 
@@ -216,7 +217,7 @@ public class MainFragment extends Fragment
                 intent.putExtra("URI", result.getUri());
             } else {
                 CropResultActivity.mImage =
-                        mCropImageView.getCropShape() == CropImageView.CropShape.OVAL
+                        mCropImageView.getCropShape() == CropShape.OVAL
                                 ? CropImage.toOvalBitmap(result.getBitmap())
                                 : result.getBitmap();
             }

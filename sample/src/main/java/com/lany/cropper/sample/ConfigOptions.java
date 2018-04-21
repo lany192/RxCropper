@@ -4,17 +4,20 @@ package com.lany.cropper.sample;
 import android.util.Pair;
 
 import com.lany.cropper.CropImageView;
+import com.lany.cropper.enums.CropShape;
+import com.lany.cropper.enums.Guidelines;
+import com.lany.cropper.enums.ScaleType;
 
 /**
  * The crop image view options that can be changed live.
  */
 final class ConfigOptions {
 
-    public CropImageView.ScaleType scaleType = CropImageView.ScaleType.CENTER_INSIDE;
+    public ScaleType scaleType = ScaleType.CENTER_INSIDE;
 
-    public CropImageView.CropShape cropShape = CropImageView.CropShape.RECTANGLE;
+    public CropShape cropShape = CropShape.RECTANGLE;
 
-    public CropImageView.Guidelines guidelines = CropImageView.Guidelines.ON_TOUCH;
+    public Guidelines guidelines = Guidelines.ON_TOUCH;
 
     public Pair<Integer, Integer> aspectRatio = new Pair<>(1, 1);
 
