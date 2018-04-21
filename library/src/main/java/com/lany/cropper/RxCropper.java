@@ -114,6 +114,7 @@ public class RxCropper {
         return this;
     }
 
+
     /**
      * whether the guidelines should be on, off, or only showing when resizing.<br>
      * <i>Default: ON_TOUCH</i>
@@ -128,7 +129,7 @@ public class RxCropper {
      * <i>Default: FIT_CENTER</i>
      */
     public RxCropper setScaleType(@NonNull ScaleType scaleType) {
-        mOptions.scaleType = scaleType;
+        mOptions.setScaleType(scaleType);
         return this;
     }
 
@@ -138,7 +139,7 @@ public class RxCropper {
      * <i>default: true, may disable for animation or frame transition.</i>
      */
     public RxCropper setShowCropOverlay(boolean showCropOverlay) {
-        mOptions.showCropOverlay = showCropOverlay;
+        mOptions.setShowCropOverlay(showCropOverlay);
         return this;
     }
 
@@ -147,7 +148,7 @@ public class RxCropper {
      * default: true.
      */
     public RxCropper setAutoZoomEnabled(boolean autoZoomEnabled) {
-        mOptions.autoZoomEnabled = autoZoomEnabled;
+        mOptions.setAutoZoomEnabled(autoZoomEnabled);
         return this;
     }
 
@@ -156,7 +157,7 @@ public class RxCropper {
      * default: true.
      */
     public RxCropper setMultiTouchEnabled(boolean multiTouchEnabled) {
-        mOptions.multiTouchEnabled = multiTouchEnabled;
+        mOptions.setMultiTouchEnabled(multiTouchEnabled);
         return this;
     }
 
@@ -165,7 +166,7 @@ public class RxCropper {
      * <i>Default: 4</i>
      */
     public RxCropper setMaxZoom(int maxZoom) {
-        mOptions.maxZoom = maxZoom;
+        mOptions.setMaxZoom(maxZoom);
         return this;
     }
 
@@ -175,7 +176,7 @@ public class RxCropper {
      * <i>Default: 0.1</i>
      */
     public RxCropper setInitialCropWindowPaddingRatio(float initialCropWindowPaddingRatio) {
-        mOptions.initialCropWindowPaddingRatio = initialCropWindowPaddingRatio;
+        mOptions.setInitialCropWindowPaddingRatio(initialCropWindowPaddingRatio);
         return this;
     }
 
@@ -184,7 +185,7 @@ public class RxCropper {
      * <i>Default: false</i>
      */
     public RxCropper setFixAspectRatio(boolean fixAspectRatio) {
-        mOptions.fixAspectRatio = fixAspectRatio;
+        mOptions.setFixAspectRatio(fixAspectRatio);
         return this;
     }
 
@@ -197,9 +198,9 @@ public class RxCropper {
      * @param aspectRatioY the height
      */
     public RxCropper setAspectRatio(int aspectRatioX, int aspectRatioY) {
-        mOptions.aspectRatioX = aspectRatioX;
-        mOptions.aspectRatioY = aspectRatioY;
-        mOptions.fixAspectRatio = true;
+        mOptions.setAspectRatioX(aspectRatioX);
+        mOptions.setAspectRatioY(aspectRatioY);
+        mOptions.setFixAspectRatio(true);
         return this;
     }
 
@@ -208,7 +209,7 @@ public class RxCropper {
      * <i>Default: 3dp</i>
      */
     public RxCropper setBorderLineThickness(float borderLineThickness) {
-        mOptions.borderLineThickness = borderLineThickness;
+        mOptions.setBorderLineThickness(borderLineThickness);
         return this;
     }
 
@@ -217,7 +218,7 @@ public class RxCropper {
      * <i>Default: Color.argb(170, 255, 255, 255)</i>
      */
     public RxCropper setBorderLineColor(int borderLineColor) {
-        mOptions.borderLineColor = borderLineColor;
+        mOptions.setBorderLineColor(borderLineColor);
         return this;
     }
 
@@ -226,7 +227,7 @@ public class RxCropper {
      * <i>Default: 2dp</i>
      */
     public RxCropper setBorderCornerThickness(float borderCornerThickness) {
-        mOptions.borderCornerThickness = borderCornerThickness;
+        mOptions.setBorderLineThickness(borderCornerThickness);
         return this;
     }
 
@@ -235,7 +236,7 @@ public class RxCropper {
      * <i>Default: 5dp</i>
      */
     public RxCropper setBorderCornerOffset(float borderCornerOffset) {
-        mOptions.borderCornerOffset = borderCornerOffset;
+        mOptions.setBorderCornerOffset(borderCornerOffset);
         return this;
     }
 
@@ -244,7 +245,7 @@ public class RxCropper {
      * <i>Default: 14dp</i>
      */
     public RxCropper setBorderCornerLength(float borderCornerLength) {
-        mOptions.borderCornerLength = borderCornerLength;
+        mOptions.setBorderCornerLength(borderCornerLength);
         return this;
     }
 
@@ -253,7 +254,7 @@ public class RxCropper {
      * <i>Default: WHITE</i>
      */
     public RxCropper setBorderCornerColor(int borderCornerColor) {
-        mOptions.borderCornerColor = borderCornerColor;
+        mOptions.setBorderCornerColor(borderCornerColor);
         return this;
     }
 
@@ -262,7 +263,7 @@ public class RxCropper {
      * <i>Default: 1dp</i>
      */
     public RxCropper setGuidelinesThickness(float guidelinesThickness) {
-        mOptions.guidelinesThickness = guidelinesThickness;
+        mOptions.setGuidelinesThickness(guidelinesThickness);
         return this;
     }
 
@@ -271,7 +272,7 @@ public class RxCropper {
      * <i>Default: Color.argb(170, 255, 255, 255)</i>
      */
     public RxCropper setGuidelinesColor(int guidelinesColor) {
-        mOptions.guidelinesColor = guidelinesColor;
+        mOptions.setGuidelinesColor(guidelinesColor);
         return this;
     }
 
@@ -281,7 +282,7 @@ public class RxCropper {
      * <i>Default: Color.argb(119, 0, 0, 0)</i>
      */
     public RxCropper setBackgroundColor(int backgroundColor) {
-        mOptions.backgroundColor = backgroundColor;
+        mOptions.setBackgroundColor(backgroundColor);
         return this;
     }
 
@@ -290,8 +291,8 @@ public class RxCropper {
      * <i>Default: 42dp, 42dp</i>
      */
     public RxCropper setMinCropWindowSize(int minCropWindowWidth, int minCropWindowHeight) {
-        mOptions.minCropWindowWidth = minCropWindowWidth;
-        mOptions.minCropWindowHeight = minCropWindowHeight;
+        mOptions.setMinCropResultWidth(minCropWindowWidth);
+        mOptions.setMaxCropResultHeight(minCropWindowHeight);
         return this;
     }
 
@@ -301,8 +302,8 @@ public class RxCropper {
      * <i>Default: 40px, 40px</i>
      */
     public RxCropper setMinCropResultSize(int minCropResultWidth, int minCropResultHeight) {
-        mOptions.minCropResultWidth = minCropResultWidth;
-        mOptions.minCropResultHeight = minCropResultHeight;
+        mOptions.setMinCropResultWidth(minCropResultWidth);
+        mOptions.setMinCropResultHeight(minCropResultHeight);
         return this;
     }
 
@@ -312,8 +313,8 @@ public class RxCropper {
      * <i>Default: 99999, 99999</i>
      */
     public RxCropper setMaxCropResultSize(int maxCropResultWidth, int maxCropResultHeight) {
-        mOptions.maxCropResultWidth = maxCropResultWidth;
-        mOptions.maxCropResultHeight = maxCropResultHeight;
+        mOptions.setMaxCropResultWidth(maxCropResultWidth);
+        mOptions.setMaxCropResultHeight(maxCropResultHeight);
         return this;
     }
 
@@ -322,7 +323,7 @@ public class RxCropper {
      * <i>Default: ""</i>
      */
     public RxCropper setActivityTitle(CharSequence activityTitle) {
-        mOptions.activityTitle = activityTitle;
+        mOptions.setActivityTitle(activityTitle);
         return this;
     }
 
@@ -331,7 +332,7 @@ public class RxCropper {
      * <i>Default: NONE</i>
      */
     public RxCropper setActivityMenuIconColor(int activityMenuIconColor) {
-        mOptions.activityMenuIconColor = activityMenuIconColor;
+        mOptions.setActivityMenuIconColor(activityMenuIconColor);
         return this;
     }
 
@@ -340,7 +341,7 @@ public class RxCropper {
      * <i>Default: NONE, will create a temp file</i>
      */
     public RxCropper setOutputUri(Uri outputUri) {
-        mOptions.outputUri = outputUri;
+        mOptions.setOutputUri(outputUri);
         return this;
     }
 
@@ -349,7 +350,7 @@ public class RxCropper {
      * <i>Default: JPEG</i>
      */
     public RxCropper setOutputCompressFormat(Bitmap.CompressFormat outputCompressFormat) {
-        mOptions.outputCompressFormat = outputCompressFormat;
+        mOptions.setOutputCompressFormat(outputCompressFormat);
         return this;
     }
 
@@ -358,7 +359,7 @@ public class RxCropper {
      * <i>Default: 90</i>
      */
     public RxCropper setOutputCompressQuality(int outputCompressQuality) {
-        mOptions.outputCompressQuality = outputCompressQuality;
+        mOptions.setOutputCompressQuality(outputCompressQuality);
         return this;
     }
 
@@ -376,11 +377,10 @@ public class RxCropper {
      * the size to resize the cropped image to.<br>
      * <i>Default: 0, 0 - not set, will not resize</i>
      */
-    public RxCropper setRequestedSize(
-            int reqWidth, int reqHeight, RequestSizeOptions options) {
-        mOptions.outputRequestWidth = reqWidth;
-        mOptions.outputRequestHeight = reqHeight;
-        mOptions.outputRequestSizeOptions = options;
+    public RxCropper setRequestedSize(int reqWidth, int reqHeight, RequestSizeOptions options) {
+        mOptions.setOutputRequestWidth(reqWidth);
+        mOptions.setOutputRequestHeight(reqHeight);
+        mOptions.setOutputRequestSizeOptions(options);
         return this;
     }
 
@@ -391,7 +391,7 @@ public class RxCropper {
      * <i>Default: false</i>
      */
     public RxCropper setNoOutputImage(boolean noOutputImage) {
-        mOptions.noOutputImage = noOutputImage;
+        mOptions.setNoOutputImage(noOutputImage);
         return this;
     }
 
@@ -400,7 +400,7 @@ public class RxCropper {
      * <i>Default: NONE - will initialize using initial crop window padding ratio</i>
      */
     public RxCropper setInitialCropWindowRectangle(Rect initialCropWindowRectangle) {
-        mOptions.initialCropWindowRectangle = initialCropWindowRectangle;
+        mOptions.setInitialCropWindowRectangle(initialCropWindowRectangle);
         return this;
     }
 
@@ -410,7 +410,7 @@ public class RxCropper {
      * <i>Default: NONE - will read image exif data</i>
      */
     public RxCropper setInitialRotation(int initialRotation) {
-        mOptions.initialRotation = (initialRotation + 360) % 360;
+        mOptions.setInitialRotation((initialRotation + 360) % 360);
         return this;
     }
 
@@ -419,7 +419,7 @@ public class RxCropper {
      * <i>Default: true</i>
      */
     public RxCropper setAllowRotation(boolean allowRotation) {
-        mOptions.allowRotation = allowRotation;
+        mOptions.setAllowRotation(allowRotation);
         return this;
     }
 
@@ -428,7 +428,7 @@ public class RxCropper {
      * <i>Default: true</i>
      */
     public RxCropper setAllowFlipping(boolean allowFlipping) {
-        mOptions.allowFlipping = allowFlipping;
+        mOptions.setAllowFlipping(allowFlipping);
         return this;
     }
 
@@ -438,7 +438,7 @@ public class RxCropper {
      * <i>Default: false</i>
      */
     public RxCropper setAllowCounterRotation(boolean allowCounterRotation) {
-        mOptions.allowCounterRotation = allowCounterRotation;
+        mOptions.setAllowCounterRotation(allowCounterRotation);
         return this;
     }
 
@@ -447,7 +447,7 @@ public class RxCropper {
      * <i>Default: 90</i>
      */
     public RxCropper setRotationDegrees(int rotationDegrees) {
-        mOptions.rotationDegrees = (rotationDegrees + 360) % 360;
+        mOptions.setRotationDegrees((rotationDegrees + 360) % 360);
         return this;
     }
 
@@ -456,7 +456,7 @@ public class RxCropper {
      * <i>Default: false</i>
      */
     public RxCropper setFlipHorizontally(boolean flipHorizontally) {
-        mOptions.flipHorizontally = flipHorizontally;
+        mOptions.setFlipHorizontally(flipHorizontally);
         return this;
     }
 
@@ -465,7 +465,7 @@ public class RxCropper {
      * <i>Default: false</i>
      */
     public RxCropper setFlipVertically(boolean flipVertically) {
-        mOptions.flipVertically = flipVertically;
+        mOptions.setFlipVertically(flipVertically);
         return this;
     }
 
@@ -474,7 +474,7 @@ public class RxCropper {
      * <i>Default: null, will use resource string: crop_image_menu_crop</i>
      */
     public RxCropper setCropMenuCropButtonTitle(CharSequence title) {
-        mOptions.cropMenuCropButtonTitle = title;
+        mOptions.setCropMenuCropButtonTitle(title);
         return this;
     }
 
@@ -483,7 +483,7 @@ public class RxCropper {
      * <i>Default: 0</i>
      */
     public RxCropper setCropMenuCropButtonIcon(@DrawableRes int drawableResource) {
-        mOptions.cropMenuCropButtonIcon = drawableResource;
+        mOptions.setCropMenuCropButtonIcon(drawableResource);
         return this;
     }
 }

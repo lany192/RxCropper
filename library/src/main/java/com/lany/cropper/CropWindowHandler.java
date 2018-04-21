@@ -163,12 +163,12 @@ final class CropWindowHandler {
      * Set the variables to be used during crop window handling.
      */
     public void setInitialAttributeValues(CropOptions options) {
-        mMinCropWindowWidth = options.minCropWindowWidth;
-        mMinCropWindowHeight = options.minCropWindowHeight;
-        mMinCropResultWidth = options.minCropResultWidth;
-        mMinCropResultHeight = options.minCropResultHeight;
-        mMaxCropResultWidth = options.maxCropResultWidth;
-        mMaxCropResultHeight = options.maxCropResultHeight;
+        mMinCropWindowWidth = options.getMinCropWindowWidth();
+        mMinCropWindowHeight = options.getMinCropWindowHeight();
+        mMinCropResultWidth = options.getMinCropResultWidth();
+        mMinCropResultHeight = options.getMinCropResultHeight();
+        mMaxCropResultWidth = options.getMaxCropResultWidth();
+        mMaxCropResultHeight = options.getMaxCropResultHeight();
     }
 
     /**

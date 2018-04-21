@@ -560,13 +560,14 @@ public final class CropImage {
             fragment.startActivityForResult(getIntent(context, cls), CROP_IMAGE_ACTIVITY_REQUEST_CODE);
         }
 
+
         /**
          * The shape of the cropping window.<br>
          * To set square/circle crop shape set aspect ratio to 1:1.<br>
          * <i>Default: RECTANGLE</i>
          */
-        public ActivityBuilder setCropShape(@NonNull CropShape cropShape) {
-            mOptions.setCropShape(cropShape);
+        public ActivityBuilder setCropShape(@NonNull CropShape shape) {
+            mOptions.setCropShape(shape);
             return this;
         }
 
@@ -588,16 +589,17 @@ public final class CropImage {
          * <i>Default: 48dp</i>
          */
         public ActivityBuilder setTouchRadius(float touchRadius) {
-            mOptions.touchRadius = touchRadius;
+            mOptions.setTouchRadius(touchRadius);
             return this;
         }
+
 
         /**
          * whether the guidelines should be on, off, or only showing when resizing.<br>
          * <i>Default: ON_TOUCH</i>
          */
         public ActivityBuilder setGuidelines(@NonNull Guidelines guidelines) {
-            mOptions.guidelines = guidelines;
+            mOptions.setGuidelines(guidelines);
             return this;
         }
 
@@ -606,7 +608,7 @@ public final class CropImage {
          * <i>Default: FIT_CENTER</i>
          */
         public ActivityBuilder setScaleType(@NonNull ScaleType scaleType) {
-            mOptions.scaleType = scaleType;
+            mOptions.setScaleType(scaleType);
             return this;
         }
 
@@ -616,7 +618,7 @@ public final class CropImage {
          * <i>default: true, may disable for animation or frame transition.</i>
          */
         public ActivityBuilder setShowCropOverlay(boolean showCropOverlay) {
-            mOptions.showCropOverlay = showCropOverlay;
+            mOptions.setShowCropOverlay(showCropOverlay);
             return this;
         }
 
@@ -625,7 +627,7 @@ public final class CropImage {
          * default: true.
          */
         public ActivityBuilder setAutoZoomEnabled(boolean autoZoomEnabled) {
-            mOptions.autoZoomEnabled = autoZoomEnabled;
+            mOptions.setAutoZoomEnabled(autoZoomEnabled);
             return this;
         }
 
@@ -634,7 +636,7 @@ public final class CropImage {
          * default: true.
          */
         public ActivityBuilder setMultiTouchEnabled(boolean multiTouchEnabled) {
-            mOptions.multiTouchEnabled = multiTouchEnabled;
+            mOptions.setMultiTouchEnabled(multiTouchEnabled);
             return this;
         }
 
@@ -643,7 +645,7 @@ public final class CropImage {
          * <i>Default: 4</i>
          */
         public ActivityBuilder setMaxZoom(int maxZoom) {
-            mOptions.maxZoom = maxZoom;
+            mOptions.setMaxZoom(maxZoom);
             return this;
         }
 
@@ -653,7 +655,7 @@ public final class CropImage {
          * <i>Default: 0.1</i>
          */
         public ActivityBuilder setInitialCropWindowPaddingRatio(float initialCropWindowPaddingRatio) {
-            mOptions.initialCropWindowPaddingRatio = initialCropWindowPaddingRatio;
+            mOptions.setInitialCropWindowPaddingRatio(initialCropWindowPaddingRatio);
             return this;
         }
 
@@ -662,7 +664,7 @@ public final class CropImage {
          * <i>Default: false</i>
          */
         public ActivityBuilder setFixAspectRatio(boolean fixAspectRatio) {
-            mOptions.fixAspectRatio = fixAspectRatio;
+            mOptions.setFixAspectRatio(fixAspectRatio);
             return this;
         }
 
@@ -675,9 +677,9 @@ public final class CropImage {
          * @param aspectRatioY the height
          */
         public ActivityBuilder setAspectRatio(int aspectRatioX, int aspectRatioY) {
-            mOptions.aspectRatioX = aspectRatioX;
-            mOptions.aspectRatioY = aspectRatioY;
-            mOptions.fixAspectRatio = true;
+            mOptions.setAspectRatioX(aspectRatioX);
+            mOptions.setAspectRatioY(aspectRatioY);
+            mOptions.setFixAspectRatio(true);
             return this;
         }
 
@@ -686,7 +688,7 @@ public final class CropImage {
          * <i>Default: 3dp</i>
          */
         public ActivityBuilder setBorderLineThickness(float borderLineThickness) {
-            mOptions.borderLineThickness = borderLineThickness;
+            mOptions.setBorderLineThickness(borderLineThickness);
             return this;
         }
 
@@ -695,7 +697,7 @@ public final class CropImage {
          * <i>Default: Color.argb(170, 255, 255, 255)</i>
          */
         public ActivityBuilder setBorderLineColor(int borderLineColor) {
-            mOptions.borderLineColor = borderLineColor;
+            mOptions.setBorderLineColor(borderLineColor);
             return this;
         }
 
@@ -704,7 +706,7 @@ public final class CropImage {
          * <i>Default: 2dp</i>
          */
         public ActivityBuilder setBorderCornerThickness(float borderCornerThickness) {
-            mOptions.borderCornerThickness = borderCornerThickness;
+            mOptions.setBorderLineThickness(borderCornerThickness);
             return this;
         }
 
@@ -713,7 +715,7 @@ public final class CropImage {
          * <i>Default: 5dp</i>
          */
         public ActivityBuilder setBorderCornerOffset(float borderCornerOffset) {
-            mOptions.borderCornerOffset = borderCornerOffset;
+            mOptions.setBorderCornerOffset(borderCornerOffset);
             return this;
         }
 
@@ -722,7 +724,7 @@ public final class CropImage {
          * <i>Default: 14dp</i>
          */
         public ActivityBuilder setBorderCornerLength(float borderCornerLength) {
-            mOptions.borderCornerLength = borderCornerLength;
+            mOptions.setBorderCornerLength(borderCornerLength);
             return this;
         }
 
@@ -731,7 +733,7 @@ public final class CropImage {
          * <i>Default: WHITE</i>
          */
         public ActivityBuilder setBorderCornerColor(int borderCornerColor) {
-            mOptions.borderCornerColor = borderCornerColor;
+            mOptions.setBorderCornerColor(borderCornerColor);
             return this;
         }
 
@@ -740,7 +742,7 @@ public final class CropImage {
          * <i>Default: 1dp</i>
          */
         public ActivityBuilder setGuidelinesThickness(float guidelinesThickness) {
-            mOptions.guidelinesThickness = guidelinesThickness;
+            mOptions.setGuidelinesThickness(guidelinesThickness);
             return this;
         }
 
@@ -749,7 +751,7 @@ public final class CropImage {
          * <i>Default: Color.argb(170, 255, 255, 255)</i>
          */
         public ActivityBuilder setGuidelinesColor(int guidelinesColor) {
-            mOptions.guidelinesColor = guidelinesColor;
+            mOptions.setGuidelinesColor(guidelinesColor);
             return this;
         }
 
@@ -759,7 +761,7 @@ public final class CropImage {
          * <i>Default: Color.argb(119, 0, 0, 0)</i>
          */
         public ActivityBuilder setBackgroundColor(int backgroundColor) {
-            mOptions.backgroundColor = backgroundColor;
+            mOptions.setBackgroundColor(backgroundColor);
             return this;
         }
 
@@ -768,8 +770,8 @@ public final class CropImage {
          * <i>Default: 42dp, 42dp</i>
          */
         public ActivityBuilder setMinCropWindowSize(int minCropWindowWidth, int minCropWindowHeight) {
-            mOptions.minCropWindowWidth = minCropWindowWidth;
-            mOptions.minCropWindowHeight = minCropWindowHeight;
+            mOptions.setMinCropResultWidth(minCropWindowWidth);
+            mOptions.setMaxCropResultHeight(minCropWindowHeight);
             return this;
         }
 
@@ -779,8 +781,8 @@ public final class CropImage {
          * <i>Default: 40px, 40px</i>
          */
         public ActivityBuilder setMinCropResultSize(int minCropResultWidth, int minCropResultHeight) {
-            mOptions.minCropResultWidth = minCropResultWidth;
-            mOptions.minCropResultHeight = minCropResultHeight;
+            mOptions.setMinCropResultWidth(minCropResultWidth);
+            mOptions.setMinCropResultHeight(minCropResultHeight);
             return this;
         }
 
@@ -790,8 +792,8 @@ public final class CropImage {
          * <i>Default: 99999, 99999</i>
          */
         public ActivityBuilder setMaxCropResultSize(int maxCropResultWidth, int maxCropResultHeight) {
-            mOptions.maxCropResultWidth = maxCropResultWidth;
-            mOptions.maxCropResultHeight = maxCropResultHeight;
+            mOptions.setMaxCropResultWidth(maxCropResultWidth);
+            mOptions.setMaxCropResultHeight(maxCropResultHeight);
             return this;
         }
 
@@ -800,7 +802,7 @@ public final class CropImage {
          * <i>Default: ""</i>
          */
         public ActivityBuilder setActivityTitle(CharSequence activityTitle) {
-            mOptions.activityTitle = activityTitle;
+            mOptions.setActivityTitle(activityTitle);
             return this;
         }
 
@@ -809,7 +811,7 @@ public final class CropImage {
          * <i>Default: NONE</i>
          */
         public ActivityBuilder setActivityMenuIconColor(int activityMenuIconColor) {
-            mOptions.activityMenuIconColor = activityMenuIconColor;
+            mOptions.setActivityMenuIconColor(activityMenuIconColor);
             return this;
         }
 
@@ -818,7 +820,7 @@ public final class CropImage {
          * <i>Default: NONE, will create a temp file</i>
          */
         public ActivityBuilder setOutputUri(Uri outputUri) {
-            mOptions.outputUri = outputUri;
+            mOptions.setOutputUri(outputUri);
             return this;
         }
 
@@ -827,7 +829,7 @@ public final class CropImage {
          * <i>Default: JPEG</i>
          */
         public ActivityBuilder setOutputCompressFormat(Bitmap.CompressFormat outputCompressFormat) {
-            mOptions.outputCompressFormat = outputCompressFormat;
+            mOptions.setOutputCompressFormat(outputCompressFormat);
             return this;
         }
 
@@ -836,9 +838,10 @@ public final class CropImage {
          * <i>Default: 90</i>
          */
         public ActivityBuilder setOutputCompressQuality(int outputCompressQuality) {
-            mOptions.outputCompressQuality = outputCompressQuality;
+            mOptions.setOutputCompressQuality(outputCompressQuality);
             return this;
         }
+
 
         /**
          * the size to resize the cropped image to.<br>
@@ -853,11 +856,10 @@ public final class CropImage {
          * the size to resize the cropped image to.<br>
          * <i>Default: 0, 0 - not set, will not resize</i>
          */
-        public ActivityBuilder setRequestedSize(
-                int reqWidth, int reqHeight, RequestSizeOptions options) {
-            mOptions.outputRequestWidth = reqWidth;
-            mOptions.outputRequestHeight = reqHeight;
-            mOptions.outputRequestSizeOptions = options;
+        public ActivityBuilder setRequestedSize(int reqWidth, int reqHeight, RequestSizeOptions options) {
+            mOptions.setOutputRequestWidth(reqWidth);
+            mOptions.setOutputRequestHeight(reqHeight);
+            mOptions.setOutputRequestSizeOptions(options);
             return this;
         }
 
@@ -868,7 +870,7 @@ public final class CropImage {
          * <i>Default: false</i>
          */
         public ActivityBuilder setNoOutputImage(boolean noOutputImage) {
-            mOptions.noOutputImage = noOutputImage;
+            mOptions.setNoOutputImage(noOutputImage);
             return this;
         }
 
@@ -877,7 +879,7 @@ public final class CropImage {
          * <i>Default: NONE - will initialize using initial crop window padding ratio</i>
          */
         public ActivityBuilder setInitialCropWindowRectangle(Rect initialCropWindowRectangle) {
-            mOptions.initialCropWindowRectangle = initialCropWindowRectangle;
+            mOptions.setInitialCropWindowRectangle(initialCropWindowRectangle);
             return this;
         }
 
@@ -887,7 +889,7 @@ public final class CropImage {
          * <i>Default: NONE - will read image exif data</i>
          */
         public ActivityBuilder setInitialRotation(int initialRotation) {
-            mOptions.initialRotation = (initialRotation + 360) % 360;
+            mOptions.setInitialRotation((initialRotation + 360) % 360);
             return this;
         }
 
@@ -896,7 +898,7 @@ public final class CropImage {
          * <i>Default: true</i>
          */
         public ActivityBuilder setAllowRotation(boolean allowRotation) {
-            mOptions.allowRotation = allowRotation;
+            mOptions.setAllowRotation(allowRotation);
             return this;
         }
 
@@ -905,7 +907,7 @@ public final class CropImage {
          * <i>Default: true</i>
          */
         public ActivityBuilder setAllowFlipping(boolean allowFlipping) {
-            mOptions.allowFlipping = allowFlipping;
+            mOptions.setAllowFlipping(allowFlipping);
             return this;
         }
 
@@ -915,7 +917,7 @@ public final class CropImage {
          * <i>Default: false</i>
          */
         public ActivityBuilder setAllowCounterRotation(boolean allowCounterRotation) {
-            mOptions.allowCounterRotation = allowCounterRotation;
+            mOptions.setAllowCounterRotation(allowCounterRotation);
             return this;
         }
 
@@ -924,7 +926,7 @@ public final class CropImage {
          * <i>Default: 90</i>
          */
         public ActivityBuilder setRotationDegrees(int rotationDegrees) {
-            mOptions.rotationDegrees = (rotationDegrees + 360) % 360;
+            mOptions.setRotationDegrees((rotationDegrees + 360) % 360);
             return this;
         }
 
@@ -933,7 +935,7 @@ public final class CropImage {
          * <i>Default: false</i>
          */
         public ActivityBuilder setFlipHorizontally(boolean flipHorizontally) {
-            mOptions.flipHorizontally = flipHorizontally;
+            mOptions.setFlipHorizontally(flipHorizontally);
             return this;
         }
 
@@ -942,7 +944,7 @@ public final class CropImage {
          * <i>Default: false</i>
          */
         public ActivityBuilder setFlipVertically(boolean flipVertically) {
-            mOptions.flipVertically = flipVertically;
+            mOptions.setFlipVertically(flipVertically);
             return this;
         }
 
@@ -951,7 +953,7 @@ public final class CropImage {
          * <i>Default: null, will use resource string: crop_image_menu_crop</i>
          */
         public ActivityBuilder setCropMenuCropButtonTitle(CharSequence title) {
-            mOptions.cropMenuCropButtonTitle = title;
+            mOptions.setCropMenuCropButtonTitle(title);
             return this;
         }
 
@@ -960,7 +962,7 @@ public final class CropImage {
          * <i>Default: 0</i>
          */
         public ActivityBuilder setCropMenuCropButtonIcon(@DrawableRes int drawableResource) {
-            mOptions.cropMenuCropButtonIcon = drawableResource;
+            mOptions.setCropMenuCropButtonIcon(drawableResource);
             return this;
         }
     }

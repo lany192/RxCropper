@@ -85,8 +85,8 @@ public class CropImageActivity extends AppCompatActivity implements OnSetImageUr
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             CharSequence title = mOptions != null &&
-                    mOptions.activityTitle != null && mOptions.activityTitle.length() > 0
-                    ? mOptions.activityTitle
+                    mOptions.getActivityTitle() != null && mOptions.getActivityTitle().length() > 0
+                    ? mOptions.getActivityTitle()
                     : getResources().getString(R.string.crop_image_activity_title);
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -111,39 +111,39 @@ public class CropImageActivity extends AppCompatActivity implements OnSetImageUr
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.crop_image_menu, menu);
 
-        if (!mOptions.allowRotation) {
+        if (!mOptions.isAllowRotation()) {
             menu.removeItem(R.id.crop_image_menu_rotate_left);
             menu.removeItem(R.id.crop_image_menu_rotate_right);
-        } else if (mOptions.allowCounterRotation) {
+        } else if (mOptions.isAllowCounterRotation()) {
             menu.findItem(R.id.crop_image_menu_rotate_left).setVisible(true);
         }
 
-        if (!mOptions.allowFlipping) {
+        if (!mOptions.isAllowFlipping()) {
             menu.removeItem(R.id.crop_image_menu_flip);
         }
 
-        if (mOptions.cropMenuCropButtonTitle != null) {
-            menu.findItem(R.id.crop_image_menu_crop).setTitle(mOptions.cropMenuCropButtonTitle);
+        if (mOptions.getCropMenuCropButtonTitle() != null) {
+            menu.findItem(R.id.crop_image_menu_crop).setTitle(mOptions.getCropMenuCropButtonTitle());
         }
 
         Drawable cropIcon = null;
         try {
-            if (mOptions.cropMenuCropButtonIcon != 0) {
-                cropIcon = ContextCompat.getDrawable(this, mOptions.cropMenuCropButtonIcon);
+            if (mOptions.getCropMenuCropButtonIcon() != 0) {
+                cropIcon = ContextCompat.getDrawable(this, mOptions.getCropMenuCropButtonIcon());
                 menu.findItem(R.id.crop_image_menu_crop).setIcon(cropIcon);
             }
         } catch (Exception e) {
             Log.w("AIC", "Failed to read menu crop drawable", e);
         }
 
-        if (mOptions.activityMenuIconColor != 0) {
+        if (mOptions.getActivityMenuIconColor() != 0) {
             updateMenuItemIconColor(
-                    menu, R.id.crop_image_menu_rotate_left, mOptions.activityMenuIconColor);
+                    menu, R.id.crop_image_menu_rotate_left, mOptions.getActivityMenuIconColor());
             updateMenuItemIconColor(
-                    menu, R.id.crop_image_menu_rotate_right, mOptions.activityMenuIconColor);
-            updateMenuItemIconColor(menu, R.id.crop_image_menu_flip, mOptions.activityMenuIconColor);
+                    menu, R.id.crop_image_menu_rotate_right, mOptions.getActivityMenuIconColor());
+            updateMenuItemIconColor(menu, R.id.crop_image_menu_flip, mOptions.getActivityMenuIconColor());
             if (cropIcon != null) {
-                updateMenuItemIconColor(menu, R.id.crop_image_menu_crop, mOptions.activityMenuIconColor);
+                updateMenuItemIconColor(menu, R.id.crop_image_menu_crop, mOptions.getActivityMenuIconColor());
             }
         }
         return true;
@@ -156,11 +156,11 @@ public class CropImageActivity extends AppCompatActivity implements OnSetImageUr
             return true;
         }
         if (item.getItemId() == R.id.crop_image_menu_rotate_left) {
-            rotateImage(-mOptions.rotationDegrees);
+            rotateImage(-mOptions.getRotationDegrees());
             return true;
         }
         if (item.getItemId() == R.id.crop_image_menu_rotate_right) {
-            rotateImage(mOptions.rotationDegrees);
+            rotateImage(mOptions.getRotationDegrees());
             return true;
         }
         if (item.getItemId() == R.id.crop_image_menu_flip_horizontally) {
@@ -238,11 +238,11 @@ public class CropImageActivity extends AppCompatActivity implements OnSetImageUr
     @Override
     public void onSetImageUriComplete(CropImageView view, Uri uri, Exception error) {
         if (error == null) {
-            if (mOptions.initialCropWindowRectangle != null) {
-                mCropImageView.setCropRect(mOptions.initialCropWindowRectangle);
+            if (mOptions.getInitialCropWindowRectangle() != null) {
+                mCropImageView.setCropRect(mOptions.getInitialCropWindowRectangle());
             }
-            if (mOptions.initialRotation > -1) {
-                mCropImageView.setRotatedDegrees(mOptions.initialRotation);
+            if (mOptions.getInitialRotation() > -1) {
+                mCropImageView.setRotatedDegrees(mOptions.getInitialRotation());
             }
         } else {
             setResult(null, error, 1);
@@ -260,17 +260,17 @@ public class CropImageActivity extends AppCompatActivity implements OnSetImageUr
      * Execute crop image and save the result tou output uri.
      */
     protected void cropImage() {
-        if (mOptions.noOutputImage) {
+        if (mOptions.isNoOutputImage()) {
             setResult(null, null, 1);
         } else {
             Uri outputUri = getOutputUri();
             mCropImageView.saveCroppedImageAsync(
                     outputUri,
-                    mOptions.outputCompressFormat,
-                    mOptions.outputCompressQuality,
-                    mOptions.outputRequestWidth,
-                    mOptions.outputRequestHeight,
-                    mOptions.outputRequestSizeOptions);
+                    mOptions.getOutputCompressFormat(),
+                    mOptions.getOutputCompressQuality(),
+                    mOptions.getOutputRequestWidth(),
+                    mOptions.getOutputRequestHeight(),
+                    mOptions.getOutputRequestSizeOptions());
         }
     }
 
@@ -286,13 +286,13 @@ public class CropImageActivity extends AppCompatActivity implements OnSetImageUr
      * Use the given in options or create a temp file.
      */
     protected Uri getOutputUri() {
-        Uri outputUri = mOptions.outputUri;
+        Uri outputUri = mOptions.getOutputUri();
         if (outputUri == null || outputUri.equals(Uri.EMPTY)) {
             try {
                 String ext =
-                        mOptions.outputCompressFormat == Bitmap.CompressFormat.JPEG
+                        mOptions.getOutputCompressFormat() == Bitmap.CompressFormat.JPEG
                                 ? ".jpg"
-                                : mOptions.outputCompressFormat == Bitmap.CompressFormat.PNG ? ".png" : ".webp";
+                                : mOptions.getOutputCompressFormat() == Bitmap.CompressFormat.PNG ? ".png" : ".webp";
                 outputUri = Uri.fromFile(File.createTempFile("cropped", ext, getCacheDir()));
             } catch (IOException e) {
                 throw new RuntimeException("Failed to create temp file for output image", e);

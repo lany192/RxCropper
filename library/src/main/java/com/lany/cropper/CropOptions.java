@@ -56,242 +56,242 @@ public class CropOptions implements Parcelable {
      * We are basing this value off of the recommended 48dp Rhythm.<br>
      * See: http://developer.android.com/design/style/metrics-grids.html#48dp-rhythm
      */
-    public float touchRadius;
+    private float touchRadius;
 
     /**
      * whether the guidelines should be on, off, or only showing when resizing.
      */
-    public Guidelines guidelines;
+    private Guidelines guidelines;
 
     /**
      * The initial scale type of the image in the crop image view
      */
-    public ScaleType scaleType;
+    private ScaleType scaleType;
 
     /**
      * if to show crop overlay UI what contains the crop window UI surrounded by background over the
      * cropping image.<br>
      * default: true, may disable for animation or frame transition.
      */
-    public boolean showCropOverlay;
+    private boolean showCropOverlay;
 
     /**
      * if to show progress bar when image async loading/cropping is in progress.<br>
      * default: true, disable to provide custom progress bar UI.
      */
-    public boolean showProgressBar;
+    private boolean showProgressBar;
 
     /**
      * if auto-zoom functionality is enabled.<br>
      * default: true.
      */
-    public boolean autoZoomEnabled;
+    private boolean autoZoomEnabled;
 
     /**
      * if multi-touch should be enabled on the crop box default: false
      */
-    public boolean multiTouchEnabled;
+    private boolean multiTouchEnabled;
 
     /**
      * The max zoom allowed during cropping.
      */
-    public int maxZoom;
+    private int maxZoom;
 
     /**
      * The initial crop window padding from image borders in percentage of the cropping image
      * dimensions.
      */
-    public float initialCropWindowPaddingRatio;
+    private float initialCropWindowPaddingRatio;
 
     /**
      * whether the width to height aspect ratio should be maintained or free to change.
      */
-    public boolean fixAspectRatio;
+    private boolean fixAspectRatio;
 
     /**
      * the X value of the aspect ratio.
      */
-    public int aspectRatioX;
+    private int aspectRatioX;
 
     /**
      * the Y value of the aspect ratio.
      */
-    public int aspectRatioY;
+    private int aspectRatioY;
 
     /**
      * the thickness of the guidelines lines in pixels. (in pixels)
      */
-    public float borderLineThickness;
+    private float borderLineThickness;
 
     /**
      * the color of the guidelines lines
      */
-    public int borderLineColor;
+    private int borderLineColor;
 
     /**
      * thickness of the corner line. (in pixels)
      */
-    public float borderCornerThickness;
+    private float borderCornerThickness;
 
     /**
      * the offset of corner line from crop window border. (in pixels)
      */
-    public float borderCornerOffset;
+    private float borderCornerOffset;
 
     /**
      * the length of the corner line away from the corner. (in pixels)
      */
-    public float borderCornerLength;
+    private float borderCornerLength;
 
     /**
      * the color of the corner line
      */
-    public int borderCornerColor;
+    private int borderCornerColor;
 
     /**
      * the thickness of the guidelines lines. (in pixels)
      */
-    public float guidelinesThickness;
+    private float guidelinesThickness;
 
     /**
      * the color of the guidelines lines
      */
-    public int guidelinesColor;
+    private int guidelinesColor;
 
     /**
      * the color of the overlay background around the crop window cover the image parts not in the
      * crop window.
      */
-    public int backgroundColor;
+    private int backgroundColor;
 
     /**
      * the min width the crop window is allowed to be. (in pixels)
      */
-    public int minCropWindowWidth;
+    private int minCropWindowWidth;
 
     /**
      * the min height the crop window is allowed to be. (in pixels)
      */
-    public int minCropWindowHeight;
+    private int minCropWindowHeight;
 
     /**
      * the min width the resulting cropping image is allowed to be, affects the cropping window
      * limits. (in pixels)
      */
-    public int minCropResultWidth;
+    private int minCropResultWidth;
 
     /**
      * the min height the resulting cropping image is allowed to be, affects the cropping window
      * limits. (in pixels)
      */
-    public int minCropResultHeight;
+    private int minCropResultHeight;
 
     /**
      * the max width the resulting cropping image is allowed to be, affects the cropping window
      * limits. (in pixels)
      */
-    public int maxCropResultWidth;
+    private int maxCropResultWidth;
 
     /**
      * the max height the resulting cropping image is allowed to be, affects the cropping window
      * limits. (in pixels)
      */
-    public int maxCropResultHeight;
+    private int maxCropResultHeight;
 
     /**
      * the title of the {@link CropImageActivity}
      */
-    public CharSequence activityTitle;
+    private CharSequence activityTitle;
 
     /**
      * the color to use for action bar items icons
      */
-    public int activityMenuIconColor;
+    private int activityMenuIconColor;
 
     /**
      * the Android Uri to save the cropped image to
      */
-    public Uri outputUri;
+    private Uri outputUri;
 
     /**
      * the compression format to use when writing the image
      */
-    public Bitmap.CompressFormat outputCompressFormat;
+    private Bitmap.CompressFormat outputCompressFormat;
 
     /**
      * the quality (if applicable) to use when writing the image (0 - 100)
      */
-    public int outputCompressQuality;
+    private int outputCompressQuality;
 
     /**
      * the width to resize the cropped image to (see options)
      */
-    public int outputRequestWidth;
+    private int outputRequestWidth;
 
     /**
      * the height to resize the cropped image to (see options)
      */
-    public int outputRequestHeight;
+    private int outputRequestHeight;
 
     /**
      * the resize method to use on the cropped bitmap (see options documentation)
      */
-    public RequestSizeOptions outputRequestSizeOptions;
+    private RequestSizeOptions outputRequestSizeOptions;
 
     /**
      * if the result of crop image activity should not save the cropped image bitmap
      */
-    public boolean noOutputImage;
+    private boolean noOutputImage;
 
     /**
      * the initial rectangle to set on the cropping image after loading
      */
-    public Rect initialCropWindowRectangle;
+    private Rect initialCropWindowRectangle;
 
     /**
      * the initial rotation to set on the cropping image after loading (0-360 degrees clockwise)
      */
-    public int initialRotation;
+    private int initialRotation;
 
     /**
      * if to allow (all) rotation during cropping (activity)
      */
-    public boolean allowRotation;
+    private boolean allowRotation;
 
     /**
      * if to allow (all) flipping during cropping (activity)
      */
-    public boolean allowFlipping;
+    private boolean allowFlipping;
 
     /**
      * if to allow counter-clockwise rotation during cropping (activity)
      */
-    public boolean allowCounterRotation;
+    private boolean allowCounterRotation;
 
     /**
      * the amount of degrees to rotate clockwise or counter-clockwise
      */
-    public int rotationDegrees;
+    private int rotationDegrees;
 
     /**
      * whether the image should be flipped horizontally
      */
-    public boolean flipHorizontally;
+    private boolean flipHorizontally;
 
     /**
      * whether the image should be flipped vertically
      */
-    public boolean flipVertically;
+    private boolean flipVertically;
 
     /**
      * optional, the text of the crop menu crop button
      */
-    public CharSequence cropMenuCropButtonTitle;
+    private CharSequence cropMenuCropButtonTitle;
 
     /**
      * optional image resource to be used for crop menu crop icon instead of text
      */
-    public int cropMenuCropButtonIcon;
+    private int cropMenuCropButtonIcon;
 
     /**
      * Init options with defaults.

@@ -465,19 +465,19 @@ public class OverlayView extends View {
         mCropWindowHandler.setInitialAttributeValues(options);
         setCropShape(options.getCropShape());
         setSnapRadius(options.getSnapRadius());
-        setGuidelines(options.guidelines);
-        setFixedAspectRatio(options.fixAspectRatio);
-        setAspectRatioX(options.aspectRatioX);
-        setAspectRatioY(options.aspectRatioY);
-        setMultiTouchEnabled(options.multiTouchEnabled);
-        mTouchRadius = options.touchRadius;
-        mInitialCropWindowPaddingRatio = options.initialCropWindowPaddingRatio;
-        mBorderPaint = getNewPaintOrNull(options.borderLineThickness, options.borderLineColor);
-        mBorderCornerOffset = options.borderCornerOffset;
-        mBorderCornerLength = options.borderCornerLength;
-        mBorderCornerPaint = getNewPaintOrNull(options.borderCornerThickness, options.borderCornerColor);
-        mGuidelinePaint = getNewPaintOrNull(options.guidelinesThickness, options.guidelinesColor);
-        mBackgroundPaint = getNewPaint(options.backgroundColor);
+        setGuidelines(options.getGuidelines());
+        setFixedAspectRatio(options.isFixAspectRatio());
+        setAspectRatioX(options.getAspectRatioX());
+        setAspectRatioY(options.getAspectRatioY());
+        setMultiTouchEnabled(options.isMultiTouchEnabled());
+        mTouchRadius = options.getTouchRadius();
+        mInitialCropWindowPaddingRatio = options.getInitialCropWindowPaddingRatio();
+        mBorderPaint = getNewPaintOrNull(options.getBorderLineThickness(), options.getBorderLineColor());
+        mBorderCornerOffset = options.getBorderCornerOffset();
+        mBorderCornerLength = options.getBorderCornerLength();
+        mBorderCornerPaint = getNewPaintOrNull(options.getBorderCornerThickness(), options.getBorderCornerColor());
+        mGuidelinePaint = getNewPaintOrNull(options.getGuidelinesThickness(), options.getGuidelinesColor());
+        mBackgroundPaint = getNewPaint(options.getBackgroundColor());
     }
 
     // region: Private methods
