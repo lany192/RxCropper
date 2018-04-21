@@ -817,13 +817,21 @@ public class OverlayView extends View {
                     rect.top - cornerOffset,
                     mBorderCornerPaint);
 
-//            //上边中间
-//            canvas.drawLine(
-//                    rect.right / 2 - mBorderCornerLength,
-//                    rect.top - cornerOffset,
-//                    rect.right / 2 + mBorderCornerLength,
-//                    rect.top - cornerOffset,
-//                    mBorderCornerPaint);
+            //上中
+            canvas.drawLine(
+                    (rect.right + rect.left) / 2 - mBorderCornerLength,
+                    rect.top - cornerOffset,
+                    (rect.right + rect.left) / 2 + mBorderCornerLength,
+                    rect.top - cornerOffset,
+                    mBorderCornerPaint);
+
+            //左中
+            canvas.drawLine(
+                    rect.left - cornerOffset,
+                    (rect.top + rect.bottom) / 2 + cornerExtension - mBorderCornerLength,
+                    rect.left - cornerOffset,
+                    (rect.top + rect.bottom) / 2 + mBorderCornerLength,
+                    mBorderCornerPaint);
 
             //右上
             canvas.drawLine(
@@ -840,7 +848,21 @@ public class OverlayView extends View {
                     mBorderCornerPaint);
 
 
+            //下中
+            canvas.drawLine(
+                    (rect.right + rect.left) / 2 + cornerExtension - mBorderCornerLength,
+                    rect.bottom + cornerOffset,
+                    (rect.right + rect.left) / 2 + mBorderCornerLength,
+                    rect.bottom + cornerOffset,
+                    mBorderCornerPaint);
 
+            //右中
+            canvas.drawLine(
+                    rect.right + cornerOffset,
+                    (rect.top + rect.bottom) / 2 + cornerExtension - mBorderCornerLength,
+                    rect.right + cornerOffset,
+                    (rect.top + rect.bottom) / 2 + mBorderCornerLength,
+                    mBorderCornerPaint);
 
             // Bottom left
             canvas.drawLine(
@@ -856,13 +878,6 @@ public class OverlayView extends View {
                     rect.bottom + cornerOffset,
                     mBorderCornerPaint);
 
-//            // Bottom center
-//            canvas.drawLine(
-//                    rect.right / 2 + cornerExtension - mBorderCornerLength,
-//                    rect.bottom + cornerOffset,
-//                    rect.right / 2 + mBorderCornerLength,
-//                    rect.bottom + cornerOffset,
-//                    mBorderCornerPaint);
 
             // Bottom left
             canvas.drawLine(
