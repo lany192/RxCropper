@@ -69,7 +69,7 @@ public class SampleActivity extends AppCompatActivity {
 
     private void handleCropResult(CropResult result) {
         if (result.getError() == null) {
-            Intent intent = new Intent(this, CropResultActivity.class);
+            Intent intent = new Intent(this, ResultActivity.class);
             intent.putExtra("SAMPLE_SIZE", result.getSampleSize());
             intent.putExtra("URI", result.getUri());
             startActivity(intent);

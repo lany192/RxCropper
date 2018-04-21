@@ -13,11 +13,12 @@
 
         <Button
             android:id="@+id/my_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
             android:layout_margin="8dp"
-            android:text="pick"
-            android:textColor="@android:color/black"
+            android:background="@android:color/black"
+            android:text="选择图片"
+            android:textColor="@android:color/white"
             android:textSize="14sp" />
 
     </LinearLayout>

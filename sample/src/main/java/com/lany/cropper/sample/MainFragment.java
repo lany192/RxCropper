@@ -22,21 +22,10 @@ import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.listeners.OnCropImageCompleteListener;
 import com.lany.cropper.listeners.OnSetImageUriCompleteListener;
 
-/**
- * The fragment that will show the Image Cropping UI by requested preset.
- */
 public class MainFragment extends Fragment implements OnSetImageUriCompleteListener, OnCropImageCompleteListener {
-
-    // region: Fields and Consts
-
     private CropDemoPreset mDemoPreset;
-
     private CropImageView mCropImageView;
-    // endregion
 
-    /**
-     * Returns a new instance of this fragment for the given section number.
-     */
     public static MainFragment newInstance(CropDemoPreset demoPreset) {
         MainFragment fragment = new MainFragment();
         Bundle args = new Bundle();
@@ -103,8 +92,7 @@ public class MainFragment extends Fragment implements OnSetImageUriCompleteListe
     }
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView;
         switch (mDemoPreset) {
             case RECT:
@@ -211,12 +199,12 @@ public class MainFragment extends Fragment implements OnSetImageUriCompleteListe
 
     private void handleCropResult(CropResult result) {
         if (result.getError() == null) {
-            Intent intent = new Intent(getActivity(), CropResultActivity.class);
+            Intent intent = new Intent(getActivity(), ResultActivity.class);
             intent.putExtra("SAMPLE_SIZE", result.getSampleSize());
             if (result.getUri() != null) {
                 intent.putExtra("URI", result.getUri());
             } else {
-                CropResultActivity.mImage =
+                ResultActivity.mImage =
                         mCropImageView.getCropShape() == CropShape.OVAL
                                 ? CropImage.toOvalBitmap(result.getBitmap())
                                 : result.getBitmap();
