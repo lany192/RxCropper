@@ -244,7 +244,7 @@ public class CropImageActivity extends AppCompatActivity
     }
 
     @Override
-    public void onCropImageComplete(CropImageView view, CropImageView.CropResult result) {
+    public void onCropImageComplete(CropImageView view, CropResult result) {
         setResult(result.getUri(), result.getError(), result.getSampleSize());
     }
 

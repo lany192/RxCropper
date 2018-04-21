@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.lany.cropper.CropImage;
 import com.lany.cropper.CropImageView;
+import com.lany.cropper.CropResult;
 import com.lany.picker.RxPicker;
 import com.lany.picker.bean.ImageItem;
 import com.lany.picker.utils.ImageLoader;
@@ -41,7 +42,10 @@ public class SampleActivity extends AppCompatActivity {
         findViewById(R.id.my_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RxPicker.of().single(true).start(SampleActivity.this).subscribe(new Consumer<List<ImageItem>>() {
+                RxPicker.of()
+                        .single(true)
+                        .start(SampleActivity.this)
+                        .subscribe(new Consumer<List<ImageItem>>() {
                     @Override
                     public void accept(@NonNull List<ImageItem> imageItems) {
                         String path = imageItems.get(0).getPath();
@@ -64,14 +68,14 @@ public class SampleActivity extends AppCompatActivity {
         });
         mImageView.setOnCropImageCompleteListener(new CropImageView.OnCropImageCompleteListener() {
             @Override
-            public void onCropImageComplete(CropImageView view, CropImageView.CropResult result) {
+            public void onCropImageComplete(CropImageView view, CropResult result) {
                 handleCropResult(result);
             }
         });
     }
 
 
-    private void handleCropResult(CropImageView.CropResult result) {
+    private void handleCropResult(CropResult result) {
         if (result.getError() == null) {
             Intent intent = new Intent(this, CropResultActivity.class);
             intent.putExtra("SAMPLE_SIZE", result.getSampleSize());

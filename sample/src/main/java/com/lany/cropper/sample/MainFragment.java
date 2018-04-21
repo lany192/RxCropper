@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.lany.cropper.CropImage;
 import com.lany.cropper.CropImageView;
+import com.lany.cropper.CropResult;
 
 /**
  * The fragment that will show the Image Cropping UI by requested preset.
@@ -194,7 +195,7 @@ public class MainFragment extends Fragment
     }
 
     @Override
-    public void onCropImageComplete(CropImageView view, CropImageView.CropResult result) {
+    public void onCropImageComplete(CropImageView view, CropResult result) {
         handleCropResult(result);
     }
 
@@ -207,7 +208,7 @@ public class MainFragment extends Fragment
         }
     }
 
-    private void handleCropResult(CropImageView.CropResult result) {
+    private void handleCropResult(CropResult result) {
         if (result.getError() == null) {
             Intent intent = new Intent(getActivity(), CropResultActivity.class);
             intent.putExtra("SAMPLE_SIZE", result.getSampleSize());

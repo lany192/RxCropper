@@ -965,7 +965,7 @@ public final class CropImage {
     /**
      * Result data of Crop Image Activity.
      */
-    public static final class ActivityResult extends CropImageView.CropResult implements Parcelable {
+    public static final class ActivityResult extends CropResult implements Parcelable {
 
         public static final Creator<ActivityResult> CREATOR =
                 new Creator<ActivityResult>() {

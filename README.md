@@ -1,2 +1,2 @@
-# Cropper
+# RxCropper
 Demo
