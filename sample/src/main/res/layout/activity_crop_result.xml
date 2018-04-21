@@ -13,8 +13,9 @@
         android:id="@+id/resultImageText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#70000000"
         android:padding="8dp"
-        android:background="#7000"
+        android:textColor="@android:color/white"
         android:textIsSelectable="true" />
 
 </FrameLayout>

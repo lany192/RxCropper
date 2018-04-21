@@ -57,6 +57,15 @@ public class SampleActivity extends AppCompatActivity {
     private void startCropActivity(String path) {
         Disposable disposable = RxCropper.of()
                 .setSourceUri(Uri.fromFile(new File(path)))
+
+                //自由模式
+//                .setAspectRatio(1,1)
+//                .setFixAspectRatio(false)
+
+                //固定模式
+                .setAspectRatio(1,1)
+
+
                 .setBackgroundColor(Color.parseColor("#90000000"))
                 .start(this)
                 .subscribe(new Consumer<CropResult>() {
