@@ -58,10 +58,10 @@ public class RxCropper {
         } else if (fragment.isDetached()) {
             fragmentManager.beginTransaction().attach(fragment).commitAllowingStateLoss();
         }
-        return getListItem(fragment);
+        return getResult(fragment);
     }
 
-    private Observable<CropResult> getListItem(final ResultHandlerFragment fragment) {
+    private Observable<CropResult> getResult(final ResultHandlerFragment fragment) {
         return fragment.getAttachSubject().filter(new Predicate<Boolean>() {
             @Override
             public boolean test(@NonNull Boolean aBoolean) {
@@ -79,6 +79,12 @@ public class RxCropper {
                 return fragment.getResultSubject();
             }
         }).take(1);
+    }
+
+
+    public RxCropper resetOptions(@NonNull CropOptions options) {
+        mOptions = options;
+        return this;
     }
 
 

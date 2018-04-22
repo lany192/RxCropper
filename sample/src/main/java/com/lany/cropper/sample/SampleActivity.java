@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.lany.cropper.CropOptions;
 import com.lany.cropper.CropResult;
 import com.lany.cropper.RxCropper;
+import com.lany.cropper.enums.CropShape;
 import com.lany.picker.RxPicker;
 import com.lany.picker.bean.ImageItem;
 import com.lany.picker.utils.ImageLoader;
@@ -57,6 +58,9 @@ public class SampleActivity extends AppCompatActivity {
     private void startCropActivity(String path) {
         Disposable disposable = RxCropper.of()
                 .setSourceUri(Uri.fromFile(new File(path)))
+
+
+                //.setCropShape(CropShape.OVAL)
 
                 //自由模式
 //                .setAspectRatio(1,1)
