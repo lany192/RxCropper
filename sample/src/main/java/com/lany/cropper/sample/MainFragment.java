@@ -133,7 +133,7 @@ public class MainFragment extends Fragment implements OnSetImageUriCompleteListe
             if (mDemoPreset == CropDemoPreset.SCALE_CENTER_INSIDE) {
                 mCropImageView.setImageResource(R.drawable.cat_small);
             } else {
-                mCropImageView.setImageResource(R.drawable.cat);
+                mCropImageView.setImageResource(R.drawable.demo);
             }
         }
     }
