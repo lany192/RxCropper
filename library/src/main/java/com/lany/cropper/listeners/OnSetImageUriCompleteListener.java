@@ -2,7 +2,7 @@ package com.lany.cropper.listeners;
 
 import android.net.Uri;
 
-import com.lany.cropper.CropImageView;
+import com.lany.cropper.view.CropImageView;
 
 /**
  * Interface definition for a callback to be invoked when image async loading is complete.

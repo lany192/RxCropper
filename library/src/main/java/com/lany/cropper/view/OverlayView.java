@@ -1,6 +1,6 @@
 
 
-package com.lany.cropper;
+package com.lany.cropper.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -17,6 +17,10 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 
+import com.lany.cropper.utils.BitmapUtils;
+import com.lany.cropper.entity.CropOptions;
+import com.lany.cropper.CropWindowHandler;
+import com.lany.cropper.CropWindowMoveHandler;
 import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.enums.Guidelines;
 

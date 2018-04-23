@@ -1,6 +1,6 @@
 
 
-package com.lany.cropper;
+package com.lany.cropper.utils;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -15,6 +15,8 @@ import android.support.media.ExifInterface;
 import android.util.Log;
 import android.util.Pair;
 
+import com.lany.cropper.entity.BitmapSampled;
+import com.lany.cropper.entity.RotateBitmapResult;
 import com.lany.cropper.enums.RequestSizeOptions;
 
 import java.io.Closeable;
@@ -33,26 +35,26 @@ import javax.microedition.khronos.egl.EGLDisplay;
 /**
  * Utility class that deals with operations with an ImageView.
  */
-final class BitmapUtils {
+public final class BitmapUtils {
 
-    static final Rect EMPTY_RECT = new Rect();
+    public static final Rect EMPTY_RECT = new Rect();
 
-    static final RectF EMPTY_RECT_F = new RectF();
+    public static final RectF EMPTY_RECT_F = new RectF();
 
     /**
      * Reusable rectangle for general internal usage
      */
-    static final RectF RECT = new RectF();
+    public static final RectF RECT = new RectF();
 
     /**
      * Reusable point for general internal usage
      */
-    static final float[] POINTS = new float[6];
+    public static final float[] POINTS = new float[6];
 
     /**
      * Reusable point for general internal usage
      */
-    static final float[] POINTS2 = new float[6];
+    public static final float[] POINTS2 = new float[6];
 
     /**
      * Used to know the max texture size allowed to be rendered
@@ -62,14 +64,14 @@ final class BitmapUtils {
     /**
      * used to save bitmaps during state save and restore so not to reload them.
      */
-    static Pair<String, WeakReference<Bitmap>> mStateBitmap;
+    public static Pair<String, WeakReference<Bitmap>> mStateBitmap;
 
     /**
      * Rotate the given image by reading the Exif value of the image (uri).<br>
      * If no rotation is required the image will not be rotated.<br>
      * New bitmap is created and the old one is recycled.
      */
-    static RotateBitmapResult rotateBitmapByExif(Bitmap bitmap, Context context, Uri uri) {
+    public static RotateBitmapResult rotateBitmapByExif(Bitmap bitmap, Context context, Uri uri) {
         ExifInterface ei = null;
         try {
             InputStream is = context.getContentResolver().openInputStream(uri);
@@ -87,7 +89,7 @@ final class BitmapUtils {
      * If no rotation is required the image will not be rotated.<br>
      * New bitmap is created and the old one is recycled.
      */
-    static RotateBitmapResult rotateBitmapByExif(Bitmap bitmap, ExifInterface exif) {
+    public static RotateBitmapResult rotateBitmapByExif(Bitmap bitmap, ExifInterface exif) {
         int degrees;
         int orientation =
                 exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
@@ -111,7 +113,7 @@ final class BitmapUtils {
     /**
      * Decode bitmap from stream using sampling to get bitmap with the requested limit.
      */
-    static BitmapSampled decodeSampledBitmap(Context context, Uri uri, int reqWidth, int reqHeight) {
+    public static BitmapSampled decodeSampledBitmap(Context context, Uri uri, int reqWidth, int reqHeight) {
 
         try {
             ContentResolver resolver = context.getContentResolver();
@@ -145,7 +147,7 @@ final class BitmapUtils {
      * If crop fails due to OOM we scale the cropping image by 0.5 every time it fails until it is
      * small enough.
      */
-    static BitmapSampled cropBitmapObjectHandleOOM(
+    public static BitmapSampled cropBitmapObjectHandleOOM(
             Bitmap bitmap,
             float[] points,
             int degreesRotated,
@@ -239,7 +241,7 @@ final class BitmapUtils {
      * required.<br>
      * Additionally if OOM is thrown try to increase the sampling (2,4,8).
      */
-    static BitmapSampled cropBitmap(
+    public static BitmapSampled cropBitmap(
             Context context,
             Uri loadedImageUri,
             float[] points,
@@ -292,56 +294,56 @@ final class BitmapUtils {
     /**
      * Get left value of the bounding rectangle of the given points.
      */
-    static float getRectLeft(float[] points) {
+    public static float getRectLeft(float[] points) {
         return Math.min(Math.min(Math.min(points[0], points[2]), points[4]), points[6]);
     }
 
     /**
      * Get top value of the bounding rectangle of the given points.
      */
-    static float getRectTop(float[] points) {
+    public static float getRectTop(float[] points) {
         return Math.min(Math.min(Math.min(points[1], points[3]), points[5]), points[7]);
     }
 
     /**
      * Get right value of the bounding rectangle of the given points.
      */
-    static float getRectRight(float[] points) {
+    public static float getRectRight(float[] points) {
         return Math.max(Math.max(Math.max(points[0], points[2]), points[4]), points[6]);
     }
 
     /**
      * Get bottom value of the bounding rectangle of the given points.
      */
-    static float getRectBottom(float[] points) {
+    public static float getRectBottom(float[] points) {
         return Math.max(Math.max(Math.max(points[1], points[3]), points[5]), points[7]);
     }
 
     /**
      * Get width of the bounding rectangle of the given points.
      */
-    static float getRectWidth(float[] points) {
+    public static float getRectWidth(float[] points) {
         return getRectRight(points) - getRectLeft(points);
     }
 
     /**
      * Get height of the bounding rectangle of the given points.
      */
-    static float getRectHeight(float[] points) {
+    public static float getRectHeight(float[] points) {
         return getRectBottom(points) - getRectTop(points);
     }
 
     /**
      * Get horizontal center value of the bounding rectangle of the given points.
      */
-    static float getRectCenterX(float[] points) {
+    public static float getRectCenterX(float[] points) {
         return (getRectRight(points) + getRectLeft(points)) / 2f;
     }
 
     /**
      * Get vertical center value of the bounding rectangle of the given points.
      */
-    static float getRectCenterY(float[] points) {
+    public static float getRectCenterY(float[] points) {
         return (getRectBottom(points) + getRectTop(points)) / 2f;
     }
 
@@ -349,7 +351,7 @@ final class BitmapUtils {
      * Get a rectangle for the given 4 points (x0,y0,x1,y1,x2,y2,x3,y3) by finding the min/max 2
      * points that contains the given 4 points and is a straight rectangle.
      */
-    static Rect getRectFromPoints(
+    public static Rect getRectFromPoints(
             float[] points,
             int imageWidth,
             int imageHeight,
@@ -391,7 +393,7 @@ final class BitmapUtils {
      * @return the uri where the image was saved in, either the given uri or new pointing to temp
      * file.
      */
-    static Uri writeTempStateStoreBitmap(Context context, Bitmap bitmap, Uri uri) {
+    public static Uri writeTempStateStoreBitmap(Context context, Bitmap bitmap, Uri uri) {
         try {
             boolean needSave = true;
             if (uri == null) {
@@ -414,7 +416,7 @@ final class BitmapUtils {
     /**
      * Write the given bitmap to the given uri using the given compression.
      */
-    static void writeBitmapToUri(
+    public static void writeBitmapToUri(
             Context context,
             Bitmap bitmap,
             Uri uri,
@@ -433,7 +435,7 @@ final class BitmapUtils {
     /**
      * Resize the given bitmap to the given width/height by the given option.<br>
      */
-    static Bitmap resizeBitmap(
+    public static Bitmap resizeBitmap(
             Bitmap bitmap, int reqWidth, int reqHeight, RequestSizeOptions options) {
         try {
             if (reqWidth > 0
@@ -509,8 +511,8 @@ final class BitmapUtils {
             // given.
             BitmapSampled bitmapSampled =
                     decodeSampledBitmapRegion(context, loadedImageUri, rect, width, height, sampleMulti);
-            result = bitmapSampled.bitmap;
-            sampleSize = bitmapSampled.sampleSize;
+            result = bitmapSampled.getBitmap();
+            sampleSize = bitmapSampled.getSampleSize();
         } catch (Exception ignored) {
         }
 
@@ -859,54 +861,6 @@ final class BitmapUtils {
                 closeable.close();
             } catch (IOException ignored) {
             }
-        }
-    }
-    // endregion
-
-    // region: Inner class: BitmapSampled
-
-    /**
-     * Holds bitmap instance and the sample size that the bitmap was loaded/cropped with.
-     */
-    static final class BitmapSampled {
-
-        /**
-         * The bitmap instance
-         */
-        public final Bitmap bitmap;
-
-        /**
-         * The sample size used to lower the size of the bitmap (1,2,4,8,...)
-         */
-        final int sampleSize;
-
-        BitmapSampled(Bitmap bitmap, int sampleSize) {
-            this.bitmap = bitmap;
-            this.sampleSize = sampleSize;
-        }
-    }
-    // endregion
-
-    // region: Inner class: RotateBitmapResult
-
-    /**
-     * The result of {@link #rotateBitmapByExif(Bitmap, ExifInterface)}.
-     */
-    static final class RotateBitmapResult {
-
-        /**
-         * The loaded bitmap
-         */
-        public final Bitmap bitmap;
-
-        /**
-         * The degrees the image was rotated
-         */
-        final int degrees;
-
-        RotateBitmapResult(Bitmap bitmap, int degrees) {
-            this.bitmap = bitmap;
-            this.degrees = degrees;
         }
     }
     // endregion

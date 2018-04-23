@@ -1,12 +1,17 @@
 
 
-package com.lany.cropper;
+package com.lany.cropper.task;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.DisplayMetrics;
+
+import com.lany.cropper.utils.BitmapUtils;
+import com.lany.cropper.entity.BitmapSampled;
+import com.lany.cropper.entity.RotateBitmapResult;
+import com.lany.cropper.view.CropImageView;
 
 import java.lang.ref.WeakReference;
 
@@ -72,10 +77,10 @@ public final class LoadingTask extends AsyncTask<Void, Void, LoadingTask.Result>
     protected Result doInBackground(Void... params) {
         try {
             if (!isCancelled()) {
-                BitmapUtils.BitmapSampled decodeResult = BitmapUtils.decodeSampledBitmap(mContext, mUri, mWidth, mHeight);
+                BitmapSampled decodeResult = BitmapUtils.decodeSampledBitmap(mContext, mUri, mWidth, mHeight);
                 if (!isCancelled()) {
-                    BitmapUtils.RotateBitmapResult rotateResult = BitmapUtils.rotateBitmapByExif(decodeResult.bitmap, mContext, mUri);
-                    return new Result(mUri, rotateResult.bitmap, decodeResult.sampleSize, rotateResult.degrees);
+                    RotateBitmapResult rotateResult = BitmapUtils.rotateBitmapByExif(decodeResult.getBitmap(), mContext, mUri);
+                    return new Result(mUri, rotateResult.getBitmap(), decodeResult.getSampleSize(), rotateResult.getDegrees());
                 }
             }
             return null;

@@ -17,8 +17,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.lany.cropper.CropImage;
-import com.lany.cropper.CropImageView;
-import com.lany.cropper.CropResult;
+import com.lany.cropper.view.CropImageView;
+import com.lany.cropper.entity.CropResult;
 import com.lany.cropper.entity.ActivityResult;
 import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.listeners.OnCropImageCompleteListener;

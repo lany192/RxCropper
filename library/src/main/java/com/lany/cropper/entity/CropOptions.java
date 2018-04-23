@@ -1,6 +1,6 @@
 
 
-package com.lany.cropper;
+package com.lany.cropper.entity;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

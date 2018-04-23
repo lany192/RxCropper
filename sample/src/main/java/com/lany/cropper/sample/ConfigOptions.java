@@ -3,7 +3,6 @@ package com.lany.cropper.sample;
 
 import android.util.Pair;
 
-import com.lany.cropper.CropImageView;
 import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.enums.Guidelines;
 import com.lany.cropper.enums.ScaleType;

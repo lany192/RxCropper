@@ -12,6 +12,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 
+import com.lany.cropper.entity.CropOptions;
+import com.lany.cropper.entity.CropResult;
 import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.enums.Guidelines;
 import com.lany.cropper.enums.RequestSizeOptions;
@@ -24,12 +26,12 @@ import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 
-public class RxCropper {
+public final class RxCropper {
     private CropOptions mOptions;
     @Nullable
     private Uri mSourceUri;
 
-    public RxCropper() {
+    private RxCropper() {
         this.mOptions = new CropOptions();
     }
 
@@ -86,7 +88,6 @@ public class RxCropper {
         mOptions = options;
         return this;
     }
-
 
     /**
      * The shape of the cropping window.<br>

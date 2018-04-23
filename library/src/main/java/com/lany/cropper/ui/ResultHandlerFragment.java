@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.lany.cropper.CropImage;
-import com.lany.cropper.CropResult;
+import com.lany.cropper.entity.CropResult;
 import com.lany.cropper.entity.ActivityResult;
 
 import io.reactivex.subjects.BehaviorSubject;

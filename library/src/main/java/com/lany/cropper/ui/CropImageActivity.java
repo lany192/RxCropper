@@ -16,9 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.lany.cropper.CropImage;
-import com.lany.cropper.CropImageView;
-import com.lany.cropper.CropOptions;
-import com.lany.cropper.CropResult;
+import com.lany.cropper.view.CropImageView;
+import com.lany.cropper.entity.CropOptions;
+import com.lany.cropper.entity.CropResult;
 import com.lany.cropper.R;
 import com.lany.cropper.entity.ActivityResult;
 import com.lany.cropper.listeners.OnCropImageCompleteListener;

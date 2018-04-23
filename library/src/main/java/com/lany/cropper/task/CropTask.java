@@ -1,19 +1,22 @@
 
-package com.lany.cropper;
+package com.lany.cropper.task;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
 
+import com.lany.cropper.utils.BitmapUtils;
+import com.lany.cropper.entity.BitmapSampled;
 import com.lany.cropper.enums.RequestSizeOptions;
+import com.lany.cropper.view.CropImageView;
 
 import java.lang.ref.WeakReference;
 
 /**
  * Task to crop bitmap asynchronously from the UI thread.
  */
-final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
+public final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
 
     // region: Fields and Consts
 
@@ -113,7 +116,7 @@ final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
     private final int mSaveCompressQuality;
     // endregion
 
-    CropTask(
+    public CropTask(
             CropImageView cropImageView,
             Bitmap bitmap,
             float[] cropPoints,
@@ -151,7 +154,7 @@ final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
         mOrgHeight = 0;
     }
 
-    CropTask(
+    public CropTask(
             CropImageView cropImageView,
             Uri uri,
             float[] cropPoints,
@@ -209,7 +212,7 @@ final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
         try {
             if (!isCancelled()) {
 
-                BitmapUtils.BitmapSampled bitmapSampled;
+                BitmapSampled bitmapSampled;
                 if (mUri != null) {
                     bitmapSampled =
                             BitmapUtils.cropBitmap(
@@ -242,17 +245,17 @@ final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
                 }
 
                 Bitmap bitmap =
-                        BitmapUtils.resizeBitmap(bitmapSampled.bitmap, mReqWidth, mReqHeight, mReqSizeOptions);
+                        BitmapUtils.resizeBitmap(bitmapSampled.getBitmap(), mReqWidth, mReqHeight, mReqSizeOptions);
 
                 if (mSaveUri == null) {
-                    return new Result(bitmap, bitmapSampled.sampleSize);
+                    return new Result(bitmap, bitmapSampled.getSampleSize());
                 } else {
                     BitmapUtils.writeBitmapToUri(
                             mContext, bitmap, mSaveUri, mSaveCompressFormat, mSaveCompressQuality);
                     if (bitmap != null) {
                         bitmap.recycle();
                     }
-                    return new Result(mSaveUri, bitmapSampled.sampleSize);
+                    return new Result(mSaveUri, bitmapSampled.getSampleSize());
                 }
             }
             return null;
@@ -289,7 +292,7 @@ final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
     /**
      * The result of CropTask async loading.
      */
-    static final class Result {
+    public static final class Result {
 
         /**
          * The cropped bitmap
@@ -304,19 +307,19 @@ final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
         /**
          * The error that occurred during async bitmap cropping.
          */
-        final Exception error;
+        public final Exception error;
 
         /**
          * is the cropping request was to get a bitmap or to save it to uri
          */
-        final boolean isSave;
+        public final boolean isSave;
 
         /**
          * sample size used creating the crop bitmap to lower its size
          */
-        final int sampleSize;
+        public final int sampleSize;
 
-        Result(Bitmap bitmap, int sampleSize) {
+        public Result(Bitmap bitmap, int sampleSize) {
             this.bitmap = bitmap;
             this.uri = null;
             this.error = null;
@@ -324,7 +327,7 @@ final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
             this.sampleSize = sampleSize;
         }
 
-        Result(Uri uri, int sampleSize) {
+        public Result(Uri uri, int sampleSize) {
             this.bitmap = null;
             this.uri = uri;
             this.error = null;
@@ -332,7 +335,7 @@ final class CropTask extends AsyncTask<Void, Void, CropTask.Result> {
             this.sampleSize = sampleSize;
         }
 
-        Result(Exception error, boolean isSave) {
+        public Result(Exception error, boolean isSave) {
             this.bitmap = null;
             this.uri = null;
             this.error = error;

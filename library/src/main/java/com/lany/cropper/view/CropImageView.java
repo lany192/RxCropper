@@ -1,4 +1,4 @@
-package com.lany.cropper;
+package com.lany.cropper.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,6 +23,16 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.lany.cropper.utils.BitmapUtils;
+import com.lany.cropper.CropImage;
+import com.lany.cropper.entity.CropOptions;
+import com.lany.cropper.entity.CropResult;
+import com.lany.cropper.task.CropTask;
+import com.lany.cropper.ImageAnimation;
+import com.lany.cropper.task.LoadingTask;
+import com.lany.cropper.R;
+import com.lany.cropper.entity.BitmapSampled;
+import com.lany.cropper.entity.RotateBitmapResult;
 import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.enums.Guidelines;
 import com.lany.cropper.enums.RequestSizeOptions;
@@ -788,7 +798,7 @@ public class CropImageView extends FrameLayout {
                     && (mLoadedSampleSize > 1 || options == RequestSizeOptions.SAMPLING)) {
                 int orgWidth = mBitmap.getWidth() * mLoadedSampleSize;
                 int orgHeight = mBitmap.getHeight() * mLoadedSampleSize;
-                BitmapUtils.BitmapSampled bitmapSampled =
+                BitmapSampled bitmapSampled =
                         BitmapUtils.cropBitmap(
                                 getContext(),
                                 mLoadedImageUri,
@@ -803,7 +813,7 @@ public class CropImageView extends FrameLayout {
                                 reqHeight,
                                 mFlipHorizontally,
                                 mFlipVertically);
-                croppedBitmap = bitmapSampled.bitmap;
+                croppedBitmap = bitmapSampled.getBitmap();
             } else {
                 croppedBitmap =
                         BitmapUtils.cropBitmapObjectHandleOOM(
@@ -815,7 +825,7 @@ public class CropImageView extends FrameLayout {
                                 mOverlayView.getAspectRatioY(),
                                 mFlipHorizontally,
                                 mFlipVertically)
-                                .bitmap;
+                                .getBitmap();
             }
 
             croppedBitmap = BitmapUtils.resizeBitmap(croppedBitmap, reqWidth, reqHeight, options);
@@ -1002,10 +1012,10 @@ public class CropImageView extends FrameLayout {
         Bitmap setBitmap;
         int degreesRotated = 0;
         if (bitmap != null && exif != null) {
-            BitmapUtils.RotateBitmapResult result = BitmapUtils.rotateBitmapByExif(bitmap, exif);
-            setBitmap = result.bitmap;
-            degreesRotated = result.degrees;
-            mInitialDegreesRotated = result.degrees;
+            RotateBitmapResult result = BitmapUtils.rotateBitmapByExif(bitmap, exif);
+            setBitmap = result.getBitmap();
+            degreesRotated = result.getDegrees();
+            mInitialDegreesRotated = result.getDegrees();
         } else {
             setBitmap = bitmap;
         }
@@ -1167,7 +1177,7 @@ public class CropImageView extends FrameLayout {
      *
      * @param result the result of bitmap loading
      */
-    void onSetImageUriAsyncComplete(LoadingTask.Result result) {
+    public void onSetImageUriAsyncComplete(LoadingTask.Result result) {
 
         mLoadingTask = null;
         setProgressBarVisibility();
@@ -1189,7 +1199,7 @@ public class CropImageView extends FrameLayout {
      *
      * @param result the result of bitmap cropping
      */
-    void onImageCroppingAsyncComplete(CropTask.Result result) {
+    public void onImageCroppingAsyncComplete(CropTask.Result result) {
 
         mCropTask = null;
         setProgressBarVisibility();

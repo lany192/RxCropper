@@ -4,12 +4,13 @@ package com.lany.cropper;
 
 import android.graphics.RectF;
 
+import com.lany.cropper.entity.CropOptions;
 import com.lany.cropper.enums.CropShape;
 
 /**
  * Handler from crop window stuff, moving and knowing possition.
  */
-final class CropWindowHandler {
+public final class CropWindowHandler {
 
     // region: Fields and Consts
 

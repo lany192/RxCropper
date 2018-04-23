@@ -8,17 +8,12 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.lany.cropper.CropOptions;
-import com.lany.cropper.CropResult;
+import com.lany.cropper.entity.CropResult;
 import com.lany.cropper.RxCropper;
-import com.lany.cropper.enums.CropShape;
 import com.lany.picker.RxPicker;
 import com.lany.picker.bean.ImageItem;
-import com.lany.picker.utils.ImageLoader;
 
 import java.io.File;
 import java.util.List;

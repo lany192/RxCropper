@@ -1,7 +1,7 @@
 package com.lany.cropper.listeners;
 
-import com.lany.cropper.CropImageView;
-import com.lany.cropper.CropResult;
+import com.lany.cropper.view.CropImageView;
+import com.lany.cropper.entity.CropResult;
 
 /**
  * Interface definition for a callback to be invoked when image async crop is complete.

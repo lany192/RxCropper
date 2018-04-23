@@ -9,11 +9,13 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.ImageView;
 
+import com.lany.cropper.view.OverlayView;
+
 /**
  * Animation to handle smooth cropping image matrix transformation change, specifically for
  * zoom-in/out.
  */
-final class ImageAnimation extends Animation implements Animation.AnimationListener {
+public final class ImageAnimation extends Animation implements Animation.AnimationListener {
 
     // region: Fields and Consts
 
