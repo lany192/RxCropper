@@ -40,4 +40,4 @@ Add it in your root build.gradle at the end of repositories:
                     
 ### Step 4. Thanks
 
-[ArthurHub/Android-Image-Cropper](https://github.com/ArthurHub/Android-Image-Cropper)
+Fork from[ArthurHub/Android-Image-Cropper](https://github.com/ArthurHub/Android-Image-Cropper)
