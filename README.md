@@ -37,3 +37,7 @@ Add it in your root build.gradle at the end of repositories:
                             //todo something
                         }
                     });
+                    
+### Step 4. Thanks
+
+    [ArthurHub/Android-Image-Cropper](https://github.com/ArthurHub/Android-Image-Cropper)
