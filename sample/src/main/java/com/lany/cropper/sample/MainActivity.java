@@ -1,11 +1,9 @@
 package com.lany.cropper.sample;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -18,16 +16,22 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lany.cropper.CropImage;
 import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.enums.Guidelines;
 import com.lany.cropper.enums.ScaleType;
+import com.lany.picker.RxPicker;
+import com.lany.picker.bean.ImageItem;
+
+import java.io.File;
+import java.util.List;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 
 public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private MainFragment mCurrentFragment;
-    private Uri mCropImageUri;
     private ConfigOptions mOptions = new ConfigOptions();
 
     public void setCurrentFragment(MainFragment fragment) {
@@ -43,18 +47,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-
         mDrawerLayout = findViewById(R.id.drawer_layout);
-
-        mDrawerToggle =
-                new ActionBarDrawerToggle(
-                        this, mDrawerLayout, R.string.main_drawer_open, R.string.main_drawer_close);
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.main_drawer_open, R.string.main_drawer_close);
         mDrawerToggle.setDrawerIndicatorEnabled(true);
         mDrawerLayout.setDrawerListener(mDrawerToggle);
-
         if (savedInstanceState == null) {
             setMainFragmentByPreset(CropDemoPreset.RECT);
         }
@@ -85,61 +83,20 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    @SuppressLint("NewApi")
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == CropImage.PICK_IMAGE_CHOOSER_REQUEST_CODE
-                && resultCode == AppCompatActivity.RESULT_OK) {
-            Uri imageUri = CropImage.getPickImageResultUri(this, data);
-
-            if (CropImage.isReadExternalStoragePermissionsRequired(this, imageUri)) {
-                mCropImageUri = imageUri;
-                requestPermissions(
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                        CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE);
-            } else {
-
-                mCurrentFragment.setImageUri(imageUri);
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(
-            int requestCode, String permissions[], int[] grantResults) {
-        if (requestCode == CropImage.CAMERA_CAPTURE_PERMISSIONS_REQUEST_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                CropImage.startPickImageActivity(this);
-            } else {
-                Toast.makeText(this, "Cancelling, required permissions are not granted", Toast.LENGTH_LONG)
-                        .show();
-            }
-        }
-        if (requestCode == CropImage.PICK_IMAGE_PERMISSIONS_REQUEST_CODE) {
-            if (mCropImageUri != null
-                    && grantResults.length > 0
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                mCurrentFragment.setImageUri(mCropImageUri);
-            } else {
-                Toast.makeText(this, "Cancelling, required permissions are not granted", Toast.LENGTH_LONG)
-                        .show();
-            }
-        }
-    }
-
     @SuppressLint("NewApi")
     public void onDrawerOptionClicked(View view) {
         switch (view.getId()) {
             case R.id.drawer_option_load:
-                if (CropImage.isExplicitCameraPermissionRequired(this)) {
-                    requestPermissions(
-                            new String[]{Manifest.permission.CAMERA},
-                            CropImage.CAMERA_CAPTURE_PERMISSIONS_REQUEST_CODE);
-                } else {
-                    CropImage.startPickImageActivity(this);
-                }
+                Disposable disposable = RxPicker.of()
+                        .single(true)
+                        .start(MainActivity.this)
+                        .subscribe(new Consumer<List<ImageItem>>() {
+                            @Override
+                            public void accept(@NonNull List<ImageItem> imageItems) {
+                                String path = imageItems.get(0).getPath();
+                                mCurrentFragment.setImageUri(Uri.fromFile(new File(path)));
+                            }
+                        });
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.drawer_option_oval:

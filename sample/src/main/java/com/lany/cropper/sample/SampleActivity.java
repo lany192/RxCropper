@@ -31,13 +31,6 @@ public class SampleActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sample);
-        RxPicker.init(new ImageLoader() {
-
-            @Override
-            public void display(ImageView imageView, String path, int width, int height) {
-                Glide.with(imageView.getContext()).load(path).error(R.drawable.ic_preview_image).centerCrop().override(width, height).into(imageView);
-            }
-        });
         findViewById(R.id.my_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

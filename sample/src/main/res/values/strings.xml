@@ -5,11 +5,11 @@
     <string name="app_title">RxCropper</string>
     <string name="result_image_desc">crop result</string>
 
-    <string name="main_drawer_load">Load Image for cropping</string>
+    <string name="main_drawer_load">图片选择</string>
     <string name="main_drawer_open">Open navigation drawer</string>
     <string name="main_drawer_close">Close navigation drawer</string>
 
-    <string name="main_action_crop">CROP</string>
+    <string name="main_action_crop">剪切</string>
     <string name="main_action_rotate">Rotate 90 degrees clockwise</string>
     <string name="main_action_flip">Flip</string>
     <string name="main_action_flip_horizontally">Flip horizontally</string>
