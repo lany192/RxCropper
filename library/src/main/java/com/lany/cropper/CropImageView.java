@@ -81,7 +81,7 @@ public class CropImageView extends FrameLayout {
     /**
      * Animation class to smooth animate zoom-in/out
      */
-    private CropImageAnimation mAnimation;
+    private ImageAnimation mAnimation;
 
     private Bitmap mBitmap;
 
@@ -1634,7 +1634,7 @@ public class CropImageView extends FrameLayout {
                     if (animate) {
                         if (mAnimation == null) {
                             // lazy create animation single instance
-                            mAnimation = new CropImageAnimation(mImageView, mOverlayView);
+                            mAnimation = new ImageAnimation(mImageView, mOverlayView);
                         }
                         // set the state for animation to start from
                         mAnimation.setStartState(mImagePoints, mImageMatrix);

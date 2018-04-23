@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.lany.cropper.CropImage;
 import com.lany.cropper.CropImageView;
 import com.lany.cropper.CropResult;
+import com.lany.cropper.entity.ActivityResult;
 import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.listeners.OnCropImageCompleteListener;
 import com.lany.cropper.listeners.OnSetImageUriCompleteListener;
@@ -192,9 +194,12 @@ public class MainFragment extends Fragment implements OnSetImageUriCompleteListe
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            handleCropResult(result);
+            handleCropResult(getActivityResult(data));
         }
+    }
+
+    private ActivityResult getActivityResult(@Nullable Intent data) {
+        return data != null ? (ActivityResult) data.getParcelableExtra(CropImage.CROP_IMAGE_EXTRA_RESULT) : null;
     }
 
     private void handleCropResult(CropResult result) {

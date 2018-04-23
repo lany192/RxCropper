@@ -26,6 +26,7 @@ import com.lany.cropper.CropImageView;
 import com.lany.cropper.CropOptions;
 import com.lany.cropper.CropResult;
 import com.lany.cropper.R;
+import com.lany.cropper.entity.ActivityResult;
 import com.lany.cropper.listeners.OnCropImageCompleteListener;
 import com.lany.cropper.listeners.OnSetImageUriCompleteListener;
 
@@ -322,8 +323,7 @@ public class CropImageActivity extends AppCompatActivity implements OnSetImageUr
      * Get intent instance to be used for the result of this activity.
      */
     protected Intent getResultIntent(Uri uri, Exception error, int sampleSize) {
-        CropImage.ActivityResult result =
-                new CropImage.ActivityResult(
+        ActivityResult result = new ActivityResult(
                         mCropImageView.getImageUri(),
                         uri,
                         error,
@@ -356,5 +356,4 @@ public class CropImageActivity extends AppCompatActivity implements OnSetImageUr
             }
         }
     }
-    // endregion
 }

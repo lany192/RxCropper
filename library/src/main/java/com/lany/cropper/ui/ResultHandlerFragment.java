@@ -6,10 +6,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.lany.cropper.CropImage;
 import com.lany.cropper.CropResult;
+import com.lany.cropper.entity.ActivityResult;
 
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
@@ -36,8 +38,12 @@ public class ResultHandlerFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && data != null) {
-            resultSubject.onNext(CropImage.getActivityResult(data));
+            resultSubject.onNext(getActivityResult(data));
         }
+    }
+
+    private ActivityResult getActivityResult(@Nullable Intent data) {
+        return data != null ? (ActivityResult) data.getParcelableExtra(CropImage.CROP_IMAGE_EXTRA_RESULT) : null;
     }
 
     @TargetApi(23)
