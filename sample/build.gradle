@@ -4,7 +4,7 @@ android {
     compileSdkVersion rootProject.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 16
         applicationId "com.lany.cropper.sample"
         targetSdkVersion rootProject.compileSdkVersion
         versionCode 1
@@ -16,15 +16,14 @@ android {
 }
 
 dependencies {
-    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.github.lany168:RxPicker:1.0.1'
-    implementation "com.android.support:design:$supportLibraryVersion"
-
     compileOnly 'org.projectlombok:lombok:1.18.2'
     annotationProcessor 'org.projectlombok:lombok:1.18.2'
     implementation 'com.github.bumptech.glide:glide:3.7.0'
-
+    implementation 'com.github.lany192:Box:2.3.7'
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation project(':library')
     //implementation 'com.github.lany192:RxCropper:1.0.0'
 }
