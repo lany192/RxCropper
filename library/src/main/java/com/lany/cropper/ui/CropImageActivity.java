@@ -29,6 +29,7 @@ import java.io.IOException;
 public class CropImageActivity extends AppCompatActivity implements OnSetImageUriCompleteListener, OnCropImageCompleteListener {
     private CropImageView mCropImageView;
     private CropOptions mOptions;
+    private final String TAG = getClass().getSimpleName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,6 @@ public class CropImageActivity extends AppCompatActivity implements OnSetImageUr
         if (savedInstanceState == null) {
             mCropImageView.setImageUriAsync(mCropImageUri);
         }
-
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             CharSequence title = mOptions != null && mOptions.getActivityTitle() != null && mOptions.getActivityTitle().length() > 0 ? mOptions.getActivityTitle() : getResources().getString(R.string.crop_image_activity_title);
@@ -255,7 +255,7 @@ public class CropImageActivity extends AppCompatActivity implements OnSetImageUr
                     menuItemIcon.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
                     menuItem.setIcon(menuItemIcon);
                 } catch (Exception e) {
-                    Log.w("AIC", "Failed to update menu item color", e);
+                    Log.w(TAG, "Failed to update menu item color", e);
                 }
             }
         }

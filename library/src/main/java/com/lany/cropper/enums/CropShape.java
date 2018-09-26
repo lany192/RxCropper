@@ -9,7 +9,7 @@ import android.os.Parcelable;
  */
 public enum CropShape implements Parcelable {
 
-    RECTANGLE(1), OVAL(2);
+    RECTANGLE(0), OVAL(1);
 
     private int value;
 

@@ -8,12 +8,10 @@ import android.os.Parcelable;
 
 import com.lany.cropper.enums.CropShape;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Setter
-@Getter
+@Data
 @NoArgsConstructor
 public final class CropResult implements Parcelable {
 

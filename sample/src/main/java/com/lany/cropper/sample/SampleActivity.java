@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.lany.box.activity.BaseActivity;
+import com.lany.cropper.CropImage;
 import com.lany.cropper.RxCropper;
 import com.lany.cropper.entity.CropResult;
+import com.lany.cropper.enums.CropShape;
 import com.lany.picker.RxPicker;
 import com.lany.picker.bean.ImageItem;
 
@@ -55,7 +57,7 @@ public class SampleActivity extends BaseActivity {
     private void cropper(String path) {
         Disposable disposable = RxCropper.of()
                 .setSourceUri(Uri.fromFile(new File(path)))
-                //.setCropShape(CropShape.OVAL)
+                .setCropShape(CropShape.OVAL)
                 //自由模式
                 //                .setAspectRatio(1,1)
                 //                .setFixAspectRatio(false)
@@ -67,6 +69,7 @@ public class SampleActivity extends BaseActivity {
                 .subscribe(new Consumer<CropResult>() {
                     @Override
                     public void accept(CropResult result) {
+                        Log.i(TAG, "剪切结果: " + result);
                         handleCropResult(result);
                     }
                 });
@@ -80,7 +83,10 @@ public class SampleActivity extends BaseActivity {
             if (result.getUri() != null) {
                 intent.putExtra("URI", result.getUri());
             } else {
-                ResultActivity.mImage = result.getBitmap();
+                ResultActivity.mImage =
+                        result.getCropShape() == CropShape.OVAL
+                                ? CropImage.toOvalBitmap(result.getBitmap())
+                                : result.getBitmap();
             }
             startActivity(intent);
         } else {
