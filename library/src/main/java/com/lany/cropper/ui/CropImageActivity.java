@@ -20,7 +20,6 @@ import com.lany.cropper.view.CropImageView;
 import com.lany.cropper.entity.CropOptions;
 import com.lany.cropper.entity.CropResult;
 import com.lany.cropper.R;
-import com.lany.cropper.entity.ActivityResult;
 import com.lany.cropper.listeners.OnCropImageCompleteListener;
 import com.lany.cropper.listeners.OnSetImageUriCompleteListener;
 
@@ -227,15 +226,16 @@ public class CropImageActivity extends AppCompatActivity implements OnSetImageUr
      * Get intent instance to be used for the result of this activity.
      */
     protected Intent getResultIntent(Uri uri, Exception error, int sampleSize) {
-        ActivityResult result = new ActivityResult(
-                mCropImageView.getImageUri(),
-                uri,
-                error,
-                mCropImageView.getCropPoints(),
-                mCropImageView.getCropRect(),
-                mCropImageView.getRotatedDegrees(),
-                mCropImageView.getWholeImageRect(),
-                sampleSize);
+        CropResult result = new CropResult();
+        result.setOriginalUri(mCropImageView.getImageUri());
+        result.setUri(uri);
+        result.setError(error);
+        result.setCropPoints(mCropImageView.getCropPoints());
+        result.setCropRect(mCropImageView.getCropRect());
+        result.setRotation(mCropImageView.getRotatedDegrees());
+        result.setWholeImageRect(mCropImageView.getWholeImageRect());
+        result.setSampleSize(sampleSize);
+        result.setCropShape(mCropImageView.getCropShape());
         Intent intent = new Intent();
         intent.putExtras(getIntent());
         intent.putExtra(CropImage.CROP_IMAGE_EXTRA_RESULT, result);

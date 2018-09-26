@@ -11,7 +11,6 @@ import android.support.v4.app.Fragment;
 
 import com.lany.cropper.CropImage;
 import com.lany.cropper.entity.CropResult;
-import com.lany.cropper.entity.ActivityResult;
 
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
@@ -42,8 +41,8 @@ public class ResultHandlerFragment extends Fragment {
         }
     }
 
-    private ActivityResult getActivityResult(@Nullable Intent data) {
-        return data != null ? (ActivityResult) data.getParcelableExtra(CropImage.CROP_IMAGE_EXTRA_RESULT) : null;
+    private CropResult getActivityResult(@Nullable Intent data) {
+        return data != null ? (CropResult) data.getParcelableExtra(CropImage.CROP_IMAGE_EXTRA_RESULT) : null;
     }
 
     @TargetApi(23)

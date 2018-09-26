@@ -1206,18 +1206,18 @@ public class CropImageView extends FrameLayout {
 
         OnCropImageCompleteListener listener = mOnCropImageCompleteListener;
         if (listener != null) {
-            CropResult cropResult =
-                    new CropResult(
-                            mBitmap,
-                            mLoadedImageUri,
-                            result.bitmap,
-                            result.uri,
-                            result.error,
-                            getCropPoints(),
-                            getCropRect(),
-                            getWholeImageRect(),
-                            getRotatedDegrees(),
-                            result.sampleSize);
+            CropResult cropResult = new CropResult();
+            cropResult.setOriginalBitmap(mBitmap);
+            cropResult.setBitmap(result.bitmap);
+            cropResult.setOriginalUri(mLoadedImageUri);
+            cropResult.setUri(result.uri);
+            cropResult.setError(result.error);
+            cropResult.setCropPoints(getCropPoints());
+            cropResult.setCropRect(getCropRect());
+            cropResult.setRotation(getRotatedDegrees());
+            cropResult.setWholeImageRect(getWholeImageRect());
+            cropResult.setSampleSize(result.sampleSize);
+            cropResult.setCropShape(getCropShape());
             listener.onCropImageComplete(this, cropResult);
         }
     }

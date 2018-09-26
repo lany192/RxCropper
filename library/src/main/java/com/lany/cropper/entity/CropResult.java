@@ -3,8 +3,11 @@ package com.lany.cropper.entity;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import lombok.AllArgsConstructor;
+import com.lany.cropper.enums.CropShape;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,8 +15,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
-public class CropResult {
+public final class CropResult implements Parcelable {
 
     /**
      * The image bitmap of the original image loaded for cropping.<br>
@@ -69,4 +71,52 @@ public class CropResult {
      */
     private int sampleSize;
 
+    /**
+     * The shape of the cropping area - rectangle/circular.
+     */
+    private CropShape cropShape;
+
+    protected CropResult(Parcel in) {
+        originalBitmap = in.readParcelable(Bitmap.class.getClassLoader());
+        originalUri = in.readParcelable(Uri.class.getClassLoader());
+        bitmap = in.readParcelable(Bitmap.class.getClassLoader());
+        uri = in.readParcelable(Uri.class.getClassLoader());
+        cropPoints = in.createFloatArray();
+        cropRect = in.readParcelable(Rect.class.getClassLoader());
+        wholeImageRect = in.readParcelable(Rect.class.getClassLoader());
+        rotation = in.readInt();
+        sampleSize = in.readInt();
+        cropShape = in.readParcelable(CropShape.class.getClassLoader());
+    }
+
+    public static final Creator<CropResult> CREATOR = new Creator<CropResult>() {
+        @Override
+        public CropResult createFromParcel(Parcel in) {
+            return new CropResult(in);
+        }
+
+        @Override
+        public CropResult[] newArray(int size) {
+            return new CropResult[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(originalBitmap, flags);
+        dest.writeParcelable(originalUri, flags);
+        dest.writeParcelable(bitmap, flags);
+        dest.writeParcelable(uri, flags);
+        dest.writeFloatArray(cropPoints);
+        dest.writeParcelable(cropRect, flags);
+        dest.writeParcelable(wholeImageRect, flags);
+        dest.writeInt(rotation);
+        dest.writeInt(sampleSize);
+        dest.writeParcelable(cropShape, flags);
+    }
 }

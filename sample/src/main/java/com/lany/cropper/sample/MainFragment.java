@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.lany.cropper.CropImage;
 import com.lany.cropper.view.CropImageView;
 import com.lany.cropper.entity.CropResult;
-import com.lany.cropper.entity.ActivityResult;
 import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.listeners.OnCropImageCompleteListener;
 import com.lany.cropper.listeners.OnSetImageUriCompleteListener;
@@ -198,8 +197,8 @@ public class MainFragment extends Fragment implements OnSetImageUriCompleteListe
         }
     }
 
-    private ActivityResult getActivityResult(@Nullable Intent data) {
-        return data != null ? (ActivityResult) data.getParcelableExtra(CropImage.CROP_IMAGE_EXTRA_RESULT) : null;
+    private CropResult getActivityResult(@Nullable Intent data) {
+        return data != null ? (CropResult) data.getParcelableExtra(CropImage.CROP_IMAGE_EXTRA_RESULT) : null;
     }
 
     private void handleCropResult(CropResult result) {
