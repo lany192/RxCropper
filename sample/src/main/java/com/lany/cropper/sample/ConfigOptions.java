@@ -7,9 +7,14 @@ import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.enums.Guidelines;
 import com.lany.cropper.enums.ScaleType;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * The crop image view options that can be changed live.
  */
+@Setter
+@Getter
 final class ConfigOptions {
 
     public ScaleType scaleType = ScaleType.CENTER_INSIDE;
