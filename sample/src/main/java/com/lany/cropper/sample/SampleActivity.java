@@ -1,8 +1,10 @@
 package com.lany.cropper.sample;
 
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.ImageView;
@@ -14,6 +16,7 @@ import com.caimuhao.rxpicker.RxPicker;
 import com.caimuhao.rxpicker.bean.ImageItem;
 import com.lany.box.activity.BaseActivity;
 import com.lany.box.utils.ToastUtils;
+import com.lany.cropper.CropImage;
 import com.lany.cropper.RxCropper;
 import com.lany.cropper.entity.CropResult;
 import com.lany.cropper.enums.CropShape;
@@ -21,6 +24,7 @@ import com.lany.cropper.enums.Guidelines;
 import com.lany.cropper.enums.ScaleType;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import butterknife.BindView;
@@ -73,7 +77,7 @@ public class SampleActivity extends BaseActivity {
     private void cropper(String path) {
         Disposable disposable = RxCropper.of()
                 .setSourceUri(Uri.fromFile(new File(path)))
-                //.setCropShape(CropShape.RECTANGLE)
+                .setCropShape(CropShape.OVAL)
                 //.setGuidelines(Guidelines.ON_TOUCH)
                 //.setBorderCornerColor(Color.GREEN)
                 //.setBorderLineColor(Color.RED)
@@ -103,10 +107,23 @@ public class SampleActivity extends BaseActivity {
             RequestOptions options = new RequestOptions()
                     .centerInside()
                     .diskCacheStrategy(DiskCacheStrategy.NONE);
-            Glide.with(self)
-                    .load(result.getUri())
-                    .apply(options)
-                    .into(imageView2);
+            if (result.getCropShape() == CropShape.OVAL) {
+                Bitmap bitmap = null;
+                try {
+                    bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), result.getUri());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Glide.with(self)
+                        .load(CropImage.toOvalBitmap(bitmap))
+                        .apply(options)
+                        .into(imageView2);
+            } else {
+                Glide.with(self)
+                        .load(result.getUri())
+                        .apply(options)
+                        .into(imageView2);
+            }
         } else {
             Log.e(TAG, "Failed to crop image", result.getError());
             ToastUtils.show("Image crop failed: " + result.getError().getMessage());
