@@ -1,19 +1,18 @@
 package com.lany.cropper.sample;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.lany.box.activity.BaseActivity;
-import com.lany.cropper.CropImage;
 import com.lany.cropper.RxCropper;
 import com.lany.cropper.entity.CropResult;
 import com.lany.cropper.enums.CropShape;
+import com.lany.cropper.enums.Guidelines;
+import com.lany.cropper.enums.ScaleType;
 import com.lany.picker.RxPicker;
 import com.lany.picker.bean.ImageItem;
 
@@ -57,7 +56,15 @@ public class SampleActivity extends BaseActivity {
     private void cropper(String path) {
         Disposable disposable = RxCropper.of()
                 .setSourceUri(Uri.fromFile(new File(path)))
-                .setCropShape(CropShape.OVAL)
+                .setCropShape(CropShape.RECTANGLE)
+                .setGuidelines(Guidelines.ON_TOUCH)
+                .setBorderCornerColor(Color.GREEN)
+                .setBorderLineColor(Color.RED)
+                .setGuidelinesColor(Color.BLUE)
+                .setScaleType(ScaleType.CENTER)
+                .setInitialCropWindowPaddingRatio(1.0f)
+                .setFlipHorizontally(true)
+                .setRotationDegrees(90)
                 //自由模式
                 //                .setAspectRatio(1,1)
                 //                .setFixAspectRatio(false)
@@ -77,25 +84,25 @@ public class SampleActivity extends BaseActivity {
 
 
     private void handleCropResult(CropResult result) {
-        if (result.getError() == null) {
-            Intent intent = new Intent(self, ResultActivity.class);
-            intent.putExtra("SAMPLE_SIZE", result.getSampleSize());
-            if (result.getUri() != null) {
-                intent.putExtra("URI", result.getUri());
-            } else {
-                ResultActivity.mImage =
-                        result.getCropShape() == CropShape.OVAL
-                                ? CropImage.toOvalBitmap(result.getBitmap())
-                                : result.getBitmap();
-            }
-            startActivity(intent);
-        } else {
-            Log.e("AIC", "Failed to crop image", result.getError());
-            Toast.makeText(self,
-                    "Image crop failed: " + result.getError().getMessage(),
-                    Toast.LENGTH_LONG)
-                    .show();
-        }
+//        if (result.getError() == null) {
+//            Intent intent = new Intent(self, ResultActivity.class);
+//            intent.putExtra("SAMPLE_SIZE", result.getSampleSize());
+//            if (result.getUri() != null) {
+//                intent.putExtra("URI", result.getUri());
+//            } else {
+//                ResultActivity.mImage =
+//                        result.getCropShape() == CropShape.OVAL
+//                                ? CropImage.toOvalBitmap(result.getBitmap())
+//                                : result.getBitmap();
+//            }
+//            startActivity(intent);
+//        } else {
+//            Log.e("AIC", "Failed to crop image", result.getError());
+//            Toast.makeText(self,
+//                    "Image crop failed: " + result.getError().getMessage(),
+//                    Toast.LENGTH_LONG)
+//                    .show();
+//        }
     }
 
 }
