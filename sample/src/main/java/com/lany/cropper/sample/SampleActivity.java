@@ -73,22 +73,21 @@ public class SampleActivity extends BaseActivity {
     private void cropper(String path) {
         Disposable disposable = RxCropper.of()
                 .setSourceUri(Uri.fromFile(new File(path)))
-                .setCropShape(CropShape.RECTANGLE)
-                .setGuidelines(Guidelines.ON_TOUCH)
-                .setBorderCornerColor(Color.GREEN)
-                .setBorderLineColor(Color.RED)
-                .setGuidelinesColor(Color.BLUE)
-                .setScaleType(ScaleType.CENTER)
-                .setInitialCropWindowPaddingRatio(0.1f)
-                .setFlipHorizontally(true)
-                .setRotationDegrees(90)
+                //.setCropShape(CropShape.RECTANGLE)
+                //.setGuidelines(Guidelines.ON_TOUCH)
+                //.setBorderCornerColor(Color.GREEN)
+                //.setBorderLineColor(Color.RED)
+                //.setGuidelinesColor(Color.BLUE)
+                //.setScaleType(ScaleType.CENTER)
+                //.setInitialCropWindowPaddingRatio(0.1f)
+                //.setFlipHorizontally(true)
+                //.setRotationDegrees(90)
                 //自由模式
-                //                .setAspectRatio(1,1)
-                //                .setFixAspectRatio(false)
+                //.setAspectRatio(1,1)
+                //.setFixAspectRatio(false)
                 //固定模式
                 .setAspectRatio(1, 1)
-
-                .setBackgroundColor(Color.parseColor("#90000000"))
+                //.setBackgroundColor(Color.parseColor("#90000000"))
                 .start(this)
                 .subscribe(new Consumer<CropResult>() {
                     @Override
