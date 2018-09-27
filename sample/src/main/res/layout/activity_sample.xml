@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,11 +7,24 @@
     android:padding="8dp"
     tools:context=".SampleActivity">
 
-    <Button
+    <TextView
         android:id="@+id/button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="choose picture" />
+        android:layout_marginBottom="1dp"
+        android:background="@color/cropper_main_color"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="choose picture"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:text="original image:"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/image_view_1"
@@ -20,12 +32,22 @@
         android:layout_height="0dp"
         android:layout_marginBottom="1dp"
         android:layout_weight="1"
+        android:background="@android:color/darker_gray"
         android:contentDescription="@string/app_name" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:text="crop result:"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/image_view_2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="@android:color/darker_gray"
         android:contentDescription="@string/app_name" />
 </LinearLayout>

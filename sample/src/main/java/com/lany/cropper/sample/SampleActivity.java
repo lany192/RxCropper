@@ -1,7 +1,6 @@
 package com.lany.cropper.sample;
 
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,7 +20,6 @@ import com.lany.cropper.RxCropper;
 import com.lany.cropper.entity.CropResult;
 import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.enums.Guidelines;
-import com.lany.cropper.enums.ScaleType;
 
 import java.io.File;
 import java.io.IOException;
@@ -78,7 +76,7 @@ public class SampleActivity extends BaseActivity {
         Disposable disposable = RxCropper.of()
                 .setSourceUri(Uri.fromFile(new File(path)))
                 .setCropShape(CropShape.OVAL)
-                //.setGuidelines(Guidelines.ON_TOUCH)
+                .setGuidelines(Guidelines.ON_TOUCH)
                 //.setBorderCornerColor(Color.GREEN)
                 //.setBorderLineColor(Color.RED)
                 //.setGuidelinesColor(Color.BLUE)
