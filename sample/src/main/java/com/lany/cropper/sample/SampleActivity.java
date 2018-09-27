@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.caimuhao.rxpicker.RxPicker;
+import com.caimuhao.rxpicker.bean.ImageItem;
 import com.lany.box.activity.BaseActivity;
 import com.lany.box.utils.ToastUtils;
 import com.lany.cropper.RxCropper;
@@ -17,8 +19,6 @@ import com.lany.cropper.entity.CropResult;
 import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.enums.Guidelines;
 import com.lany.cropper.enums.ScaleType;
-import com.lany.picker.RxPicker;
-import com.lany.picker.bean.ImageItem;
 
 import java.io.File;
 import java.util.List;

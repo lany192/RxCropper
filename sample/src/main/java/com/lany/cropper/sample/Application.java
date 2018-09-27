@@ -5,9 +5,9 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.caimuhao.rxpicker.RxPicker;
+import com.caimuhao.rxpicker.utils.ImageLoader;
 import com.lany.box.BaseApp;
-import com.lany.picker.RxPicker;
-import com.lany.picker.utils.ImageLoader;
 
 public class Application extends BaseApp {
 
