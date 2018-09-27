@@ -9,12 +9,12 @@ import com.lany.box.BaseApp;
 import com.lany.picker.RxPicker;
 import com.lany.picker.utils.ImageLoader;
 
-public class App extends BaseApp {
+public class Application extends BaseApp {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        RxPicker.of().init(new ImageLoader() {
+        RxPicker.init(new ImageLoader() {
             @Override
             public void display(ImageView imageView, String path, int width, int height) {
                 RequestOptions options = new RequestOptions()

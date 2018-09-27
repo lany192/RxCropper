@@ -5,9 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestOptions;
 import com.lany.box.activity.BaseActivity;
+import com.lany.box.utils.ToastUtils;
 import com.lany.cropper.RxCropper;
 import com.lany.cropper.entity.CropResult;
 import com.lany.cropper.enums.CropShape;
@@ -19,10 +23,16 @@ import com.lany.picker.bean.ImageItem;
 import java.io.File;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
 public class SampleActivity extends BaseActivity {
+    @BindView(R.id.image_view_1)
+    ImageView imageView1;
+    @BindView(R.id.image_view_2)
+    ImageView imageView2;
 
     @Override
     protected boolean hasBackBtn() {
@@ -36,21 +46,28 @@ public class SampleActivity extends BaseActivity {
 
     @Override
     protected void init(Bundle bundle) {
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Disposable disposable = RxPicker.of()
-                        .single(true)
-                        .start(self)
-                        .subscribe(new Consumer<List<ImageItem>>() {
-                            @Override
-                            public void accept(@NonNull List<ImageItem> imageItems) {
-                                String path = imageItems.get(0).getPath();
-                                cropper(path);
-                            }
-                        });
-            }
-        });
+
+    }
+
+    @OnClick(R.id.button)
+    public void pickerClicked() {
+        Disposable disposable = RxPicker.of()
+                .single(true)
+                .start(self)
+                .subscribe(new Consumer<List<ImageItem>>() {
+                    @Override
+                    public void accept(@NonNull List<ImageItem> imageItems) {
+                        String path = imageItems.get(0).getPath();
+                        RequestOptions options = new RequestOptions()
+                                .centerInside()
+                                .diskCacheStrategy(DiskCacheStrategy.ALL);
+                        Glide.with(self)
+                                .load(path)
+                                .apply(options)
+                                .into(imageView1);
+                        cropper(path);
+                    }
+                });
     }
 
     private void cropper(String path) {
@@ -62,7 +79,7 @@ public class SampleActivity extends BaseActivity {
                 .setBorderLineColor(Color.RED)
                 .setGuidelinesColor(Color.BLUE)
                 .setScaleType(ScaleType.CENTER)
-                .setInitialCropWindowPaddingRatio(1.0f)
+                .setInitialCropWindowPaddingRatio(0.1f)
                 .setFlipHorizontally(true)
                 .setRotationDegrees(90)
                 //自由模式
@@ -76,33 +93,24 @@ public class SampleActivity extends BaseActivity {
                 .subscribe(new Consumer<CropResult>() {
                     @Override
                     public void accept(CropResult result) {
-                        Log.i(TAG, "剪切结果: " + result);
+                        Log.i(TAG, "crop result: " + result);
                         handleCropResult(result);
                     }
                 });
     }
 
-
     private void handleCropResult(CropResult result) {
-//        if (result.getError() == null) {
-//            Intent intent = new Intent(self, ResultActivity.class);
-//            intent.putExtra("SAMPLE_SIZE", result.getSampleSize());
-//            if (result.getUri() != null) {
-//                intent.putExtra("URI", result.getUri());
-//            } else {
-//                ResultActivity.mImage =
-//                        result.getCropShape() == CropShape.OVAL
-//                                ? CropImage.toOvalBitmap(result.getBitmap())
-//                                : result.getBitmap();
-//            }
-//            startActivity(intent);
-//        } else {
-//            Log.e("AIC", "Failed to crop image", result.getError());
-//            Toast.makeText(self,
-//                    "Image crop failed: " + result.getError().getMessage(),
-//                    Toast.LENGTH_LONG)
-//                    .show();
-//        }
+        if (result.getError() == null) {
+            RequestOptions options = new RequestOptions()
+                    .centerInside()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE);
+            Glide.with(self)
+                    .load(result.getUri())
+                    .apply(options)
+                    .into(imageView2);
+        } else {
+            Log.e(TAG, "Failed to crop image", result.getError());
+            ToastUtils.show("Image crop failed: " + result.getError().getMessage());
+        }
     }
-
 }
