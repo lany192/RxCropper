@@ -5,7 +5,7 @@
 
         <activity
             android:name="com.lany.cropper.ui.CropImageActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar" />
+            android:theme="@style/CropperTheme" />
 
     </application>
 </manifest>

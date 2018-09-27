@@ -19,7 +19,7 @@ import com.lany.cropper.enums.Guidelines;
 import com.lany.cropper.enums.RequestSizeOptions;
 import com.lany.cropper.enums.ScaleType;
 import com.lany.cropper.ui.CropImageActivity;
-import com.lany.cropper.ui.ResultHandlerFragment;
+import com.lany.cropper.ui.ResultFragment;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
@@ -53,9 +53,9 @@ public final class RxCropper {
     }
 
     private Observable<CropResult> start(FragmentManager fragmentManager) {
-        ResultHandlerFragment fragment = (ResultHandlerFragment) fragmentManager.findFragmentByTag(ResultHandlerFragment.class.getSimpleName());
+        ResultFragment fragment = (ResultFragment) fragmentManager.findFragmentByTag(ResultFragment.class.getSimpleName());
         if (fragment == null) {
-            fragment = ResultHandlerFragment.newInstance();
+            fragment = ResultFragment.newInstance();
             fragmentManager.beginTransaction().add(fragment, fragment.getClass().getSimpleName()).commitAllowingStateLoss();
         } else if (fragment.isDetached()) {
             fragmentManager.beginTransaction().attach(fragment).commitAllowingStateLoss();
@@ -63,7 +63,7 @@ public final class RxCropper {
         return getResult(fragment);
     }
 
-    private Observable<CropResult> getResult(final ResultHandlerFragment fragment) {
+    private Observable<CropResult> getResult(final ResultFragment fragment) {
         return fragment.getAttachSubject().filter(new Predicate<Boolean>() {
             @Override
             public boolean test(@NonNull Boolean aBoolean) {
@@ -77,7 +77,7 @@ public final class RxCropper {
                 bundle.putParcelable(CropImage.CROP_IMAGE_EXTRA_SOURCE, mSourceUri);
                 bundle.putParcelable(CropImage.CROP_IMAGE_EXTRA_OPTIONS, mOptions);
                 intent.putExtra(CropImage.CROP_IMAGE_EXTRA_BUNDLE, bundle);
-                fragment.startActivityForResult(intent, ResultHandlerFragment.REQUEST_CODE);
+                fragment.startActivityForResult(intent, ResultFragment.REQUEST_CODE);
                 return fragment.getResultSubject();
             }
         }).take(1);

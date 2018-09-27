@@ -16,13 +16,13 @@ import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 
 
-public class ResultHandlerFragment extends Fragment {
+public class ResultFragment extends Fragment {
     private PublishSubject<CropResult> resultSubject = PublishSubject.create();
     private BehaviorSubject<Boolean> attachSubject = BehaviorSubject.create();
     public static final int REQUEST_CODE = 0x00100;
 
-    public static ResultHandlerFragment newInstance() {
-        return new ResultHandlerFragment();
+    public static ResultFragment newInstance() {
+        return new ResultFragment();
     }
 
     public PublishSubject<CropResult> getResultSubject() {

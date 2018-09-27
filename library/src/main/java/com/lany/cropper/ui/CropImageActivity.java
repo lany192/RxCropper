@@ -34,7 +34,7 @@ public class CropImageActivity extends AppCompatActivity implements OnSetImageUr
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.crop_image_activity);
+        setContentView(R.layout.cropper_activity_crop);
         mCropImageView = findViewById(R.id.cropImageView);
 
         Bundle bundle = getIntent().getBundleExtra(CropImage.CROP_IMAGE_EXTRA_BUNDLE);
