@@ -1,28 +1,35 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.compileSdkVersion
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 16
         applicationId "com.lany.cropper.sample"
-        targetSdkVersion rootProject.compileSdkVersion
+        targetSdkVersion 28
         versionCode 1
         versionName '1.0'
     }
     lintOptions {
         abortOnError false
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    compileOnly 'org.projectlombok:lombok:1.18.2'
-    annotationProcessor 'org.projectlombok:lombok:1.18.2'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:exifinterface:28.0.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.5'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'com.android.support:support-annotations:28.0.0'
+    annotationProcessor 'com.android.support:support-annotations:28.0.0'
+    compileOnly 'org.projectlombok:lombok:1.18.4'
+    annotationProcessor 'org.projectlombok:lombok:1.18.4'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
-    implementation 'com.github.lany192:Box:2.3.7'
-    implementation 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    implementation 'com.github.lany192:RxPicker:1.0.2'
+    implementation 'com.github.lany192:RxPicker:1.0.3'
     implementation project(':library')
 }

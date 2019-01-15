@@ -7,14 +7,13 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.caimuhao.rxpicker.RxPicker;
 import com.caimuhao.rxpicker.utils.ImageLoader;
-import com.lany.box.BaseApp;
 
-public class Application extends BaseApp {
+public class Application extends android.app.Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        RxPicker.init(new ImageLoader() {
+        RxPicker.of().init(new ImageLoader() {
             @Override
             public void display(ImageView imageView, String path, int width, int height) {
                 RequestOptions options = new RequestOptions()

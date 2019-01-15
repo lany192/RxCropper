@@ -4,8 +4,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -13,8 +13,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.caimuhao.rxpicker.RxPicker;
 import com.caimuhao.rxpicker.bean.ImageItem;
-import com.lany.box.activity.BaseActivity;
-import com.lany.box.utils.ToastUtils;
 import com.lany.cropper.CropImage;
 import com.lany.cropper.RxCropper;
 import com.lany.cropper.entity.CropResult;
@@ -25,51 +23,46 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
-public class SampleActivity extends BaseActivity {
-    @BindView(R.id.image_view_1)
+public class SampleActivity extends AppCompatActivity {
+    private final String TAG = getClass().getSimpleName();
     ImageView imageView1;
-    @BindView(R.id.image_view_2)
     ImageView imageView2;
 
     @Override
-    protected boolean hasBackBtn() {
-        return false;
-    }
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sample);
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_sample;
-    }
-
-    @Override
-    protected void init(Bundle bundle) {
-
-    }
-
-    @OnClick(R.id.button)
-    public void pickerClicked() {
-        Disposable disposable = RxPicker.of()
-                .single(true)
-                .start(self)
-                .subscribe(new Consumer<List<ImageItem>>() {
-                    @Override
-                    public void accept(@NonNull List<ImageItem> imageItems) {
-                        String path = imageItems.get(0).getPath();
-                        RequestOptions options = new RequestOptions()
-                                .centerInside()
-                                .diskCacheStrategy(DiskCacheStrategy.ALL);
-                        Glide.with(self)
-                                .load(path)
-                                .apply(options)
-                                .into(imageView1);
-                        cropper(path);
-                    }
-                });
+        imageView1 = findViewById(R.id.image_view_1);
+        imageView2 = findViewById(R.id.image_view_2);
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Disposable disposable = RxPicker.of()
+                        .single(true)
+                        .start(SampleActivity.this)
+                        .subscribe(new Consumer<List<ImageItem>>() {
+                            @Override
+                            public void accept(@NonNull List<ImageItem> imageItems) {
+                                String path = imageItems.get(0).getPath();
+                                RequestOptions options = new RequestOptions()
+                                        .centerInside()
+                                        .diskCacheStrategy(DiskCacheStrategy.ALL);
+                                Glide.with(SampleActivity.this)
+                                        .load(path)
+                                        .apply(options)
+                                        .into(imageView1);
+                                cropper(path);
+                            }
+                        });
+            }
+        });
     }
 
     private void cropper(String path) {
@@ -112,19 +105,18 @@ public class SampleActivity extends BaseActivity {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                Glide.with(self)
+                Glide.with(SampleActivity.this)
                         .load(CropImage.toOvalBitmap(bitmap))
                         .apply(options)
                         .into(imageView2);
             } else {
-                Glide.with(self)
+                Glide.with(SampleActivity.this)
                         .load(result.getUri())
                         .apply(options)
                         .into(imageView2);
             }
         } else {
             Log.e(TAG, "Failed to crop image", result.getError());
-            ToastUtils.show("Image crop failed: " + result.getError().getMessage());
         }
     }
 }

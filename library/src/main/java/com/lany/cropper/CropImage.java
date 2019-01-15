@@ -3,14 +3,10 @@
 package com.lany.cropper;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -19,18 +15,14 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Parcelable;
-import android.provider.MediaStore;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 
 import com.lany.cropper.ui.CropImageActivity;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
+
+import androidx.annotation.NonNull;
+
 
 /**
  * Helper to simplify crop image work like starting pick-image acitvity and handling camera/gallery
