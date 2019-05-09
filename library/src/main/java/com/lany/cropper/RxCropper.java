@@ -5,6 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 
 import com.lany.cropper.entity.CropOptions;
 import com.lany.cropper.entity.CropResult;
@@ -13,14 +19,8 @@ import com.lany.cropper.enums.Guidelines;
 import com.lany.cropper.enums.RequestSizeOptions;
 import com.lany.cropper.enums.ScaleType;
 import com.lany.cropper.ui.CropImageActivity;
-import com.lany.cropper.ui.ResultFragment;
+import com.lany.cropper.ui.CallbackFragment;
 
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
@@ -53,9 +53,9 @@ public final class RxCropper {
     }
 
     private Observable<CropResult> start(FragmentManager fragmentManager) {
-        ResultFragment fragment = (ResultFragment) fragmentManager.findFragmentByTag(ResultFragment.class.getSimpleName());
+        CallbackFragment fragment = (CallbackFragment) fragmentManager.findFragmentByTag(CallbackFragment.class.getSimpleName());
         if (fragment == null) {
-            fragment = ResultFragment.newInstance();
+            fragment = CallbackFragment.newInstance();
             fragmentManager.beginTransaction().add(fragment, fragment.getClass().getSimpleName()).commitAllowingStateLoss();
         } else if (fragment.isDetached()) {
             fragmentManager.beginTransaction().attach(fragment).commitAllowingStateLoss();
@@ -63,7 +63,7 @@ public final class RxCropper {
         return getResult(fragment);
     }
 
-    private Observable<CropResult> getResult(final ResultFragment fragment) {
+    private Observable<CropResult> getResult(final CallbackFragment fragment) {
         return fragment.getAttachSubject().filter(new Predicate<Boolean>() {
             @Override
             public boolean test(@NonNull Boolean aBoolean) {
@@ -77,7 +77,7 @@ public final class RxCropper {
                 bundle.putParcelable(CropImage.CROP_IMAGE_EXTRA_SOURCE, mSourceUri);
                 bundle.putParcelable(CropImage.CROP_IMAGE_EXTRA_OPTIONS, mOptions);
                 intent.putExtra(CropImage.CROP_IMAGE_EXTRA_BUNDLE, bundle);
-                fragment.startActivityForResult(intent, ResultFragment.REQUEST_CODE);
+                fragment.startActivityForResult(intent, CallbackFragment.REQUEST_CODE);
                 return fragment.getResultSubject();
             }
         }).take(1);

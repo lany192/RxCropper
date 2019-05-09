@@ -17,12 +17,12 @@ import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 
-import com.lany.cropper.utils.BitmapUtils;
-import com.lany.cropper.entity.CropOptions;
 import com.lany.cropper.CropWindowHandler;
 import com.lany.cropper.CropWindowMoveHandler;
+import com.lany.cropper.entity.CropOptions;
 import com.lany.cropper.enums.CropShape;
 import com.lany.cropper.enums.Guidelines;
+import com.lany.cropper.utils.BitmapUtils;
 
 import java.util.Arrays;
 
@@ -695,7 +695,11 @@ public class OverlayView extends View {
             }
             mPath.addOval(mDrawRect, Path.Direction.CW);
             canvas.save();
-            canvas.clipPath(mPath, Region.Op.XOR);
+            if (Build.VERSION.SDK_INT >= 28) {
+                canvas.clipPath(mPath);
+            } else {
+                canvas.clipPath(mPath, Region.Op.XOR);
+            }
             canvas.drawRect(left, top, right, bottom, mBackgroundPaint);
             canvas.restore();
         }

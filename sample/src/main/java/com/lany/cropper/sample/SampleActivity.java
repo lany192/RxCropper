@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,8 +13,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.caimuhao.rxpicker.RxPicker;
-import com.caimuhao.rxpicker.bean.ImageItem;
+import com.github.lany192.rxpicker.RxPicker;
 import com.lany.cropper.CropImage;
 import com.lany.cropper.RxCropper;
 import com.lany.cropper.entity.CropResult;
@@ -21,13 +22,8 @@ import com.lany.cropper.enums.Guidelines;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 
 public class SampleActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
@@ -47,19 +43,16 @@ public class SampleActivity extends AppCompatActivity {
                 Disposable disposable = RxPicker.of()
                         .single(true)
                         .start(SampleActivity.this)
-                        .subscribe(new Consumer<List<ImageItem>>() {
-                            @Override
-                            public void accept(@NonNull List<ImageItem> imageItems) {
-                                String path = imageItems.get(0).getPath();
-                                RequestOptions options = new RequestOptions()
-                                        .centerInside()
-                                        .diskCacheStrategy(DiskCacheStrategy.ALL);
-                                Glide.with(SampleActivity.this)
-                                        .load(path)
-                                        .apply(options)
-                                        .into(imageView1);
-                                cropper(path);
-                            }
+                        .subscribe(imageItems -> {
+                            String path = imageItems.get(0).getPath();
+                            RequestOptions options = new RequestOptions()
+                                    .centerInside()
+                                    .diskCacheStrategy(DiskCacheStrategy.ALL);
+                            Glide.with(SampleActivity.this)
+                                    .load(path)
+                                    .apply(options)
+                                    .into(imageView1);
+                            cropper(path);
                         });
             }
         });
@@ -84,12 +77,9 @@ public class SampleActivity extends AppCompatActivity {
                 .setAspectRatio(1, 1)
                 //.setBackgroundColor(Color.parseColor("#90000000"))
                 .start(this)
-                .subscribe(new Consumer<CropResult>() {
-                    @Override
-                    public void accept(CropResult result) {
-                        Log.i(TAG, "crop result: " + result);
-                        handleCropResult(result);
-                    }
+                .subscribe(result -> {
+                    Log.i(TAG, "crop result: " + result);
+                    handleCropResult(result);
                 });
     }
 

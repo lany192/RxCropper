@@ -6,23 +6,23 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 
 import com.lany.cropper.CropImage;
 import com.lany.cropper.entity.CropResult;
 
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import io.reactivex.subjects.BehaviorSubject;
 import io.reactivex.subjects.PublishSubject;
 
 
-public class ResultFragment extends Fragment {
+public class CallbackFragment extends Fragment {
     private PublishSubject<CropResult> resultSubject = PublishSubject.create();
     private BehaviorSubject<Boolean> attachSubject = BehaviorSubject.create();
     public static final int REQUEST_CODE = 0x00100;
 
-    public static ResultFragment newInstance() {
-        return new ResultFragment();
+    public static CallbackFragment newInstance() {
+        return new CallbackFragment();
     }
 
     public PublishSubject<CropResult> getResultSubject() {

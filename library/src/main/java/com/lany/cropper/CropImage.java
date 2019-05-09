@@ -15,13 +15,12 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.NonNull;
 
 import com.lany.cropper.ui.CropImageActivity;
 
 import java.io.File;
 import java.io.InputStream;
-
-import androidx.annotation.NonNull;
 
 
 /**
