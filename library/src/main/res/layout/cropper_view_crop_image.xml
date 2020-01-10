@@ -10,7 +10,7 @@
         android:scaleType="centerInside"
         tools:ignore="contentDescription" />
 
-    <com.lany.cropper.view.OverlayView
+    <com.github.lany192.cropper.view.OverlayView
         android:id="@+id/OverlayView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

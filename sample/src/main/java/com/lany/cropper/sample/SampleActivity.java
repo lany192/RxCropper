@@ -1,24 +1,26 @@
 package com.lany.cropper.sample;
 
+import android.Manifest;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.github.lany192.rxpicker.RxPicker;
-import com.lany.cropper.CropImage;
-import com.lany.cropper.RxCropper;
-import com.lany.cropper.entity.CropResult;
-import com.lany.cropper.enums.CropShape;
-import com.lany.cropper.enums.Guidelines;
+import com.github.lany192.cropper.CropImage;
+import com.github.lany192.cropper.RxCropper;
+import com.github.lany192.cropper.entity.CropResult;
+import com.github.lany192.cropper.enums.CropShape;
+import com.github.lany192.cropper.enums.Guidelines;
+import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,8 +29,8 @@ import io.reactivex.disposables.Disposable;
 
 public class SampleActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
-    ImageView imageView1;
-    ImageView imageView2;
+    private ImageView imageView1;
+    private ImageView imageView2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,25 +39,39 @@ public class SampleActivity extends AppCompatActivity {
 
         imageView1 = findViewById(R.id.image_view_1);
         imageView2 = findViewById(R.id.image_view_2);
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Disposable disposable = RxPicker.of()
-                        .single(true)
-                        .start(SampleActivity.this)
-                        .subscribe(imageItems -> {
-                            String path = imageItems.get(0).getPath();
-                            RequestOptions options = new RequestOptions()
-                                    .centerInside()
-                                    .diskCacheStrategy(DiskCacheStrategy.ALL);
-                            Glide.with(SampleActivity.this)
-                                    .load(path)
-                                    .apply(options)
-                                    .into(imageView1);
-                            cropper(path);
-                        });
-            }
-        });
+        findViewById(R.id.button).setOnClickListener(v -> checkPermissions());
+    }
+
+    private void checkPermissions() {
+        Disposable disposable = new RxPermissions(SampleActivity.this)
+                .request(Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                .subscribe(granted -> {
+                    if (granted) {
+                        pick();
+                    } else {
+                        Toast.makeText(SampleActivity.this, "权限不足", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void pick() {
+        Disposable disposable2 = RxPicker
+                .get()
+                .maxSize(1)
+                .start(SampleActivity.this)
+                .subscribe(paths -> {
+                    String path = paths.get(0);
+                    RequestOptions options = new RequestOptions()
+                            .centerInside()
+                            .diskCacheStrategy(DiskCacheStrategy.ALL);
+                    Glide.with(SampleActivity.this)
+                            .load(path)
+                            .apply(options)
+                            .into(imageView1);
+                    cropper(path);
+                });
     }
 
     private void cropper(String path) {
