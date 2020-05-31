@@ -2,6 +2,7 @@ package com.lany.cropper.sample;
 
 import android.Manifest;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,12 +21,12 @@ import com.github.lany192.cropper.RxCropper;
 import com.github.lany192.cropper.entity.CropResult;
 import com.github.lany192.cropper.enums.CropShape;
 import com.github.lany192.cropper.enums.Guidelines;
-import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.lany.cropper.sample.permission.RxPermissions;
 
 import java.io.File;
 import java.io.IOException;
 
-import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.disposables.Disposable;
 
 public class SampleActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
@@ -79,9 +80,9 @@ public class SampleActivity extends AppCompatActivity {
                 .setSourceUri(Uri.fromFile(new File(path)))
                 .setCropShape(CropShape.OVAL)
                 .setGuidelines(Guidelines.ON_TOUCH)
-                //.setBorderCornerColor(Color.GREEN)
-                //.setBorderLineColor(Color.RED)
-                //.setGuidelinesColor(Color.BLUE)
+                .setBorderCornerColor(Color.GREEN)
+                .setBorderLineColor(Color.RED)
+                .setGuidelinesColor(Color.BLUE)
                 //.setScaleType(ScaleType.CENTER)
                 //.setInitialCropWindowPaddingRatio(0.1f)
                 //.setFlipHorizontally(true)
@@ -91,7 +92,7 @@ public class SampleActivity extends AppCompatActivity {
                 //.setFixAspectRatio(false)
                 //固定模式
                 .setAspectRatio(1, 1)
-                //.setBackgroundColor(Color.parseColor("#90000000"))
+                .setBackgroundColor(Color.TRANSPARENT)
                 .start(this)
                 .subscribe(result -> {
                     Log.i(TAG, "crop result: " + result);

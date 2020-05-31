@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment;
 import com.github.lany192.cropper.CropImage;
 import com.github.lany192.cropper.entity.CropResult;
 
-import io.reactivex.subjects.BehaviorSubject;
-import io.reactivex.subjects.PublishSubject;
+import io.reactivex.rxjava3.subjects.BehaviorSubject;
+import io.reactivex.rxjava3.subjects.PublishSubject;
 
 
 public class ResultFragment extends Fragment {
