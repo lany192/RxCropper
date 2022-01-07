@@ -5,6 +5,7 @@
 
         <activity
             android:name="com.github.lany192.cropper.ui.CropImageActivity"
+            android:exported="true"
             android:theme="@style/CropperTheme" />
 
     </application>

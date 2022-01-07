@@ -13,6 +13,7 @@
 
         <activity
             android:name=".SampleActivity"
+            android:exported="true"
             android:label="@string/title_activity_sample">
 
             <intent-filter>

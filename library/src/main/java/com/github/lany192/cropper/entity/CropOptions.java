@@ -19,11 +19,6 @@ import com.github.lany192.cropper.enums.RequestSizeOptions;
 import com.github.lany192.cropper.enums.ScaleType;
 import com.github.lany192.cropper.ui.CropImageActivity;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
 public class CropOptions implements Parcelable {
 
     public static final Creator<CropOptions> CREATOR =
@@ -534,5 +529,393 @@ public class CropOptions implements Parcelable {
             throw new IllegalArgumentException(
                     "Cannot set rotation degrees value to a number < 0 or > 360");
         }
+    }
+
+    public static Creator<CropOptions> getCREATOR() {
+        return CREATOR;
+    }
+
+    public CropShape getCropShape() {
+        return cropShape;
+    }
+
+    public void setCropShape(CropShape cropShape) {
+        this.cropShape = cropShape;
+    }
+
+    public float getSnapRadius() {
+        return snapRadius;
+    }
+
+    public void setSnapRadius(float snapRadius) {
+        this.snapRadius = snapRadius;
+    }
+
+    public float getTouchRadius() {
+        return touchRadius;
+    }
+
+    public void setTouchRadius(float touchRadius) {
+        this.touchRadius = touchRadius;
+    }
+
+    public Guidelines getGuidelines() {
+        return guidelines;
+    }
+
+    public void setGuidelines(Guidelines guidelines) {
+        this.guidelines = guidelines;
+    }
+
+    public ScaleType getScaleType() {
+        return scaleType;
+    }
+
+    public void setScaleType(ScaleType scaleType) {
+        this.scaleType = scaleType;
+    }
+
+    public boolean isShowCropOverlay() {
+        return showCropOverlay;
+    }
+
+    public void setShowCropOverlay(boolean showCropOverlay) {
+        this.showCropOverlay = showCropOverlay;
+    }
+
+    public boolean isShowProgressBar() {
+        return showProgressBar;
+    }
+
+    public void setShowProgressBar(boolean showProgressBar) {
+        this.showProgressBar = showProgressBar;
+    }
+
+    public boolean isAutoZoomEnabled() {
+        return autoZoomEnabled;
+    }
+
+    public void setAutoZoomEnabled(boolean autoZoomEnabled) {
+        this.autoZoomEnabled = autoZoomEnabled;
+    }
+
+    public boolean isMultiTouchEnabled() {
+        return multiTouchEnabled;
+    }
+
+    public void setMultiTouchEnabled(boolean multiTouchEnabled) {
+        this.multiTouchEnabled = multiTouchEnabled;
+    }
+
+    public int getMaxZoom() {
+        return maxZoom;
+    }
+
+    public void setMaxZoom(int maxZoom) {
+        this.maxZoom = maxZoom;
+    }
+
+    public float getInitialCropWindowPaddingRatio() {
+        return initialCropWindowPaddingRatio;
+    }
+
+    public void setInitialCropWindowPaddingRatio(float initialCropWindowPaddingRatio) {
+        this.initialCropWindowPaddingRatio = initialCropWindowPaddingRatio;
+    }
+
+    public boolean isFixAspectRatio() {
+        return fixAspectRatio;
+    }
+
+    public void setFixAspectRatio(boolean fixAspectRatio) {
+        this.fixAspectRatio = fixAspectRatio;
+    }
+
+    public int getAspectRatioX() {
+        return aspectRatioX;
+    }
+
+    public void setAspectRatioX(int aspectRatioX) {
+        this.aspectRatioX = aspectRatioX;
+    }
+
+    public int getAspectRatioY() {
+        return aspectRatioY;
+    }
+
+    public void setAspectRatioY(int aspectRatioY) {
+        this.aspectRatioY = aspectRatioY;
+    }
+
+    public float getBorderLineThickness() {
+        return borderLineThickness;
+    }
+
+    public void setBorderLineThickness(float borderLineThickness) {
+        this.borderLineThickness = borderLineThickness;
+    }
+
+    public int getBorderLineColor() {
+        return borderLineColor;
+    }
+
+    public void setBorderLineColor(int borderLineColor) {
+        this.borderLineColor = borderLineColor;
+    }
+
+    public float getBorderCornerThickness() {
+        return borderCornerThickness;
+    }
+
+    public void setBorderCornerThickness(float borderCornerThickness) {
+        this.borderCornerThickness = borderCornerThickness;
+    }
+
+    public float getBorderCornerOffset() {
+        return borderCornerOffset;
+    }
+
+    public void setBorderCornerOffset(float borderCornerOffset) {
+        this.borderCornerOffset = borderCornerOffset;
+    }
+
+    public float getBorderCornerLength() {
+        return borderCornerLength;
+    }
+
+    public void setBorderCornerLength(float borderCornerLength) {
+        this.borderCornerLength = borderCornerLength;
+    }
+
+    public int getBorderCornerColor() {
+        return borderCornerColor;
+    }
+
+    public void setBorderCornerColor(int borderCornerColor) {
+        this.borderCornerColor = borderCornerColor;
+    }
+
+    public float getGuidelinesThickness() {
+        return guidelinesThickness;
+    }
+
+    public void setGuidelinesThickness(float guidelinesThickness) {
+        this.guidelinesThickness = guidelinesThickness;
+    }
+
+    public int getGuidelinesColor() {
+        return guidelinesColor;
+    }
+
+    public void setGuidelinesColor(int guidelinesColor) {
+        this.guidelinesColor = guidelinesColor;
+    }
+
+    public int getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    public void setBackgroundColor(int backgroundColor) {
+        this.backgroundColor = backgroundColor;
+    }
+
+    public int getMinCropWindowWidth() {
+        return minCropWindowWidth;
+    }
+
+    public void setMinCropWindowWidth(int minCropWindowWidth) {
+        this.minCropWindowWidth = minCropWindowWidth;
+    }
+
+    public int getMinCropWindowHeight() {
+        return minCropWindowHeight;
+    }
+
+    public void setMinCropWindowHeight(int minCropWindowHeight) {
+        this.minCropWindowHeight = minCropWindowHeight;
+    }
+
+    public int getMinCropResultWidth() {
+        return minCropResultWidth;
+    }
+
+    public void setMinCropResultWidth(int minCropResultWidth) {
+        this.minCropResultWidth = minCropResultWidth;
+    }
+
+    public int getMinCropResultHeight() {
+        return minCropResultHeight;
+    }
+
+    public void setMinCropResultHeight(int minCropResultHeight) {
+        this.minCropResultHeight = minCropResultHeight;
+    }
+
+    public int getMaxCropResultWidth() {
+        return maxCropResultWidth;
+    }
+
+    public void setMaxCropResultWidth(int maxCropResultWidth) {
+        this.maxCropResultWidth = maxCropResultWidth;
+    }
+
+    public int getMaxCropResultHeight() {
+        return maxCropResultHeight;
+    }
+
+    public void setMaxCropResultHeight(int maxCropResultHeight) {
+        this.maxCropResultHeight = maxCropResultHeight;
+    }
+
+    public CharSequence getActivityTitle() {
+        return activityTitle;
+    }
+
+    public void setActivityTitle(CharSequence activityTitle) {
+        this.activityTitle = activityTitle;
+    }
+
+    public int getActivityMenuIconColor() {
+        return activityMenuIconColor;
+    }
+
+    public void setActivityMenuIconColor(int activityMenuIconColor) {
+        this.activityMenuIconColor = activityMenuIconColor;
+    }
+
+    public Uri getOutputUri() {
+        return outputUri;
+    }
+
+    public void setOutputUri(Uri outputUri) {
+        this.outputUri = outputUri;
+    }
+
+    public Bitmap.CompressFormat getOutputCompressFormat() {
+        return outputCompressFormat;
+    }
+
+    public void setOutputCompressFormat(Bitmap.CompressFormat outputCompressFormat) {
+        this.outputCompressFormat = outputCompressFormat;
+    }
+
+    public int getOutputCompressQuality() {
+        return outputCompressQuality;
+    }
+
+    public void setOutputCompressQuality(int outputCompressQuality) {
+        this.outputCompressQuality = outputCompressQuality;
+    }
+
+    public int getOutputRequestWidth() {
+        return outputRequestWidth;
+    }
+
+    public void setOutputRequestWidth(int outputRequestWidth) {
+        this.outputRequestWidth = outputRequestWidth;
+    }
+
+    public int getOutputRequestHeight() {
+        return outputRequestHeight;
+    }
+
+    public void setOutputRequestHeight(int outputRequestHeight) {
+        this.outputRequestHeight = outputRequestHeight;
+    }
+
+    public RequestSizeOptions getOutputRequestSizeOptions() {
+        return outputRequestSizeOptions;
+    }
+
+    public void setOutputRequestSizeOptions(RequestSizeOptions outputRequestSizeOptions) {
+        this.outputRequestSizeOptions = outputRequestSizeOptions;
+    }
+
+    public boolean isNoOutputImage() {
+        return noOutputImage;
+    }
+
+    public void setNoOutputImage(boolean noOutputImage) {
+        this.noOutputImage = noOutputImage;
+    }
+
+    public Rect getInitialCropWindowRectangle() {
+        return initialCropWindowRectangle;
+    }
+
+    public void setInitialCropWindowRectangle(Rect initialCropWindowRectangle) {
+        this.initialCropWindowRectangle = initialCropWindowRectangle;
+    }
+
+    public int getInitialRotation() {
+        return initialRotation;
+    }
+
+    public void setInitialRotation(int initialRotation) {
+        this.initialRotation = initialRotation;
+    }
+
+    public boolean isAllowRotation() {
+        return allowRotation;
+    }
+
+    public void setAllowRotation(boolean allowRotation) {
+        this.allowRotation = allowRotation;
+    }
+
+    public boolean isAllowFlipping() {
+        return allowFlipping;
+    }
+
+    public void setAllowFlipping(boolean allowFlipping) {
+        this.allowFlipping = allowFlipping;
+    }
+
+    public boolean isAllowCounterRotation() {
+        return allowCounterRotation;
+    }
+
+    public void setAllowCounterRotation(boolean allowCounterRotation) {
+        this.allowCounterRotation = allowCounterRotation;
+    }
+
+    public int getRotationDegrees() {
+        return rotationDegrees;
+    }
+
+    public void setRotationDegrees(int rotationDegrees) {
+        this.rotationDegrees = rotationDegrees;
+    }
+
+    public boolean isFlipHorizontally() {
+        return flipHorizontally;
+    }
+
+    public void setFlipHorizontally(boolean flipHorizontally) {
+        this.flipHorizontally = flipHorizontally;
+    }
+
+    public boolean isFlipVertically() {
+        return flipVertically;
+    }
+
+    public void setFlipVertically(boolean flipVertically) {
+        this.flipVertically = flipVertically;
+    }
+
+    public CharSequence getCropMenuCropButtonTitle() {
+        return cropMenuCropButtonTitle;
+    }
+
+    public void setCropMenuCropButtonTitle(CharSequence cropMenuCropButtonTitle) {
+        this.cropMenuCropButtonTitle = cropMenuCropButtonTitle;
+    }
+
+    public int getCropMenuCropButtonIcon() {
+        return cropMenuCropButtonIcon;
+    }
+
+    public void setCropMenuCropButtonIcon(int cropMenuCropButtonIcon) {
+        this.cropMenuCropButtonIcon = cropMenuCropButtonIcon;
     }
 }

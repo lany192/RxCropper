@@ -22,9 +22,9 @@ import com.github.lany192.cropper.enums.ScaleType;
 import com.github.lany192.cropper.ui.CropImageActivity;
 import com.github.lany192.cropper.ui.ResultFragment;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.functions.Function;
+import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.ObservableSource;
+import io.reactivex.rxjava3.functions.Function;
 
 public final class RxCropper {
     private final String TAG = "RxCropper";

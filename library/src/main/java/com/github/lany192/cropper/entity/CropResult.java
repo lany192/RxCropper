@@ -8,11 +8,6 @@ import android.os.Parcelable;
 
 import com.github.lany192.cropper.enums.CropShape;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
-@NoArgsConstructor
 public final class CropResult implements Parcelable {
 
     /**
@@ -74,6 +69,9 @@ public final class CropResult implements Parcelable {
      */
     private CropShape cropShape;
 
+    public CropResult() {
+    }
+
     protected CropResult(Parcel in) {
         originalBitmap = in.readParcelable(Bitmap.class.getClassLoader());
         originalUri = in.readParcelable(Uri.class.getClassLoader());
@@ -116,5 +114,93 @@ public final class CropResult implements Parcelable {
         dest.writeInt(rotation);
         dest.writeInt(sampleSize);
         dest.writeParcelable(cropShape, flags);
+    }
+
+    public Bitmap getOriginalBitmap() {
+        return originalBitmap;
+    }
+
+    public void setOriginalBitmap(Bitmap originalBitmap) {
+        this.originalBitmap = originalBitmap;
+    }
+
+    public Uri getOriginalUri() {
+        return originalUri;
+    }
+
+    public void setOriginalUri(Uri originalUri) {
+        this.originalUri = originalUri;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
+    public Uri getUri() {
+        return uri;
+    }
+
+    public void setUri(Uri uri) {
+        this.uri = uri;
+    }
+
+    public Exception getError() {
+        return error;
+    }
+
+    public void setError(Exception error) {
+        this.error = error;
+    }
+
+    public float[] getCropPoints() {
+        return cropPoints;
+    }
+
+    public void setCropPoints(float[] cropPoints) {
+        this.cropPoints = cropPoints;
+    }
+
+    public Rect getCropRect() {
+        return cropRect;
+    }
+
+    public void setCropRect(Rect cropRect) {
+        this.cropRect = cropRect;
+    }
+
+    public Rect getWholeImageRect() {
+        return wholeImageRect;
+    }
+
+    public void setWholeImageRect(Rect wholeImageRect) {
+        this.wholeImageRect = wholeImageRect;
+    }
+
+    public int getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(int rotation) {
+        this.rotation = rotation;
+    }
+
+    public int getSampleSize() {
+        return sampleSize;
+    }
+
+    public void setSampleSize(int sampleSize) {
+        this.sampleSize = sampleSize;
+    }
+
+    public CropShape getCropShape() {
+        return cropShape;
+    }
+
+    public void setCropShape(CropShape cropShape) {
+        this.cropShape = cropShape;
     }
 }

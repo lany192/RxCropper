@@ -1,13 +1,12 @@
 package com.lany.cropper.sample;
 
-import android.Manifest;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,12 +19,15 @@ import com.github.lany192.cropper.RxCropper;
 import com.github.lany192.cropper.entity.CropResult;
 import com.github.lany192.cropper.enums.CropShape;
 import com.github.lany192.cropper.enums.Guidelines;
-import com.tbruyelle.rxpermissions2.RxPermissions;
+import com.zhihu.matisse.Matisse;
+import com.zhihu.matisse.MimeType;
+import com.zhihu.matisse.internal.entity.CaptureStrategy;
 
 import java.io.File;
 import java.io.IOException;
 
-import io.reactivex.disposables.Disposable;
+import io.reactivex.rxjava3.disposables.Disposable;
+
 
 public class SampleActivity extends AppCompatActivity {
     private final String TAG = getClass().getSimpleName();
@@ -39,38 +41,44 @@ public class SampleActivity extends AppCompatActivity {
 
         imageView1 = findViewById(R.id.image_view_1);
         imageView2 = findViewById(R.id.image_view_2);
-        findViewById(R.id.button).setOnClickListener(v -> checkPermissions());
-    }
-
-    private void checkPermissions() {
-        Disposable disposable = new RxPermissions(SampleActivity.this)
-                .request(Manifest.permission.CAMERA,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.READ_EXTERNAL_STORAGE)
-                .subscribe(granted -> {
-                    if (granted) {
-                        pick();
-                    } else {
-                        Toast.makeText(SampleActivity.this, "权限不足", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        findViewById(R.id.button).setOnClickListener(v -> pick());
     }
 
     private void pick() {
-        Disposable disposable2 = RxPicker
-                .get()
-                .maxSize(1)
-                .start(SampleActivity.this)
-                .subscribe(paths -> {
-                    String path = paths.get(0);
-                    RequestOptions options = new RequestOptions()
-                            .centerInside()
-                            .diskCacheStrategy(DiskCacheStrategy.ALL);
-                    Glide.with(SampleActivity.this)
-                            .load(path)
-                            .apply(options)
-                            .into(imageView1);
-                    cropper(path);
+        Matisse.from(SampleActivity.this)
+                .choose(MimeType.ofImage(), false)
+                .countable(true)
+                .capture(true)
+                .captureStrategy(new CaptureStrategy(true, BuildConfig.APPLICATION_ID + ".fileProvider", "images"))
+                .maxSelectable(1)
+                .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+                .thumbnailScale(0.85f)
+                .setOnSelectedListener((uriList, pathList) -> {
+                    Log.e("onSelected", "onSelected: pathList=" + pathList);
+                })
+                .imageEngine(new GlideEngine())
+                .showSingleMediaType(true)
+                .originalEnable(true)
+                .maxOriginalSize(10)
+                .autoHideToolbarOnSingleTap(true)
+                .setOnCheckedListener(isChecked -> {
+                    Log.e("isChecked", "onCheck: isChecked=" + isChecked);
+                })
+                .forResult(result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+//                        mAdapter.setData(Matisse.obtainResult(result.getData()), Matisse.obtainPathResult(result.getData()));
+                        Log.e("OnActivityResult ", String.valueOf(Matisse.obtainOriginalState(result.getData())));
+
+                        String path = Matisse.obtainPathResult(result.getData()).get(0);
+                        RequestOptions options = new RequestOptions()
+                                .centerInside()
+                                .diskCacheStrategy(DiskCacheStrategy.ALL);
+                        Glide.with(SampleActivity.this)
+                                .load(path)
+                                .apply(options)
+                                .into(imageView1);
+                        cropper(path);
+                    }
                 });
     }
 

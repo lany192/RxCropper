@@ -2,13 +2,7 @@ package com.github.lany192.cropper.entity;
 
 import android.graphics.Bitmap;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
 public class RotateBitmapResult {
     /**
      * The loaded bitmap
@@ -19,4 +13,25 @@ public class RotateBitmapResult {
      * The degrees the image was rotated
      */
     private int degrees;
+
+    public RotateBitmapResult(Bitmap bitmap, int degrees) {
+        this.bitmap = bitmap;
+        this.degrees = degrees;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
+    public int getDegrees() {
+        return degrees;
+    }
+
+    public void setDegrees(int degrees) {
+        this.degrees = degrees;
+    }
 }
